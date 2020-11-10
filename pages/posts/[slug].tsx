@@ -39,7 +39,7 @@ const Post = async ({ post, morePosts, preview }) => {
   )
 }
 
-export async function getStaticProps({ params, preview = false }) {
+const getStaticProps = async ({ params, preview = false }) => {
   const data = await getPostAndMorePosts(params.slug, preview)
   const content = await markdownToHtml(data?.post?.content || '')
 
@@ -55,10 +55,12 @@ export async function getStaticProps({ params, preview = false }) {
   }
 }
 
-export async function getStaticPaths() {
+const getStaticPaths = async () => {
   const allPosts = await getAllPostsWithSlug()
   return {
     paths: allPosts?.map((post) => `/posts/${post.slug}`) || [],
     fallback: true,
   }
 }
+
+export { Post, getStaticProps, getStaticPaths }
