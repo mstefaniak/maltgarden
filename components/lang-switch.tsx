@@ -7,14 +7,14 @@ const LangSwitch = () => {
 
   if (router.locale === LOCALES.PL) {
     return (
-      <Link href="/" locale="en">
+      <Link href={`/${LOCALES.EN}${router.pathname}`} locale="en">
         <a>EN</a>
       </Link>
     )
   }
 
   return (
-    <Link href="/" locale="pl">
+    <Link href={`/${LOCALES.PL}${router.pathname}`} locale="pl">
       <a>PL</a>
     </Link>
   )
