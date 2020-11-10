@@ -8,8 +8,9 @@ const Meta = () => {
         name="description"
         content=""
       />
-      <meta property="og:image" content="/images/logo.png" />
+      <meta property="og:image" content="/images/social.jpg" />
       <meta property="og:title" content="Maltgarden" />
+      <meta property="og:descriptioin" content="Nothing But Beer & Independence" />
       <meta property="og:type" content="website" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
