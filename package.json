@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "checkTS": "tsc -p tsconfig.json"
   },
   "dependencies": {
     "date-fns": "^2.16.1",

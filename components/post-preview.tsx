@@ -1,3 +1,4 @@
+import { ResponsiveImageType } from 'react-datocms'
 import { Date } from './date'
 import { CoverImage } from './cover-image'
 import Link from 'next/link'
@@ -5,7 +6,7 @@ import Link from 'next/link'
 interface PostPreviewProps {
   title: string,
   coverImage: {
-    responsiveImage: string,
+    responsiveImage: ResponsiveImageType,
   },
   date: string,
   excerpt: string,
