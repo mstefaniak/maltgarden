@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import Head from 'next/head'
 import { Layout } from '@/components/layout'
 import { PostBody } from '@/components/post-body'
 import { getAbout } from '@/lib/api'
@@ -15,6 +16,9 @@ const About = ({ title, content, photo, paragraph2 }: AboutProps) => {
 
   return (
     <Layout>
+      <Head>
+        <meta name="og:title" content="About" />
+      </Head>
       <h2>{title}</h2>
       <PostBody content={content} />
       <img src={photo?.responsiveImage?.src} />
