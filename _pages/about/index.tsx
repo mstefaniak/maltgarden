@@ -1,3 +1,4 @@
+import { GetStaticProps } from 'next'
 import { Layout } from '@/components/layout'
 import { PostBody } from '@/components/post-body'
 import { getAbout } from '@/lib/api'
@@ -14,7 +15,7 @@ const About = ({ title, content, photo, paragraph2 }: AboutProps) => {
 
   return (
     <Layout>
-      <p>{title}</p>
+      <h2>{title}</h2>
       <PostBody content={content} />
       <img src={photo?.responsiveImage?.src} />
       <p>{paragraph2}</p>
@@ -22,8 +23,8 @@ const About = ({ title, content, photo, paragraph2 }: AboutProps) => {
   )
 }
 
-const getStaticProps = async () => {
-  const data = await getAbout()
+const getStaticProps: GetStaticProps = async (context) => {
+  const data = await getAbout(context.locale)
   const content = await markdownToHtml(data?.paragraph1)
 
   return {

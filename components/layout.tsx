@@ -3,6 +3,7 @@ import styles from './layout.module.css'
 import { Footer } from './footer'
 import { Meta } from './meta'
 import { Alert } from './alert'
+import { LangSwitch } from './lang-switch'
 
 type LayoutProps = {
   children: JSX.Element | Array<JSX.Element>,
@@ -15,6 +16,7 @@ const Layout = ({ children, preview = false}: LayoutProps) => {
       <Meta />
       <div>
         <Alert preview={preview} />
+        <LangSwitch />
         <main>{children}</main>
       </div>
       <Footer />

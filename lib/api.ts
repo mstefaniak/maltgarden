@@ -1,7 +1,4 @@
-const API_URL = 'https://graphql.datocms.com'
-const API_TOKEN = process.env.DATOCMS_API_TOKEN
-
-const locale = 'en'
+import { CMS_API_URL, CMS_API_TOKEN } from '@/lib/constants'
 
 interface Params {
   variables?: { slug: string | number },
@@ -31,11 +28,11 @@ const responsiveImageFragment: string = `
 `
 
 const fetchAPI = async (query: string, { variables, preview }: Params = {}) => {
-  const res = await fetch(API_URL + (preview ? '/preview' : ''), {
+  const res = await fetch(CMS_API_URL + (preview ? '/preview' : ''), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${API_TOKEN}`,
+      Authorization: `Bearer ${CMS_API_TOKEN}`,
     },
     body: JSON.stringify({
       query,
@@ -51,7 +48,7 @@ const fetchAPI = async (query: string, { variables, preview }: Params = {}) => {
   return json.data
 }
 
-const getAbout = async (preview?: boolean) => {
+const getAbout = async (locale: string, preview?: boolean) => {
   const data = await fetchAPI(
     `
     query About {
