@@ -1,3 +1,4 @@
+import { ResponsiveImageType } from 'react-datocms'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { PostBody } from '@/components/post-body'
@@ -8,7 +9,26 @@ import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api'
 import Head from 'next/head'
 import { markdownToHtml } from '@/lib/markdownToHtml'
 
-const Post = async ({ post, morePosts, preview }) => {
+interface Post {
+  slug: string,
+  title: string,
+  date: string,
+  content: string,
+  ogImage: {
+    url: string,
+  },
+  coverImage: {
+    responsiveImage: ResponsiveImageType,
+  },
+}
+
+interface PostProps {
+  post: Post,
+  morePosts: Array<Post>,
+  preview: boolean,
+}
+
+const Post = ({ post, morePosts, preview }: PostProps) => {
   const router = useRouter()
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
@@ -39,7 +59,7 @@ const Post = async ({ post, morePosts, preview }) => {
   )
 }
 
-export async function getStaticProps({ params, preview = false }) {
+const getStaticProps = async ({ params, preview = false }) => {
   const data = await getPostAndMorePosts(params.slug, preview)
   const content = await markdownToHtml(data?.post?.content || '')
 
@@ -55,10 +75,13 @@ export async function getStaticProps({ params, preview = false }) {
   }
 }
 
-export async function getStaticPaths() {
+const getStaticPaths = async () => {
   const allPosts = await getAllPostsWithSlug()
   return {
     paths: allPosts?.map((post) => `/posts/${post.slug}`) || [],
     fallback: true,
   }
 }
+
+export default Post
+export { getStaticProps, getStaticPaths }
