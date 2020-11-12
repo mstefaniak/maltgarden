@@ -1,8 +1,11 @@
+import useTranslation from 'next-translate/useTranslation'
+
 const Footer = () => {
+  const { t } = useTranslation();
 
   return (
     <footer>
-      Built by <a href="https://github.com/mstefaniak" rel="noopener noreferrer" target="_blank">mstefaniak</a>
+      {t('common:footerBuildBy')} <a href="https://github.com/mstefaniak" rel="noopener noreferrer" target="_blank">mstefaniak</a>
     </footer>
   )
 }

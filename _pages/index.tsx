@@ -1,15 +1,18 @@
 import Link from 'next/link'
+import useTranslation from 'next-translate/useTranslation'
 import { Date } from '@/components/date'
 import { Layout } from '@/components/layout'
 import utilStyles from '@/styles/utils.module.css'
 import { PAGE_TITLE } from '@/lib/constants'
 
 export default function Home({ allPostsData }) {
+  const { t } = useTranslation()
+
   return (
     <Layout>
       <h1>{PAGE_TITLE}</h1>
       <section className={utilStyles.headingMd}>
-        <p>To jest strona hurtowni piwa</p>
+        <p>{t('common:home_slogan')}</p>
         <p>Założonej przez dwóch ziomali z zachpomu</p>
         <Link href="/about">
           About
