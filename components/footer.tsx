@@ -1,11 +1,9 @@
-import useTranslation from 'next-translate/useTranslation'
+import styles from './layout.module.css'
 
 const Footer = () => {
-  const { t } = useTranslation();
-
   return (
-    <footer>
-      {t('common:footerBuildBy')} <a href="https://github.com/mstefaniak" rel="noopener noreferrer" target="_blank">mstefaniak</a>
+    <footer className={styles.footer}>
+      [FOOTER]
     </footer>
   )
 }
