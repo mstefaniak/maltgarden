@@ -1,9 +1,9 @@
-
 import styles from './layout.module.css'
+import { Copyright } from './copyright'
 import { Footer } from './footer'
 import { Meta } from './meta'
 import { Alert } from './alert'
-import { LangSwitch } from './lang-switch'
+import { Header } from './header'
 
 type LayoutProps = {
   children: JSX.Element | Array<JSX.Element>,
@@ -14,12 +14,13 @@ const Layout = ({ children, preview = false}: LayoutProps) => {
   return (
     <div className={styles.container}>
       <Meta />
-      <div>
-        <Alert preview={preview} />
-        <LangSwitch />
-        <main>{children}</main>
-      </div>
+      <Alert preview={preview} />
+      <Header />
+      <main className={styles.main}>
+        {children}
+      </main>
       <Footer />
+      <Copyright />
     </div>
   )
 }
