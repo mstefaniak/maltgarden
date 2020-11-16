@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Layout } from '@/components/layout'
-import { getAllPostsWithSlug } from '@/lib/api'
+// import { getAllPostsWithSlug } from '@/lib/api'
 
 const News = () => {
 
@@ -14,13 +14,13 @@ const News = () => {
   )
 }
 
-const getStaticPaths = async () => {
-  const slugs = await getAllPostsWithSlug()
-  return {
-    paths: slugs,
-    fallback: false
-  }
-}
+// const getStaticPaths = async () => {
+//   const slugs = await getAllPostsWithSlug()
+//   return {
+//     paths: slugs,
+//     fallback: false
+//   }
+// }
 
 export default News
-export { getStaticPaths }
+// export { getStaticPaths }
