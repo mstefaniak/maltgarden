@@ -18,6 +18,10 @@
   padding: 0 2rem;
 }
 
+.header * {
+  z-index: 2;
+}
+
 .header::before {
   position: absolute;
   top: 0;

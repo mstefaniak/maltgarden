@@ -9,8 +9,14 @@
   z-index: 1;
 }
 
-.isOpen.nav {
+.nav.isOpen {
   left: 0;
+}
+
+.nav ul {
+  list-style-type: none;
+  margin: 5rem 2rem;
+  padding: 0;
 }
 
 .navButton {
