@@ -6,7 +6,8 @@
       "@/lib/*": ["lib/*"],
       "@/styles/*": ["styles/*"],
       "@/locales/*": ["public/static/locales/*"],
-      "@/context/*": ["context/*"]
+      "@/context/*": ["context/*"],
+      "@/hooks/*": ["hooks/*"]
     },
     "target": "es5",
     "lib": [
