@@ -16,6 +16,7 @@ const Meta = () => {
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       <link rel="manifest" href="/manifest.json" />
+      <meta name="google-site-verification" content="PaldgEJqOd-LDxEPnNk8lh7YW-ZPFp0HVYYdY6phWvc" />
     </Head>
   )
 }
