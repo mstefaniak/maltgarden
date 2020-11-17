@@ -10,7 +10,7 @@ interface AgeProps {
 
 const LOADING_TIME = 1000
 
-const Age = ({ onVerify, isOpen }: AgeProps) => {
+const Age = ({ onVerify, isOpen = true }: AgeProps) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const { t } = useTranslation()
 
