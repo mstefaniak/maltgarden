@@ -28,8 +28,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: hsla(0,0%,70%,.9);
-  content: "";
+  background: hsla(0, 0%, 70%, 0.9);
+  content: '';
 }
 
 .headerImage {
@@ -56,5 +56,5 @@
   display: flex;
   padding: 1rem 2rem;
   justify-content: flex-end;
-  font-size: .75rem;
+  font-size: 0.75rem;
 }

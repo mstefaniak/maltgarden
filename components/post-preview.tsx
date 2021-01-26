@@ -4,13 +4,13 @@ import { CoverImage } from './cover-image'
 import Link from 'next/link'
 
 interface PostPreviewProps {
-  title: string,
+  title: string
   coverImage: {
-    responsiveImage: ResponsiveImageType,
-  },
-  date: string,
-  excerpt: string,
-  slug: string,
+    responsiveImage: ResponsiveImageType
+  }
+  date: string
+  excerpt: string
+  slug: string
 }
 
 const PostPreview = ({

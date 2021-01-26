@@ -14,9 +14,7 @@ export default function Home({ allPostsData }) {
       <section className={utilStyles.headingMd}>
         <p>{t('common:home_slogan')}</p>
         <p>Założonej przez dwóch ziomali z zachpomu</p>
-        <Link href="/about">
-          About
-        </Link>
+        <Link href="/about">About</Link>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Aktualności</h2>
@@ -42,7 +40,7 @@ export async function getStaticProps() {
   const allPostsData = [] // getAllPostsForHome
   return {
     props: {
-      allPostsData
-    }
+      allPostsData,
+    },
   }
 }

@@ -7,14 +7,13 @@ import { Header } from './header'
 import { Age } from '@/components/age'
 import { useAgeVerify } from '@/hooks/age-verify'
 
-
 type LayoutProps = {
-  children: JSX.Element | Array<JSX.Element>,
-  preview?: boolean,
+  children: JSX.Element | Array<JSX.Element>
+  preview?: boolean
 }
 
-const Layout = ({ children, preview = false}: LayoutProps) => {
-  const { verified, setVerified } = useAgeVerify();
+const Layout = ({ children, preview = false }: LayoutProps) => {
+  const { verified, setVerified } = useAgeVerify()
 
   return (
     <div className={styles.container}>
@@ -22,9 +21,7 @@ const Layout = ({ children, preview = false}: LayoutProps) => {
       <Age onVerify={setVerified} isOpen={!verified} />
       <Alert preview={preview} />
       <Header />
-      <main className={styles.main}>
-        {children}
-      </main>
+      <main className={styles.main}>{children}</main>
       <Footer />
       <Copyright />
     </div>

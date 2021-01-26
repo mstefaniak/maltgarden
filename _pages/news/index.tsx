@@ -3,7 +3,6 @@ import { Layout } from '@/components/layout'
 // import { getAllPostsWithSlug } from '@/lib/api'
 
 const News = () => {
-
   return (
     <Layout>
       <Head>

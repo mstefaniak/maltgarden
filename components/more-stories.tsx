@@ -3,9 +3,7 @@ import { PostPreview } from './post-preview'
 const MoreStories = ({ posts }) => {
   return (
     <section>
-      <h2 className="">
-        More Stories
-      </h2>
+      <h2 className="">More Stories</h2>
       <div className="">
         {posts.map((post) => (
           <PostPreview

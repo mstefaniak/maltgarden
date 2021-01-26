@@ -6,14 +6,13 @@ import { getAbout } from '@/lib/api'
 import { markdownToHtml } from '@/lib/markdownToHtml'
 
 type AboutProps = {
-  title: string,
-  content: string,
-  photo: any,
-  paragraph2: string,
+  title: string
+  content: string
+  photo: any
+  paragraph2: string
 }
 
 const About = ({ title, content, photo, paragraph2 }: AboutProps) => {
-
   return (
     <Layout>
       <Head>
@@ -35,7 +34,7 @@ const getStaticProps: GetStaticProps = async (context) => {
     props: {
       ...data,
       content,
-    }
+    },
   }
 }
 

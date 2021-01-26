@@ -3,7 +3,7 @@ import { parseISO, format } from 'date-fns'
 const dateFormat = 'LLLL d, yyyy'
 
 type DateProps = {
-  dateString: string,
+  dateString: string
 }
 
 const Date = ({ dateString }: DateProps) => {

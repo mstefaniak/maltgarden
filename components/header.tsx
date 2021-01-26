@@ -4,7 +4,7 @@ import { LangSwitch } from './lang-switch'
 import { NavButton } from './nav-button'
 import { Nav } from './nav'
 import styles from './layout.module.css'
-import { NavProvider } from '@/context/nav-context';
+import { NavProvider } from '@/context/nav-context'
 
 const Header = () => {
   return (

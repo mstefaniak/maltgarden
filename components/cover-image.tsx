@@ -2,9 +2,9 @@ import { Image, ResponsiveImageType } from 'react-datocms'
 import Link from 'next/link'
 
 interface CoverImageProps {
-  title: string,
-  responsiveImage: ResponsiveImageType,
-  slug?: string,
+  title: string
+  responsiveImage: ResponsiveImageType
+  slug?: string
 }
 
 const CoverImage = ({ title, responsiveImage, slug }: CoverImageProps) => {

@@ -1,14 +1,14 @@
 import { CMS_API_URL, CMS_API_TOKEN } from '@/lib/constants'
 
 interface Params {
-  variables?: { slug: string | number },
-  preview?: boolean,
+  variables?: { slug: string | number }
+  preview?: boolean
 }
 
 interface AllPostsResponse {
   allPosts: {
-    slug: string,
-  },
+    slug: string
+  }
 }
 
 const responsiveImageFragment: string = `
@@ -79,7 +79,7 @@ const getAbout = async (locale: string, preview?: boolean) => {
   return data?.about
 }
 
-const getPreviewPostBySlug =  async (slug: string | number) => {
+const getPreviewPostBySlug = async (slug: string | number) => {
   const data = await fetchAPI(
     `
     query PostBySlug($slug: String) {
@@ -137,7 +137,10 @@ const getAllPostsForHome = async (preview?: boolean) => {
   return data?.allPosts
 }
 
-const getPostAndMorePosts = async (slug: string | number, preview?: boolean) => {
+const getPostAndMorePosts = async (
+  slug: string | number,
+  preview?: boolean
+) => {
   const data = await fetchAPI(
     `
   query PostBySlug($slug: String) {
@@ -191,5 +194,10 @@ const getPostAndMorePosts = async (slug: string | number, preview?: boolean) => 
   return data
 }
 
-
-export { getAbout, getPreviewPostBySlug, getAllPostsWithSlug, getAllPostsForHome, getPostAndMorePosts }
+export {
+  getAbout,
+  getPreviewPostBySlug,
+  getAllPostsWithSlug,
+  getAllPostsForHome,
+  getPostAndMorePosts,
+}

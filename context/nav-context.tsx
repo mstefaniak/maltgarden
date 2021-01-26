@@ -1,8 +1,8 @@
 import { createContext, useState, Dispatch, SetStateAction } from 'react'
 
 interface NavContextData {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  isOpen: boolean
+  setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
 const navContextDefaultValue: NavContextData = {
@@ -10,13 +10,13 @@ const navContextDefaultValue: NavContextData = {
   setIsOpen: () => null,
 }
 
-const NavContext = createContext(navContextDefaultValue);
+const NavContext = createContext(navContextDefaultValue)
 
 const NavProvider = ({ children }) => {
   const [state, setState] = useState(false)
 
   return (
-    <NavContext.Provider value={{isOpen: state, setIsOpen: setState}}>
+    <NavContext.Provider value={{ isOpen: state, setIsOpen: setState }}>
       {children}
     </NavContext.Provider>
   )

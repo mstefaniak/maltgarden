@@ -1,14 +1,9 @@
-
 type PostBodyProps = {
-  content: string,
+  content: string
 }
 
 const PostBody = ({ content }: PostBodyProps) => {
-  return (
-    <div
-      dangerouslySetInnerHTML={{ __html: content }}
-    />
-  )
+  return <div dangerouslySetInnerHTML={{ __html: content }} />
 }
 
 export { PostBody }

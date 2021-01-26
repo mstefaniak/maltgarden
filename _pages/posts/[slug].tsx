@@ -10,22 +10,22 @@ import Head from 'next/head'
 import { markdownToHtml } from '@/lib/markdownToHtml'
 
 interface Post {
-  slug: string,
-  title: string,
-  date: string,
-  content: string,
+  slug: string
+  title: string
+  date: string
+  content: string
   ogImage: {
-    url: string,
-  },
+    url: string
+  }
   coverImage: {
-    responsiveImage: ResponsiveImageType,
-  },
+    responsiveImage: ResponsiveImageType
+  }
 }
 
 interface PostProps {
-  post: Post,
-  morePosts: Array<Post>,
-  preview: boolean,
+  post: Post
+  morePosts: Array<Post>
+  preview: boolean
 }
 
 const Post = ({ post, morePosts, preview }: PostProps) => {

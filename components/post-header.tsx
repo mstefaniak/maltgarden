@@ -3,11 +3,11 @@ import { Date } from './date'
 import { CoverImage } from './cover-image'
 
 interface PostHeaderProps {
-  title: string,
+  title: string
   coverImage: {
-    responsiveImage: ResponsiveImageType,
-  },
-  date: string,
+    responsiveImage: ResponsiveImageType
+  }
+  date: string
 }
 
 const PostHeader = ({ title, coverImage, date }: PostHeaderProps) => {
