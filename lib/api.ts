@@ -108,24 +108,29 @@ const getAllPostsWithSlug = async () => {
   return data?.allPosts
 }
 
-const getAllPostsForHome = async (preview?: boolean) => {
+const getAllPostsForHome = async (locale: string, preview?: boolean) => {
   const data = await fetchAPI(
     `
     {
-      allPosts(orderBy: date_DESC, first: 20) {
-        title
+      featuredPost: post(locale: ${locale}, orderBy: [featured_DESC, date_DESC]) {
+        heading
         slug
         excerpt
         date
-        coverImage {
+        headingImage {
           responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
             ...responsiveImageFragment
           }
         }
-        author {
-          name
-          picture {
-            url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100})
+      }
+      newPosts: allPosts(locale: ${locale}, orderBy: date_DESC, first: 2) {
+        heading
+        slug
+        excerpt
+        date
+        headingImage {
+          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
+            ...responsiveImageFragment
           }
         }
       }
@@ -134,7 +139,7 @@ const getAllPostsForHome = async (preview?: boolean) => {
   `,
     { preview }
   )
-  return data?.allPosts
+  return data
 }
 
 const getPostAndMorePosts = async (
@@ -145,39 +150,24 @@ const getPostAndMorePosts = async (
     `
   query PostBySlug($slug: String) {
     post(filter: {slug: {eq: $slug}}) {
-      title
+      heading
       slug
-      content
+      body
       date
-      ogImage: coverImage{
-        url(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 })
-      }
-      coverImage {
+      headingImage {
         responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
           ...responsiveImageFragment
-        }
-      }
-      author {
-        name
-        picture {
-          url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100})
         }
       }
     }
     morePosts: allPosts(orderBy: date_DESC, first: 2, filter: {slug: {neq: $slug}}) {
-      title
+      heading
       slug
       excerpt
       date
-      coverImage {
+      headingImage {
         responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
           ...responsiveImageFragment
-        }
-      }
-      author {
-        name
-        picture {
-          url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100})
         }
       }
     }

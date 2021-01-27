@@ -1,19 +1,13 @@
 import { PostPreview } from './post-preview'
+import { Post } from '@/lib/types'
 
-const MoreStories = ({ posts }) => {
+const MoreStories = ({ posts }: { posts: Post[] }) => {
   return (
     <section>
       <h2 className="">More Stories</h2>
       <div className="">
         {posts.map((post) => (
-          <PostPreview
-            key={post.slug}
-            title={post.title}
-            coverImage={post.coverImage}
-            date={post.date}
-            slug={post.slug}
-            excerpt={post.excerpt}
-          />
+          <PostPreview {...post} />
         ))}
       </div>
     </section>

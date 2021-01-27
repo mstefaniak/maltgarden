@@ -1,37 +1,27 @@
-import { ResponsiveImageType } from 'react-datocms'
 import { Date } from './date'
 import { CoverImage } from './cover-image'
 import Link from 'next/link'
-
-interface PostPreviewProps {
-  title: string
-  coverImage: {
-    responsiveImage: ResponsiveImageType
-  }
-  date: string
-  excerpt: string
-  slug: string
-}
+import { Post } from '@/lib/types'
 
 const PostPreview = ({
-  title,
-  coverImage,
+  heading,
+  headingImage,
   date,
   excerpt,
   slug,
-}: PostPreviewProps) => {
+}: Partial<Post>) => {
   return (
-    <div>
+    <div key={slug}>
       <div>
         <CoverImage
           slug={slug}
-          title={title}
-          responsiveImage={coverImage.responsiveImage}
+          title={heading}
+          responsiveImage={headingImage.responsiveImage}
         />
       </div>
       <h3>
         <Link as={`/posts/${slug}`} href="/posts/[slug]">
-          <a>{title}</a>
+          <a>{heading}</a>
         </Link>
       </h3>
       <div>
