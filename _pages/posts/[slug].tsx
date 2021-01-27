@@ -10,13 +10,13 @@ import Head from 'next/head'
 import { markdownToHtml } from '@/lib/markdownToHtml'
 import { Post } from '@/lib/types'
 
-interface PostProps {
+interface SinglePostProps {
   post: Post
-  morePosts: Array<Post>
+  morePosts: Post[]
   preview: boolean
 }
 
-const Post = ({ post, morePosts, preview }: PostProps) => {
+const SinglePost = ({ post, morePosts, preview }: SinglePostProps) => {
   const router = useRouter()
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
@@ -71,5 +71,5 @@ const getStaticPaths = async () => {
   }
 }
 
-export default Post
+export default SinglePost
 export { getStaticProps, getStaticPaths }
