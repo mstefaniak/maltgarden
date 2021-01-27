@@ -8,19 +8,7 @@ import { Layout } from '@/components/layout'
 import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api'
 import Head from 'next/head'
 import { markdownToHtml } from '@/lib/markdownToHtml'
-
-interface Post {
-  slug: string
-  title: string
-  date: string
-  content: string
-  ogImage: {
-    url: string
-  }
-  coverImage: {
-    responsiveImage: ResponsiveImageType
-  }
-}
+import { Post } from '@/lib/types'
 
 interface PostProps {
   post: Post
@@ -41,15 +29,15 @@ const Post = ({ post, morePosts, preview }: PostProps) => {
         <>
           <article>
             <Head>
-              <title>{post.title}</title>
-              <meta property="og:image" content={post.ogImage.url} />
+              <title>{post.heading}</title>
+              {/* TODO: <meta property="og:image" content={post.ogImage.url} /> */}
             </Head>
             <PostHeader
-              title={post.title}
-              coverImage={post.coverImage}
+              title={post.heading}
+              coverImage={post.headingImage}
               date={post.date}
             />
-            <PostBody content={post.content} />
+            <PostBody content={post.body} />
           </article>
           <hr />
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
