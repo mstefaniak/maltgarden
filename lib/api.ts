@@ -1,14 +1,9 @@
 import { CMS_API_URL, CMS_API_TOKEN } from '@/lib/constants'
+import { Post } from '@/lib/types'
 
 interface Params {
   variables?: { slug: string | number }
   preview?: boolean
-}
-
-interface AllPostsResponse {
-  allPosts: {
-    slug: string
-  }
 }
 
 const responsiveImageFragment: string = `
@@ -105,7 +100,7 @@ const getAllPostsWithSlug = async () => {
       }
     }
   `)
-  return data?.allPosts
+  return data?.allPosts as Post[]
 }
 
 const getAllPostsForHome = async (locale: string, preview?: boolean) => {

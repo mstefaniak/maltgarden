@@ -1,4 +1,4 @@
-import { ResponsiveImageType } from 'react-datocms'
+import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { PostBody } from '@/components/post-body'
@@ -18,6 +18,23 @@ interface SinglePostProps {
 
 const SinglePost = ({ post, morePosts, preview }: SinglePostProps) => {
   const router = useRouter()
+  const [parsedContent, setParsedContent] = useState<string>()
+
+  const parseContent = useCallback(async () => {
+    if (post) {
+      const parsedMarkdown = await markdownToHtml(post.body)
+      setParsedContent(parsedMarkdown)
+    }
+  }, [post])
+
+  useEffect(() => {
+    parseContent()
+  }, [parseContent])
+
+  if (!parsedContent) {
+    return null
+  }
+
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
@@ -37,7 +54,7 @@ const SinglePost = ({ post, morePosts, preview }: SinglePostProps) => {
               coverImage={post.headingImage}
               date={post.date}
             />
-            <PostBody content={post.body} />
+            <PostBody content={parsedContent} />
           </article>
           <hr />
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
