@@ -64,8 +64,8 @@ const SinglePost = ({ post, morePosts, preview }: SinglePostProps) => {
   )
 }
 
-const getStaticProps = async ({ params, preview = false }) => {
-  const data = await getPostAndMorePosts(params.slug, preview)
+const getStaticProps = async ({ params, locale, preview = false }) => {
+  const data = await getPostAndMorePosts(params.slug, locale, preview)
   const content = await markdownToHtml(data?.post?.content || '')
 
   return {
