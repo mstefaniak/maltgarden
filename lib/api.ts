@@ -1,5 +1,5 @@
 import { CMS_API_URL, CMS_API_TOKEN } from '@/lib/constants'
-import { Post, SiteLocale } from '@/lib/types'
+import { Post, Beer, SiteLocale } from '@/lib/types'
 
 interface FetchParams {
   variables?: Record<string, any>
@@ -208,13 +208,8 @@ const getBeers = async (
     `
     query GetBeers($locale: SiteLocale, $filter: BeerModelFilter) {
       allBeers(locale: $locale, orderBy: _createdAt_DESC, filter: $filter) {
-        id
-        alc
-        blg
-        description
-        ingredients
+        slug
         name
-        untappdUrl
         style
         category {
           categoryName
@@ -241,6 +236,61 @@ const getBeers = async (
   return data.allBeers
 }
 
+const getBeerBySlug = async (
+  slug: string,
+  locale: SiteLocale,
+  preview?: boolean
+) => {
+  const data = await fetchAPI(
+    `
+    query GetBeer($locale: SiteLocale, $slug: String) {
+      beer(locale: $locale, filter: {slug: {eq: $slug}}) {
+        alc
+        blg
+        description
+        ingredients
+        name
+        untappdUrl
+        style
+        category {
+          categoryName
+          slug
+        }
+        photo {
+          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 400, h: 400 }) {
+            ...responsiveImageFragment
+          }
+        }
+      }
+    }
+    ${responsiveImageFragment}
+    `,
+    {
+      preview,
+      variables: {
+        locale,
+        slug,
+      },
+    }
+  )
+
+  return data.beer
+}
+
+const getAllBeersWithSlug = async () => {
+  const data = await fetchAPI(`
+    {
+      allBeers {
+        slug
+        category {
+          slug
+        }
+      }
+    }
+  `)
+  return data?.allBeers as Partial<Beer>[]
+}
+
 export {
   getAbout,
   getPreviewPostBySlug,
@@ -249,4 +299,6 @@ export {
   getPostAndMorePosts,
   getBeerCategories,
   getBeers,
+  getAllBeersWithSlug,
+  getBeerBySlug,
 }

@@ -7,6 +7,6 @@
   "pages": {
     "*": ["common"],
     "/": ["home"],
-    "/beers": ["beer"]
+    "rgx:^/beers": ["beer"]
   }
 }

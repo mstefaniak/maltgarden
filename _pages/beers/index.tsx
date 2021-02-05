@@ -1,32 +1,16 @@
-import { ResponsiveImageType } from 'react-datocms'
 import Head from 'next/head'
 import Link from 'next/link'
 import { Layout } from '@/components/layout'
 import { BeerTail } from '@/components/beer-tail'
 import { getBeerCategories, getBeers } from '@/lib/api'
 import useTranslation from 'next-translate/useTranslation'
+import { Beer } from '@/lib/types'
 
 type BeerCategory = {
   id: number
   categoryName: string
   slug: string
   position: number
-}
-
-type Beer = {
-  name: string
-  description: string
-  slug: string
-  style: string
-  alc: number
-  blg: number
-  photo: {
-    responsiveImage: ResponsiveImageType
-  }
-  category: {
-    categoryName: string
-    slug: string
-  }
 }
 
 type BeersProps = {
@@ -58,7 +42,8 @@ const Beers = ({ beerCategories = [], beers = [] }: BeersProps) => {
         ))}
       </ul>
       <section>
-        {Array.isArray(beers) && beers.map((beer) => <BeerTail {...beer} />)}
+        {Array.isArray(beers) &&
+          beers.map((beer) => <BeerTail {...beer} key={beer.slug} />)}
       </section>
     </Layout>
   )

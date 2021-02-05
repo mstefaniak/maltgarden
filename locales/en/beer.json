@@ -1,5 +1,7 @@
 {
   "title": "Our Beers",
+  "alc": "Alc",
   "all": "All Beers",
+  "blg": "OG",
   "viewDetails": "View Details"
 }

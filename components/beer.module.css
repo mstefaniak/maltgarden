@@ -1,15 +1,36 @@
 .wrapper {
-  border: 1px solid gray;
-  padding: 2rem;
+  padding: 3rem 2rem 2rem;
   margin: 1rem;
   display: flex;
   align-items: center;
   flex-direction: column;
+  background: #ccc;
+  cursor: pointer;
+}
+
+.wrapper:hover .button {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.photo,
+.category,
+.name,
+.style,
+.button {
+  transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.wrapper:hover .photo,
+.wrapper:hover .category,
+.wrapper:hover .name,
+.wrapper:hover .style {
+  transform: translateY(-20px);
 }
 
 .category {
   text-transform: uppercase;
-  color: #aaa;
+  color: #888;
   font-size: 0.66rem;
 }
 
@@ -30,5 +51,8 @@
 .button {
   cursor: pointer;
   margin: 0.5rem 0;
-  display: none;
+  opacity: 0;
+  padding: 0.3rem 1rem;
+  border: none;
+  transform: translateY(50px);
 }

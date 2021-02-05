@@ -12,3 +12,20 @@ export interface Post {
 }
 
 export type SiteLocale = 'pl' | 'en'
+
+export type Beer = {
+  name: string
+  description: string
+  slug: string
+  style: string
+  alc: number
+  blg: number
+  photo: {
+    responsiveImage: ResponsiveImageType
+  }
+  category: {
+    categoryName: string
+    slug: string
+  }
+  untappdUrl?: string
+}
