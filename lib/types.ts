@@ -10,3 +10,5 @@ export interface Post {
   }
   slug: string
 }
+
+export type SiteLocale = 'pl' | 'en'
