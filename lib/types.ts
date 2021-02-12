@@ -36,3 +36,13 @@ export interface IBeerCategory {
   slug: string
   position: number
 }
+
+export interface IStaticProps {
+  params: Record<string, string | string[]>
+  locale: SiteLocale
+  preview: boolean
+}
+
+export interface IStaticPathsProps {
+  locale: string
+}

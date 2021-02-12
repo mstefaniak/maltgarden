@@ -3,13 +3,7 @@ import { CoverImage } from './cover-image'
 import Link from 'next/link'
 import { Post } from '@/lib/types'
 
-const PostPreview = ({
-  heading,
-  headingImage,
-  date,
-  excerpt,
-  slug,
-}: Partial<Post>) => {
+const PostPreview = ({ heading, headingImage, date, excerpt, slug }: Post) => {
   return (
     <div key={slug}>
       <div>

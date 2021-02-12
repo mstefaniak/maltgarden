@@ -27,7 +27,7 @@ const About = ({ title, content, photo, paragraph2 }: AboutProps) => {
 }
 
 const getStaticProps: GetStaticProps = async (context) => {
-  const data = await getAbout(context.locale)
+  const data = await getAbout(context.locale as string)
   const content = await markdownToHtml(data?.paragraph1)
 
   return {

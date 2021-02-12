@@ -1,4 +1,10 @@
-import { createContext, useState, Dispatch, SetStateAction } from 'react'
+import {
+  createContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+  ReactNode,
+} from 'react'
 
 interface NavContextData {
   isOpen: boolean
@@ -12,7 +18,7 @@ const navContextDefaultValue: NavContextData = {
 
 const NavContext = createContext(navContextDefaultValue)
 
-const NavProvider = ({ children }) => {
+const NavProvider = ({ children }: { children: ReactNode }) => {
   const [state, setState] = useState(false)
 
   return (

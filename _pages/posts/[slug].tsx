@@ -8,7 +8,7 @@ import { Layout } from '@/components/layout'
 import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api'
 import Head from 'next/head'
 import { markdownToHtml } from '@/lib/markdownToHtml'
-import { Post } from '@/lib/types'
+import { Post, IStaticProps } from '@/lib/types'
 
 interface SinglePostProps {
   post: Post
@@ -64,8 +64,12 @@ const SinglePost = ({ post, morePosts, preview }: SinglePostProps) => {
   )
 }
 
-const getStaticProps = async ({ params, locale, preview = false }) => {
-  const data = await getPostAndMorePosts(params.slug, locale, preview)
+const getStaticProps = async ({
+  params,
+  locale,
+  preview = false,
+}: IStaticProps) => {
+  const data = await getPostAndMorePosts(params.slug as string, locale, preview)
   const content = await markdownToHtml(data?.post?.content || '')
 
   return {

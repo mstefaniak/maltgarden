@@ -1,6 +1,10 @@
 import { getPreviewPostBySlug } from '@/lib/api'
+import { NextPageContext, NextApiResponse } from 'next'
 
-export default async function preview(req, res) {
+export default async function preview(
+  req: NextPageContext,
+  res: NextApiResponse
+) {
   // Check the secret and next parameters
   // This secret should only be known to this API route and the CMS
   if (
@@ -11,7 +15,7 @@ export default async function preview(req, res) {
   }
 
   // Fetch the headless CMS to check if the provided `slug` exists
-  const post = await getPreviewPostBySlug(req.query.slug)
+  const post = await getPreviewPostBySlug(req.query.slug as string)
 
   // If the slug doesn't exist prevent preview mode from being enabled
   if (!post) {

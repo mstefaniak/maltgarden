@@ -35,7 +35,9 @@ const Home = ({ featuredPost, newPosts }: HomeProps) => {
 }
 
 const getStaticProps: GetStaticProps = async (context) => {
-  const { featuredPost, newPosts } = await getAllPostsForHome(context.locale)
+  const { featuredPost, newPosts } = await getAllPostsForHome(
+    context.locale as string
+  )
 
   return {
     props: {

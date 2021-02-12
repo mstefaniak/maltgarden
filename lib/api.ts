@@ -293,7 +293,7 @@ const getAllBeersWithSlug = async () => {
       }
     }
   `)
-  return data?.allBeers as Partial<Beer>[]
+  return data?.allBeers as Beer[]
 }
 
 export {

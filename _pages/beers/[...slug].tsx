@@ -8,7 +8,12 @@ import {
   getBeerCategories,
   getBeers,
 } from '@/lib/api'
-import { Beer, IBeerCategory } from '@/lib/types'
+import {
+  Beer,
+  IBeerCategory,
+  IStaticProps,
+  IStaticPathsProps,
+} from '@/lib/types'
 import { BeerCategory } from '@/components/beer-category'
 import useTranslation from 'next-translate/useTranslation'
 import styles from '@/components//beer.module.css'
@@ -58,7 +63,7 @@ const SingleBeer = ({
 type ComponentProps = {
   beerCategories: IBeerCategory[]
   beer: Beer | null
-  beers: Beer[] | null
+  beers: Beer[]
   isSingleBeerView: boolean
   categoryName?: string
 }
@@ -66,11 +71,11 @@ type ComponentProps = {
 const View = ({
   beerCategories = [],
   beer,
-  beers,
+  beers = [],
   categoryName,
   isSingleBeerView,
 }: ComponentProps) => {
-  const title = isSingleBeerView ? beer.name : categoryName
+  const title = isSingleBeerView && beer?.name ? beer.name : categoryName
   const { t } = useTranslation()
   const router = useRouter()
 
@@ -101,7 +106,7 @@ const View = ({
         ))}
       </ul>
 
-      {isSingleBeerView ? (
+      {isSingleBeerView && beer ? (
         <SingleBeer {...beer} />
       ) : (
         <BeerCategory beers={beers} />
@@ -110,13 +115,24 @@ const View = ({
   )
 }
 
-const getStaticProps = async ({ params, locale, preview = false }) => {
-  const [categorySlug, beerSlug] = params.slug
+const getStaticProps = async ({
+  params,
+  locale,
+  preview = false,
+}: IStaticProps) => {
+  const [categorySlug, beerSlug] = params.slug as string[]
   const response = await getBeerCategories(locale)
   const beerCategories = response.allBeerCategories as IBeerCategory[]
 
   const isSingleBeerView = !!beerSlug
-  const props = {
+  const props: {
+    preview: boolean
+    beerCategories: IBeerCategory[]
+    beer: Beer | null
+    beers: Beer[] | null
+    categoryName: string | null
+    isSingleBeerView: boolean
+  } = {
     preview,
     beerCategories,
     beer: null,
@@ -130,22 +146,24 @@ const getStaticProps = async ({ params, locale, preview = false }) => {
     props.beer = data
   } else if (categorySlug === 'all') {
     props.categoryName = 'All beers'
-    props.beers = await getBeers(locale, null, preview)
+    props.beers = await getBeers(locale, undefined, preview)
   } else {
     const selectedCategory = beerCategories.find(
       (category) => categorySlug === category.slug
     )
-    props.categoryName = selectedCategory.categoryName
-    props.beers = await getBeers(locale, selectedCategory.id, preview)
+    if (selectedCategory) {
+      props.categoryName = selectedCategory.categoryName
+      props.beers = await getBeers(locale, selectedCategory.id, preview)
+    }
   }
 
   return { props }
 }
 
-const getStaticPaths = async ({ locale }) => {
+const getStaticPaths = async ({ locale }: IStaticPathsProps) => {
   const allBeers = await getAllBeersWithSlug()
   const response = await getBeerCategories(locale)
-  const categories = response.allBeerCategories
+  const categories = response.allBeerCategories as IBeerCategory[]
 
   return {
     paths: [
