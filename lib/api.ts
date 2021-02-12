@@ -1,5 +1,5 @@
 import { CMS_API_URL, CMS_API_TOKEN } from '@/lib/constants'
-import { Post, Beer, SiteLocale } from '@/lib/types'
+import { Post, Beer } from '@/lib/types'
 
 interface FetchParams {
   variables?: Record<string, any>
@@ -99,7 +99,8 @@ const getAllPostsWithSlug = async () => {
   const data = await fetchAPI(`
     {
       allPosts {
-        slug
+        slug,
+        locale
       }
     }
   `)
@@ -142,7 +143,7 @@ const getAllPostsForHome = async (locale: string, preview?: boolean) => {
 
 const getPostAndMorePosts = async (
   slug: string | number,
-  locale: string,
+  locale?: string,
   preview?: boolean
 ) => {
   const data = await fetchAPI(
@@ -184,7 +185,7 @@ const getPostAndMorePosts = async (
   return data
 }
 
-const getBeerCategories = async (locale: string) => {
+const getBeerCategories = async (locale?: string) => {
   const data = await fetchAPI(
     `
     query GetBeerCategories($locale: SiteLocale) {
@@ -205,7 +206,7 @@ const getBeerCategories = async (locale: string) => {
 }
 
 const getBeers = async (
-  locale: SiteLocale,
+  locale?: string,
   categoryId?: number,
   preview?: boolean
 ) => {
@@ -243,7 +244,7 @@ const getBeers = async (
 
 const getBeerBySlug = async (
   slug: string,
-  locale: SiteLocale,
+  locale?: string,
   preview?: boolean
 ) => {
   const data = await fetchAPI(

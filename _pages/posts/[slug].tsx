@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { PostBody } from '@/components/post-body'
@@ -8,7 +9,7 @@ import { Layout } from '@/components/layout'
 import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api'
 import Head from 'next/head'
 import { markdownToHtml } from '@/lib/markdownToHtml'
-import { Post, IStaticProps } from '@/lib/types'
+import { Post } from '@/lib/types'
 
 interface SinglePostProps {
   post: Post
@@ -64,14 +65,19 @@ const SinglePost = ({ post, morePosts, preview }: SinglePostProps) => {
   )
 }
 
-const getStaticProps = async ({
+const getStaticProps: GetStaticProps = async ({
   params,
   locale,
   preview = false,
-}: IStaticProps) => {
-  const data = await getPostAndMorePosts(params.slug as string, locale, preview)
+  locales,
+}) => {
+  const data = await getPostAndMorePosts(
+    params?.slug as string,
+    locale,
+    preview
+  )
   const content = await markdownToHtml(data?.post?.content || '')
-
+  console.log(locales)
   return {
     props: {
       preview,
@@ -84,8 +90,9 @@ const getStaticProps = async ({
   }
 }
 
-const getStaticPaths = async () => {
+const getStaticPaths: GetStaticPaths = async () => {
   const allPosts = await getAllPostsWithSlug()
+  console.log(allPosts)
   return {
     paths: allPosts?.map((post) => `/posts/${post.slug}`) || [],
     fallback: true,

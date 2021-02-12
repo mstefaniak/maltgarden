@@ -11,8 +11,6 @@ export interface Post {
   slug: string
 }
 
-export type SiteLocale = 'pl' | 'en'
-
 export type Beer = {
   name: string
   description: string
@@ -35,14 +33,4 @@ export interface IBeerCategory {
   categoryName: string
   slug: string
   position: number
-}
-
-export interface IStaticProps {
-  params: Record<string, string | string[]>
-  locale: SiteLocale
-  preview: boolean
-}
-
-export interface IStaticPathsProps {
-  locale: string
 }

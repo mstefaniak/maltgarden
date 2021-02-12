@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
 import { Layout } from '@/components/layout'
 import {
@@ -8,12 +9,7 @@ import {
   getBeerCategories,
   getBeers,
 } from '@/lib/api'
-import {
-  Beer,
-  IBeerCategory,
-  IStaticProps,
-  IStaticPathsProps,
-} from '@/lib/types'
+import { Beer, IBeerCategory } from '@/lib/types'
 import { BeerCategory } from '@/components/beer-category'
 import useTranslation from 'next-translate/useTranslation'
 import styles from '@/components//beer.module.css'
@@ -66,6 +62,7 @@ type ComponentProps = {
   beers: Beer[]
   isSingleBeerView: boolean
   categoryName?: string
+  preview: boolean
 }
 
 const View = ({
@@ -74,13 +71,14 @@ const View = ({
   beers = [],
   categoryName,
   isSingleBeerView,
+  preview,
 }: ComponentProps) => {
   const title = isSingleBeerView && beer?.name ? beer.name : categoryName
   const { t } = useTranslation()
   const router = useRouter()
 
   return (
-    <Layout>
+    <Layout preview={preview}>
       <Head>
         <meta name="og:title" content={title} />
       </Head>
@@ -115,12 +113,12 @@ const View = ({
   )
 }
 
-const getStaticProps = async ({
+const getStaticProps: GetStaticProps = async ({
   params,
   locale,
   preview = false,
-}: IStaticProps) => {
-  const [categorySlug, beerSlug] = params.slug as string[]
+}) => {
+  const [categorySlug, beerSlug] = params?.slug as string[]
   const response = await getBeerCategories(locale)
   const beerCategories = response.allBeerCategories as IBeerCategory[]
 
@@ -160,9 +158,9 @@ const getStaticProps = async ({
   return { props }
 }
 
-const getStaticPaths = async ({ locale }: IStaticPathsProps) => {
+const getStaticPaths: GetStaticPaths = async () => {
   const allBeers = await getAllBeersWithSlug()
-  const response = await getBeerCategories(locale)
+  const response = await getBeerCategories()
   const categories = response.allBeerCategories as IBeerCategory[]
 
   return {
@@ -171,7 +169,7 @@ const getStaticPaths = async ({ locale }: IStaticPathsProps) => {
       ...allBeers?.map((beer) => `/beers/${beer.category.slug}/${beer.slug}`),
       ...categories?.map((category) => `/beers/${category.slug}`),
     ],
-    fallback: false,
+    fallback: true,
   }
 }
 
