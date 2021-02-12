@@ -39,9 +39,6 @@
   font-size: 1.1rem;
 }
 
-.style {
-}
-
 .photo {
   width: 200px;
   height: 200px;
@@ -55,4 +52,8 @@
   padding: 0.3rem 1rem;
   border: none;
   transform: translateY(50px);
+}
+
+.active {
+  font-weight: bold;
 }

@@ -29,3 +29,10 @@ export type Beer = {
   }
   untappdUrl?: string
 }
+
+export interface IBeerCategory {
+  id: number
+  categoryName: string
+  slug: string
+  position: number
+}

@@ -187,14 +187,19 @@ const getPostAndMorePosts = async (
 const getBeerCategories = async (locale: string) => {
   const data = await fetchAPI(
     `
-    query {
-      allBeerCategories(locale: ${locale}) {
+    query GetBeerCategories($locale: SiteLocale) {
+      allBeerCategories(locale: $locale) {
+        id
         slug
         categoryName
-        position
       }
     }
-    `
+    `,
+    {
+      variables: {
+        locale,
+      },
+    }
   )
   return data
 }

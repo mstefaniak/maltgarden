@@ -9,7 +9,7 @@ const Menu = () => {
         <Link href="/news">{t('common:nav_news')}</Link>
       </li>
       <li>
-        <Link href="/beers">{t('common:nav_beers')}</Link>
+        <Link href="/beers/all">{t('common:nav_beers')}</Link>
       </li>
       <li>
         <Link href="/about">{t('common:nav_about')}</Link>
