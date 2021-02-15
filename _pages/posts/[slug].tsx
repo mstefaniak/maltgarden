@@ -9,7 +9,8 @@ import { Layout } from '@/components/layout'
 import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api'
 import Head from 'next/head'
 import { markdownToHtml } from '@/lib/markdownToHtml'
-import { Post } from '@/lib/types'
+import { Post, ISlug } from '@/lib/types'
+import { parseSlugsList } from '@/lib/helpers'
 
 interface SinglePostProps {
   post: Post
@@ -69,7 +70,6 @@ const getStaticProps: GetStaticProps = async ({
   params,
   locale,
   preview = false,
-  locales,
 }) => {
   const data = await getPostAndMorePosts(
     params?.slug as string,
@@ -77,7 +77,7 @@ const getStaticProps: GetStaticProps = async ({
     preview
   )
   const content = await markdownToHtml(data?.post?.content || '')
-  console.log(locales)
+
   return {
     props: {
       preview,
@@ -92,9 +92,10 @@ const getStaticProps: GetStaticProps = async ({
 
 const getStaticPaths: GetStaticPaths = async () => {
   const allPosts = await getAllPostsWithSlug()
-  console.log(allPosts)
+  const paths = parseSlugsList(allPosts)
+
   return {
-    paths: allPosts?.map((post) => `/posts/${post.slug}`) || [],
+    paths,
     fallback: true,
   }
 }

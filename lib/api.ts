@@ -1,5 +1,5 @@
 import { CMS_API_URL, CMS_API_TOKEN } from '@/lib/constants'
-import { Post, Beer } from '@/lib/types'
+import { ISlug, Beer } from '@/lib/types'
 
 interface FetchParams {
   variables?: Record<string, any>
@@ -99,12 +99,14 @@ const getAllPostsWithSlug = async () => {
   const data = await fetchAPI(`
     {
       allPosts {
-        slug,
-        locale
+        _allSlugLocales {
+          locale
+          value
+        }
       }
     }
   `)
-  return data?.allPosts as Post[]
+  return data?.allPosts as ISlug[]
 }
 
 const getAllPostsForHome = async (locale: string, preview?: boolean) => {

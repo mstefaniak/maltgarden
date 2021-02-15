@@ -34,3 +34,22 @@ export interface IBeerCategory {
   slug: string
   position: number
 }
+
+type Slug = {
+  value: string
+  locale: string
+}
+
+export interface ISlug {
+  _allSlugLocales: Slug[]
+  category?: {
+    _allSlugLocales: Slug[]
+  }
+}
+
+export interface IPath {
+  params: {
+    slug: string
+  }
+  locale: string
+}
