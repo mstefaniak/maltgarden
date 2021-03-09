@@ -1,3 +1,5 @@
+import styles from './alert.module.css'
+
 interface AlertProps {
   preview: boolean
 }
@@ -8,7 +10,7 @@ const Alert = ({ preview }: AlertProps) => {
   }
 
   return (
-    <div>
+    <div className={styles.alert}>
       This is page is a preview. <a href="/api/exit-preview">Click here</a> to
       exit preview mode.
     </div>
