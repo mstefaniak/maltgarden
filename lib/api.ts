@@ -1,5 +1,5 @@
 import { CMS_API_URL, CMS_API_TOKEN } from '@/lib/constants'
-import { ISlug, Beer } from '@/lib/types'
+import { ISlug, Beer, Post } from '@/lib/types'
 
 interface FetchParams {
   variables?: Record<string, any>
@@ -77,7 +77,7 @@ const getAbout = async (locale: string, preview?: boolean) => {
   return data?.about
 }
 
-const getPreviewPostBySlug = async (slug: string | number) => {
+const getPreviewPostBySlug = async (slug: string) => {
   const data = await fetchAPI(
     `
     query PostBySlug($slug: String) {
@@ -92,7 +92,28 @@ const getPreviewPostBySlug = async (slug: string | number) => {
       },
     }
   )
-  return data?.post
+  return data?.post as Partial<Post>
+}
+
+const getPreviewBeerBySlug = async (slug: string) => {
+  const data = await fetchAPI(
+    `
+    query BeerBySlug($slug: String) {
+      beer(filter: {slug: {eq: $slug}}) {
+        slug
+        category {
+          slug
+        }
+      }
+    }`,
+    {
+      preview: true,
+      variables: {
+        slug,
+      },
+    }
+  )
+  return data?.beer as Partial<Beer>
 }
 
 const getAllPostsWithSlug = async () => {
@@ -302,6 +323,7 @@ const getAllBeersWithSlug = async () => {
 export {
   getAbout,
   getPreviewPostBySlug,
+  getPreviewBeerBySlug,
   getAllPostsWithSlug,
   getAllPostsForHome,
   getPostAndMorePosts,
