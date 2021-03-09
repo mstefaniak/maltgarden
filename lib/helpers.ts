@@ -8,7 +8,7 @@ const parseSlugsList = (item: ISlug[]): IPath[] => {
     }))
   )
 
-  return [].concat(...pathsArray)
+  return ([] as IPath[]).concat(...pathsArray)
 }
 
 export { parseSlugsList }
