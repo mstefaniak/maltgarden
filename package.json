@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next-translate && next dev",
-    "build": "next-translate && next build",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "checkTS": "tsc -p tsconfig.json"
   },
@@ -14,7 +14,7 @@
     "gray-matter": "^4.0.2",
     "js-cookie": "^2.2.1",
     "next": "^10.0.0",
-    "next-translate": "^0.19.4",
+    "next-translate": "^1.0.0",
     "react": "^17.0.1",
     "react-datocms": "^1.4.5",
     "react-dom": "16.13.1",
