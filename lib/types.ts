@@ -1,5 +1,13 @@
 import { ResponsiveImageType } from 'react-datocms'
 
+interface ISeoDescription {
+  description: string
+  title: string
+  image: {
+    url: string
+  }
+}
+
 export interface Post {
   body: string
   date: string
@@ -9,10 +17,7 @@ export interface Post {
     responsiveImage: ResponsiveImageType
   }
   slug: string
-  seoDescription?: {
-    description: string
-    title: string
-  }
+  seoDescription?: ISeoDescription
 }
 
 export type Beer = {
@@ -30,10 +35,7 @@ export type Beer = {
     slug: string
   }
   untappdUrl?: string
-  seoDescription?: {
-    description: string
-    title: string
-  }
+  seoDescription?: ISeoDescription
 }
 
 export interface IBeerCategory {

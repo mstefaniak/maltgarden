@@ -50,7 +50,7 @@ const SinglePost = ({ post, morePosts, preview }: SinglePostProps) => {
           <article>
             <Meta
               title={post?.seoDescription?.title ?? post.heading}
-              imageUrl={post?.headingImage?.url}
+              imageUrl={post?.headingImage?.responsiveImage?.src}
               description={post?.seoDescription?.description}
             />
             <PostHeader
