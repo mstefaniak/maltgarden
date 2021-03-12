@@ -9,6 +9,10 @@ export interface Post {
     responsiveImage: ResponsiveImageType
   }
   slug: string
+  seoDescription?: {
+    description: string
+    title: string
+  }
 }
 
 export type Beer = {
@@ -26,6 +30,10 @@ export type Beer = {
     slug: string
   }
   untappdUrl?: string
+  seoDescription?: {
+    description: string
+    title: string
+  }
 }
 
 export interface IBeerCategory {

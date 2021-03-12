@@ -1,7 +1,7 @@
-import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
+import { Meta } from '@/components/meta'
 import { Layout } from '@/components/layout'
 import {
   getAllBeersWithSlug,
@@ -12,6 +12,7 @@ import {
 import { Beer, IBeerCategory } from '@/lib/types'
 import { BeerCategory } from '@/components/beer-category'
 import useTranslation from 'next-translate/useTranslation'
+import getT from 'next-translate/getT'
 import styles from '@/components//beer.module.css'
 
 const SingleBeer = ({
@@ -74,15 +75,22 @@ const View = ({
   preview,
 }: ComponentProps) => {
   const title = isSingleBeerView && beer?.name ? beer.name : categoryName
+  const pageTitle = beer?.seoDescription?.title ?? `${title} - Maltgarden`
   const { t } = useTranslation()
   const router = useRouter()
 
   return (
     <Layout preview={preview}>
-      <Head>
-        <meta name="og:title" content={title} />
-      </Head>
-      <h2>{t('beer:title')}</h2>
+      <Meta
+        title={pageTitle}
+        description={
+          isSingleBeerView ? beer?.seoDescription?.description : undefined
+        }
+        imageUrl={beer?.seoDescription?.image?.url}
+      />
+      <h1>
+        {t('beer:title')} - {title}
+      </h1>
       <ul>
         <li
           key="0"
@@ -118,6 +126,7 @@ const getStaticProps: GetStaticProps = async ({
   locale,
   preview = false,
 }) => {
+  const t = await getT(locale, 'beer')
   const [categorySlug, beerSlug] = params?.slug as string[]
   const response = await getBeerCategories(locale)
   const beerCategories = response.allBeerCategories as IBeerCategory[]
@@ -143,7 +152,7 @@ const getStaticProps: GetStaticProps = async ({
     const data = await getBeerBySlug(beerSlug, locale, preview)
     props.beer = data
   } else if (categorySlug === 'all') {
-    props.categoryName = 'All beers'
+    props.categoryName = t('beer:all')
     props.beers = await getBeers(locale, undefined, preview)
   } else {
     const selectedCategory = beerCategories.find(

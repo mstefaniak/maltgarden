@@ -11,6 +11,7 @@ import Head from 'next/head'
 import { markdownToHtml } from '@/lib/markdownToHtml'
 import { Post, ISlug } from '@/lib/types'
 import { parseSlugsList } from '@/lib/helpers'
+import { Meta } from '@/components/meta'
 
 interface SinglePostProps {
   post: Post
@@ -47,10 +48,11 @@ const SinglePost = ({ post, morePosts, preview }: SinglePostProps) => {
       ) : (
         <>
           <article>
-            <Head>
-              <title>{post.heading}</title>
-              {/* TODO: <meta property="og:image" content={post.ogImage.url} /> */}
-            </Head>
+            <Meta
+              title={post?.seoDescription?.title ?? post.heading}
+              imageUrl={post?.headingImage?.url}
+              description={post?.seoDescription?.description}
+            />
             <PostHeader
               title={post.heading}
               coverImage={post.headingImage}

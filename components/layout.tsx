@@ -1,7 +1,7 @@
 import styles from './layout.module.css'
 import { Copyright } from './copyright'
 import { Footer } from './footer'
-import { Meta } from './meta'
+import { MetaStatic } from './meta-static'
 import { Alert } from './alert'
 import { Header } from './header'
 import { Age } from '@/components/age'
@@ -17,7 +17,7 @@ const Layout = ({ children, preview = false }: LayoutProps) => {
 
   return (
     <div className={styles.container}>
-      <Meta />
+      <MetaStatic />
       <Age onVerify={setVerified} isOpen={!verified} />
       <Alert preview={preview} />
       <Header />

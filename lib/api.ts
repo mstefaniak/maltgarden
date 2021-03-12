@@ -182,6 +182,10 @@ const getPostAndMorePosts = async (
           ...responsiveImageFragment
         }
       }
+      seoDescription {
+        description
+        title
+      }
     }
     morePosts: allPosts(locale: $locale, orderBy: date_DESC, first: 2, filter: {slug: {neq: $slug}}) {
       heading
@@ -289,6 +293,10 @@ const getBeerBySlug = async (
           responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 400, h: 400 }) {
             ...responsiveImageFragment
           }
+        }
+        seoDescription {
+          description
+          title
         }
       }
     }

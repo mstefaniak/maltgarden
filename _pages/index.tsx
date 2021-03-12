@@ -25,7 +25,7 @@ const Home = ({ featuredPost, newPosts }: HomeProps) => {
         key="news"
       >
         <h2 className={utilStyles.headingLg}>Aktualności</h2>
-        <PostPreview {...featuredPost} />
+        <PostPreview {...featuredPost} key="featured" />
         {newPosts.map((post) => (
           <PostPreview {...post} />
         ))}
