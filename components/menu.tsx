@@ -6,13 +6,13 @@ const Menu = () => {
   return (
     <ul>
       <li>
-        <Link href="/news">{t('common:nav_news')}</Link>
-      </li>
-      <li>
         <Link href="/beers/all">{t('common:nav_beers')}</Link>
       </li>
       <li>
         <Link href="/about">{t('common:nav_about')}</Link>
+      </li>
+      <li>
+        <Link href="/news">{t('common:nav_news')}</Link>
       </li>
     </ul>
   )

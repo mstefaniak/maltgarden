@@ -1,8 +1,10 @@
 {
   "ageConfirm": "Mam ukończone 18 lat",
+  "followUs": "Śledź nas",
   "footerBuildBy": "Zbudowane przez",
   "home_slogan": "Nic ponad piwo i niezależność",
   "nav_news": "Aktualności",
   "nav_beers": "Piwo",
-  "nav_about": "O nas"
+  "nav_about": "O nas",
+  "phone": "Tel"
 }

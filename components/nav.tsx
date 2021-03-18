@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import cn from 'classnames'
-import styles from './nav.module.css'
+import styles from './nav.module.scss'
 import { NavContext } from '@/context/nav-context'
 import { Menu } from './menu'
 

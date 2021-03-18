@@ -1,4 +1,4 @@
-import styles from './layout.module.css'
+import styles from './layout.module.scss'
 import { Copyright } from './copyright'
 import { Footer } from './footer'
 import { MetaStatic } from './meta-static'
