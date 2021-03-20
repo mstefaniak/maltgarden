@@ -276,8 +276,9 @@ const getTopBeers = async (locale?: string) => {
       allBeers(locale: $locale, orderBy: _createdAt_DESC, filter: $filter) {
         slug
         name
+        style
         category {
-          categoryName
+          slug
         }
         photo {
           responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 200, h: 200 }) {

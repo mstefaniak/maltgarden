@@ -4,27 +4,25 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: #ccc;
   cursor: pointer;
 }
 
-.wrapper:hover .button {
+.details {
+  opacity: 0;
+  text-align: center;
+}
+
+.wrapper:hover .details {
   opacity: 1;
   transform: translateY(0);
 }
 
 .photo,
-.category,
-.name,
-.style,
-.button {
+.details {
   transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-.wrapper:hover .photo,
-.wrapper:hover .category,
-.wrapper:hover .name,
-.wrapper:hover .style {
+.wrapper:hover .photo {
   transform: translateY(-20px);
 }
 
@@ -40,17 +38,14 @@
 }
 
 .photo {
-  width: 200px;
-  height: 200px;
   margin-bottom: 1rem;
 }
 
-.button {
-  cursor: pointer;
-  margin: 0.5rem 0;
-  opacity: 0;
-  padding: 0.3rem 1rem;
-  border: none;
+.style {
+  margin-bottom: 1rem;
+}
+
+.details {
   transform: translateY(50px);
 }
 

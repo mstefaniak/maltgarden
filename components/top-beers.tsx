@@ -1,6 +1,9 @@
 import { RoundLink } from '@/components/ui/round-link'
+import { Picture } from '@/components/ui/picture'
+import { BeerTail } from '@/components/beer-tail'
 import { Beer } from '@/lib/types'
 import useTranslation from 'next-translate/useTranslation'
+import styles from './top-beers.module.scss'
 
 interface ITopBeersProps {
   beers: Beer[]
@@ -8,16 +11,16 @@ interface ITopBeersProps {
 
 const TopBeers = ({ beers }: ITopBeersProps) => {
   const { t } = useTranslation()
-
-  return null
-
+  console.log(beers)
   return (
-    <section>
-      <h2>{t('common:top4title')}</h2>
-      <p>{t('common:top4info')}</p>
-      <RoundLink href="/beers/all" text={t('common:seeAll')} type="filled" />
+    <section className={styles.container}>
+      <div>
+        <h2 className={styles.heading}>{t('common:top4title')}</h2>
+        <p className={styles.info}>{t('common:top4info')}</p>
+        <RoundLink href="/beers/all" text={t('common:seeAll')} type="filled" />
+      </div>
       {beers.map((beer: Beer) => (
-        <div>{beer.name}</div>
+        <BeerTail {...beer} />
       ))}
     </section>
   )
