@@ -2,9 +2,13 @@
   "ageConfirm": "Mam ukończone 18 lat",
   "followUs": "Śledź nas",
   "footerBuildBy": "Zbudowane przez",
-  "home_slogan": "Nic ponad piwo i niezależność",
+  "home_slogan1": "Nothing But Beer",
+  "home_slogan2": "& Independence",
   "nav_news": "Aktualności",
   "nav_beers": "Piwo",
   "nav_about": "O nas",
-  "phone": "Tel"
+  "phone": "Tel",
+  "seeAll": "Zobacz wszystkie",
+  "top4title": "Maltgarden TOP 4",
+  "top4info": "Piwa, które szczególnie wam polecamy"
 }

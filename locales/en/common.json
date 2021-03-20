@@ -2,9 +2,13 @@
   "ageConfirm": "I am over 21",
   "followUs": "Follow Us",
   "footerBuildBy": "Built by",
-  "home_slogan": "Nothing but beer & independence",
+  "home_slogan1": "Nothing But Beer",
+  "home_slogan2": "& Independence",
   "nav_news": "News",
   "nav_beers": "Beers",
   "nav_about": "About",
-  "phone": "Phone"
+  "phone": "Phone",
+  "seeAll": "See all",
+  "top4title": "Maltgarden TOP 4",
+  "top4info": "Beers which we recommend mostly"
 }

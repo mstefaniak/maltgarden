@@ -41,8 +41,12 @@ $screen-xl-min: 1200px;
 // colors
 $color-text-primary: #020101;
 $color-text-secondary: #fff;
-$color-link-secondary: #fff;
-$color-link-secondary-hover: gray;
 $color-bg-primary: #f2ebe7;
 $color-bg-secondary: #020101;
 $color-bg-primary-dark: #c0a291;
+
+// link colors
+$color-link: $color-text-primary;
+$color-link-hover: #444;
+$color-link-secondary: #fff;
+$color-link-secondary-hover: #444;

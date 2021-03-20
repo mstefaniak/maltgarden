@@ -1,0 +1,25 @@
+@import '@/styles/_variables.scss';
+
+.roundedLink {
+  height: 2.2rem;
+  border: 2px solid $color-text-primary;
+  border-radius: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 1.6rem;
+  font-weight: bold;
+
+  &:hover {
+    border-color: $color-link-hover;
+  }
+}
+
+.filled {
+  background-color: $color-bg-secondary;
+  color: $color-text-secondary;
+
+  &:hover {
+    color: $color-text-secondary;
+    background-color: $color-link-hover;
+  }
+}
