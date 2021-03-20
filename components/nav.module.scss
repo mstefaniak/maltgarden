@@ -3,12 +3,31 @@
 .nav {
   position: fixed;
   width: 30rem;
-  background-color: pink;
+  color: $color-text-secondary;
+  background-color: $color-bg-secondary;
   top: 0;
   bottom: 0;
   left: -30rem;
   transition: all 0.25s ease-out;
-  z-index: 1;
+  z-index: 2;
+
+  @include md {
+    position: relative;
+    width: auto;
+    background-color: transparent;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    flex: 1 0 40vw;
+  }
+}
+
+.nav a {
+  color: $color-link-secondary;
+
+  @include md {
+    color: $color-link;
+  }
 }
 
 .nav.isOpen {
@@ -19,6 +38,16 @@
   list-style-type: none;
   margin: 5rem 2rem;
   padding: 0;
+
+  @include md {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 2rem 0 0;
+  }
+}
+
+.nav li {
+  margin-right: 2rem;
 }
 
 .navButton {
@@ -26,7 +55,11 @@
   width: 25px;
   height: 30px;
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
+
+  @include md {
+    display: none;
+  }
 }
 
 .navLine {
@@ -35,8 +68,12 @@
   left: 0;
   width: 25px;
   height: 1px;
-  background-color: black;
+  background-color: $color-text-primary;
   transition: all 0.25s ease-out;
+
+  .isOpen & {
+    background-color: $color-text-secondary;
+  }
 }
 
 .firstLine {

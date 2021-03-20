@@ -1,12 +1,14 @@
 .langSwitch {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 4.5rem;
+  flex: 1 0 40vw;
 }
 
 .separator {
   width: 1px;
   height: 22px;
+  margin: 0 1rem;
   background-color: black;
 }

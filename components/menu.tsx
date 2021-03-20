@@ -14,6 +14,9 @@ const Menu = () => {
       <li>
         <Link href="/news">{t('common:nav_news')}</Link>
       </li>
+      <li>
+        <Link href="">{t('common:nav_food')}</Link>
+      </li>
     </ul>
   )
 }
