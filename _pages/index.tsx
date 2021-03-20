@@ -1,25 +1,24 @@
 import { GetStaticProps } from 'next'
 import useTranslation from 'next-translate/useTranslation'
 import { Layout } from '@/components/layout'
+import { TopBeers } from '@/components/top-beers'
 import { PostPreview } from '@/components/post-preview'
 import utilStyles from '@/styles/utils.module.css'
 import { PAGE_TITLE } from '@/lib/constants'
-import { getAllPostsForHome } from '@/lib/api'
+import { getAllPostsForHome, getTopBeers } from '@/lib/api'
 import { Post } from '@/lib/types'
 
 interface HomeProps {
   featuredPost: Post
   newPosts: Post[]
+  topBeers: Beer[]
 }
 
-const Home = ({ featuredPost, newPosts }: HomeProps) => {
+const Home = ({ featuredPost, newPosts, topBeers }: HomeProps) => {
   const { t } = useTranslation()
   return (
-    <Layout>
-      <h1>{PAGE_TITLE}</h1>
-      <section className={utilStyles.headingMd} key="slogan">
-        <p>{t('common:home_slogan')}</p>
-      </section>
+    <Layout isHomePage={true}>
+      <TopBeers beers={topBeers} />
       <section
         className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}
         key="news"
@@ -34,10 +33,9 @@ const Home = ({ featuredPost, newPosts }: HomeProps) => {
   )
 }
 
-const getStaticProps: GetStaticProps = async (context) => {
-  const { featuredPost, newPosts } = await getAllPostsForHome(
-    context.locale as string
-  )
+const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const { featuredPost, newPosts } = await getAllPostsForHome(locale as string)
+  const topBeers = await getTopBeers(locale)
 
   return {
     props: {
@@ -45,6 +43,7 @@ const getStaticProps: GetStaticProps = async (context) => {
       newPosts: newPosts.filter(
         (post: Post) => post.slug !== featuredPost.slug
       ),
+      topBeers,
     },
   }
 }

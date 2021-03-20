@@ -269,6 +269,36 @@ const getBeers = async (
   return data.allBeers
 }
 
+const getTopBeers = async (locale?: string) => {
+  const data = await fetchAPI(
+    `
+    query GetTopBeers($locale: SiteLocale, $filter: BeerModelFilter) {
+      allBeers(locale: $locale, orderBy: _createdAt_DESC, filter: $filter) {
+        slug
+        name
+        category {
+          categoryName
+        }
+        photo {
+          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 200, h: 200 }) {
+            ...responsiveImageFragment
+          }
+        }
+      }
+    }
+    ${responsiveImageFragment}
+    `,
+    {
+      variables: {
+        locale,
+        filter: { top4: { eq: true } },
+      },
+    }
+  )
+
+  return data.allBeers as Beer[]
+}
+
 const getBeerBySlug = async (
   slug: string,
   locale?: string,
@@ -337,6 +367,7 @@ export {
   getPostAndMorePosts,
   getBeerCategories,
   getBeers,
+  getTopBeers,
   getAllBeersWithSlug,
   getBeerBySlug,
 }
