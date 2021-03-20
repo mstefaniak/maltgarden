@@ -15,10 +15,10 @@ const Header = () => {
         <Link href="/">
           <a>
             <Image
-              src="/images/logo.png"
-              alt="Maltgarden Logo"
-              width={100}
-              height={100}
+              src="/images/logo.svg"
+              alt="Maltgarden Brewery Logo"
+              width={126}
+              height={90}
             />
           </a>
         </Link>
