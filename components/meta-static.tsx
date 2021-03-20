@@ -9,6 +9,9 @@ const MetaStatic = () => {
 
   return (
     <Head>
+      {/* TODO: TEMPORARY */}
+      <meta name="robots" content="noindex" />
+
       <link rel="canonical" href={canURL} />
       <meta property="og:url" content={canURL} key="og:url" />
       <link rel="icon" href="/favicon.ico" />
