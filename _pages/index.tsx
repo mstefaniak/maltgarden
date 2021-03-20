@@ -6,7 +6,7 @@ import { PostPreview } from '@/components/post-preview'
 import utilStyles from '@/styles/utils.module.css'
 import { PAGE_TITLE } from '@/lib/constants'
 import { getAllPostsForHome, getTopBeers } from '@/lib/api'
-import { Post } from '@/lib/types'
+import { Post, Beer } from '@/lib/types'
 
 interface HomeProps {
   featuredPost: Post
