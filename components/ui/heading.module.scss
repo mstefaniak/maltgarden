@@ -1,12 +1,9 @@
 @import '@/styles/_variables.scss';
 
-.slogan {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: url('/images/heading.svg');
-  background-size: cover;
+.container {
+  position: relative;
   height: 614px;
+  background-color: #917d76;
 
   h1 {
     margin: 0;
@@ -27,4 +24,21 @@
       }
     }
   }
+}
+
+.content {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bgImage {
+  z-index: 0;
+  height: 614px;
 }
