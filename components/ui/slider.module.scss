@@ -1,0 +1,80 @@
+@import '@/styles/_variables.scss';
+
+$color: $color-text-primary;
+$font-size: 0.5rem;
+
+.slider {
+  box-sizing: border-box;
+  font-size: $font-size;
+  line-height: 1;
+  height: 2em;
+  background-color: transparent;
+  cursor: pointer;
+
+  // * * * RESET * * *
+
+  -webkit-appearance: none;
+  width: 100%;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+  &:focus {
+    outline: none;
+  }
+  &::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+
+  // * * * TRUMP * * *
+
+  @mixin mx-trange-trump {
+    width: 2em;
+    height: 2em;
+    margin-top: 0;
+    background-color: $color;
+    border-radius: 1em;
+    cursor: pointer;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    @include mx-trange-trump;
+  }
+
+  &::-moz-range-thumb {
+    @include mx-trange-trump;
+  }
+
+  &::-ms-thumb {
+    @include mx-trange-trump;
+  }
+
+  // * * * TRACK * * *
+
+  @mixin mx-range-track {
+    width: 100%;
+    cursor: pointer;
+    height: 1em;
+    border-bottom: 2px solid $color;
+    background-color: transparent;
+  }
+
+  &::-webkit-slider-runnable-track {
+    @include mx-range-track;
+  }
+
+  &::-moz-range-track {
+    @include mx-range-track;
+  }
+
+  &::-ms-track {
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+}

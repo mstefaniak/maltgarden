@@ -11,7 +11,7 @@ interface ITopBeersProps {
 
 const TopBeers = ({ beers }: ITopBeersProps) => {
   const { t } = useTranslation()
-  console.log(beers)
+
   return (
     <section className={styles.container}>
       <div>
