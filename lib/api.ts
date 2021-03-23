@@ -130,21 +130,10 @@ const getAllPostsWithSlug = async () => {
   return data?.allPosts as ISlug[]
 }
 
-const getAllPostsForHome = async (locale: string, preview?: boolean) => {
+const getAllPostsForHome = async (locale: string) => {
   const data = await fetchAPI(
     `
     {
-      featuredPost: post(locale: ${locale}, orderBy: [featured_DESC, date_DESC]) {
-        heading
-        slug
-        excerpt
-        date
-        headingImage {
-          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
-            ...responsiveImageFragment
-          }
-        }
-      }
       newPosts: allPosts(locale: ${locale}, orderBy: date_DESC, first: 2) {
         heading
         slug
@@ -158,10 +147,9 @@ const getAllPostsForHome = async (locale: string, preview?: boolean) => {
       }
     }
     ${responsiveImageFragment}
-  `,
-    { preview }
+  `
   )
-  return data
+  return data.newPosts
 }
 
 const getPostAndMorePosts = async (

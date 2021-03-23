@@ -1,0 +1,19 @@
+@import '@/styles/_variables.scss';
+
+.news {
+  display: flex;
+  justify-content: space-between;
+
+  & > div {
+    width: 50vw;
+
+    &:first-child {
+      padding-right: 2rem;
+      border-right: 2px solid $color-text-primary;
+    }
+
+    &:last-child {
+      padding-left: 2rem;
+    }
+  }
+}

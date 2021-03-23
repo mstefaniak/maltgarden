@@ -9,7 +9,7 @@
       "@/context/*": ["context/*"],
       "@/hooks/*": ["hooks/*"]
     },
-    "target": "es5",
+    "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
     "skipLibCheck": true,

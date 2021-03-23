@@ -1,27 +1,50 @@
 import { Date } from './date'
 import { CoverImage } from './cover-image'
 import Link from 'next/link'
+import { RoundLink } from '@/components/ui/round-link'
+import useTranslation from 'next-translate/useTranslation'
 import { Post } from '@/lib/types'
+import styles from './post-preview.module.scss'
 
-const PostPreview = ({ heading, headingImage, date, excerpt, slug }: Post) => {
+interface IPostPreviewProps {
+  post: Post
+  showImage?: boolean
+  showDate?: boolean
+}
+
+const PostPreview = ({
+  post,
+  showImage = false,
+  showDate = false,
+}: IPostPreviewProps) => {
+  const { heading, headingImage, date, excerpt, slug } = post
+  const { t } = useTranslation()
+
   return (
-    <div key={slug}>
-      <div>
-        <CoverImage
-          slug={slug}
-          title={heading}
-          responsiveImage={headingImage.responsiveImage}
-        />
-      </div>
+    <div key={slug} className={styles.postPreview}>
+      {showImage && (
+        <div>
+          <CoverImage
+            slug={slug}
+            title={heading}
+            responsiveImage={headingImage.responsiveImage}
+          />
+        </div>
+      )}
       <h3>
-        <Link as={`/posts/${slug}`} href="/posts/[slug]">
+        <Link href={`/posts/${slug}`}>
           <a>{heading}</a>
         </Link>
       </h3>
-      <div>
-        <Date dateString={date} />
-      </div>
+      {showDate && (
+        <div>
+          <Date dateString={date} />
+        </div>
+      )}
       <p>{excerpt}</p>
+      <div>
+        <RoundLink href={`/posts/${slug}`} text={t('common:readMore')} />
+      </div>
     </div>
   )
 }

@@ -5,6 +5,7 @@
   align-items: center;
   flex-direction: column;
   cursor: pointer;
+  width: 285px;
 }
 
 .details {
