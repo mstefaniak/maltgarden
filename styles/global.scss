@@ -1,11 +1,22 @@
 @import '@/styles/_variables.scss';
 
+@font-face {
+  font-family: Peggs;
+  src: url('/peggs-medium-pro.otf') format('opentype');
+}
+
+@font-face {
+  font-family: Danmark;
+  font-weight: bold;
+  src: url('/Danmark-Bold.otf') format('opentype');
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Peggs, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.6;
   font-size: 18px;
   color: $color-text-primary;
@@ -29,4 +40,20 @@ a:hover {
 img {
   max-width: 100%;
   display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Danmark;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 3.125rem;
+  margin: 0;
+  padding: 0;
 }
