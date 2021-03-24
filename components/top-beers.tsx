@@ -17,7 +17,7 @@ const TopBeers = ({ beers }: ITopBeersProps) => {
       <div>
         <h2 className={styles.heading}>{t('common:top4title')}</h2>
         <p className={styles.info}>{t('common:top4info')}</p>
-        <RoundLink href="/beers/all" text={t('common:seeAll')} type="filled" />
+        <RoundLink href="/beers/all" text={t('common:seeAll')} />
       </div>
       {beers.map((beer: Beer) => (
         <BeerTail {...beer} />

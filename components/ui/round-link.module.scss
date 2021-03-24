@@ -9,9 +9,12 @@
   padding: 0.2rem 1.6rem 0;
   font-family: Danmark;
   font-weight: bold;
+  transition: color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    border-color: $color-link-hover;
+    background-color: $color-bg-secondary;
+    color: $color-text-secondary;
   }
 }
 
