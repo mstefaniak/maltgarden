@@ -1,4 +1,4 @@
-import { Slide } from 'react-awesome-reveal'
+import { Fade, Slide } from 'react-awesome-reveal'
 import { RoundLink } from '@/components/ui/round-link'
 import { BeerTail } from '@/components/beer-tail'
 import { Beer } from '@/lib/types'
@@ -14,12 +14,14 @@ const TopBeers = ({ beers }: ITopBeersProps) => {
 
   return (
     <section className={styles.container}>
-      <div>
-        <h2 className={styles.heading}>{t('common:top4title')}</h2>
-        <p className={styles.info}>{t('common:top4info')}</p>
-        <RoundLink href="/beers/all" text={t('common:seeAll')} />
-      </div>
-      <Slide triggerOnce cascade direction="right">
+      <Fade delay={500}>
+        <div>
+          <h2 className={styles.heading}>{t('common:top4title')}</h2>
+          <p className={styles.info}>{t('common:top4info')}</p>
+          <RoundLink href="/beers/all" text={t('common:seeAll')} />
+        </div>
+      </Fade>
+      <Slide cascade direction="right">
         {beers.map((beer: Beer, index: number) => (
           <span>
             <BeerTail {...beer} />

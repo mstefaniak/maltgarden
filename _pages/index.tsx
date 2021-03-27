@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import { Fade } from 'react-awesome-reveal'
 import { ContentBox } from '@/components/ui/content-box'
 import { Layout } from '@/components/layout'
 import { TopBeers } from '@/components/top-beers'
@@ -24,9 +25,11 @@ const Home = ({ newPosts, topBeers, lastBeer }: HomeProps) => {
       <LastBeer beer={lastBeer} />
       <ContentBox>
         <section className={styles.news} key="news">
-          {newPosts.map((post) => (
-            <PostPreview post={post} />
-          ))}
+          <Fade cascade>
+            {newPosts.map((post) => (
+              <PostPreview post={post} />
+            ))}
+          </Fade>
         </section>
       </ContentBox>
     </Layout>

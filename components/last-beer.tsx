@@ -34,7 +34,7 @@ const LastBeer = ({ beer }: ILastBeerProps) => {
       </Slide>
       <Slide
         direction="right"
-        delay={1000}
+        delay={500}
         className={styles.descriptionBox}
         style={{ backgroundColor: beer.backgroundColor.hex }}
       >
