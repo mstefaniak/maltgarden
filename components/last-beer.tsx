@@ -1,3 +1,4 @@
+import { Slide } from 'react-awesome-reveal'
 import Image from 'next/image'
 import useTranslation from 'next-translate/useTranslation'
 import { Beer } from '@/lib/types'
@@ -22,7 +23,7 @@ const LastBeer = ({ beer }: ILastBeerProps) => {
           layout="fill"
         />
       </div>
-      <div className={styles.image}>
+      <Slide direction="left" className={styles.image}>
         <Image
           src={img.src as string}
           alt={img.alt}
@@ -30,15 +31,19 @@ const LastBeer = ({ beer }: ILastBeerProps) => {
           width={img.width}
           height={img.height as number}
         />
-      </div>
-      <div
+      </Slide>
+      <Slide
+        direction="right"
+        delay={1000}
         className={styles.descriptionBox}
         style={{ backgroundColor: beer.backgroundColor.hex }}
       >
-        <h3>{t('home:freshestBrew')}</h3>
-        <p>{beer.name}</p>
-        <p>{beer.description}</p>
-      </div>
+        <div>
+          <h3>{t('home:freshestBrew')}</h3>
+          <p>{beer.name}</p>
+          <p>{beer.description}</p>
+        </div>
+      </Slide>
     </section>
   )
 }

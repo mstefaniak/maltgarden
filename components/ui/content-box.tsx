@@ -8,8 +8,9 @@ const ContentBox = ({ children }: IContentBoxProps) => {
   return (
     <div
       style={{
-        maxWidth: '100rem',
+        maxWidth: '88rem',
         margin: '0 auto',
+        padding: '0 1rem',
       }}
     >
       {children}

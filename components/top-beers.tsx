@@ -1,5 +1,5 @@
+import { Slide } from 'react-awesome-reveal'
 import { RoundLink } from '@/components/ui/round-link'
-import { Picture } from '@/components/ui/picture'
 import { BeerTail } from '@/components/beer-tail'
 import { Beer } from '@/lib/types'
 import useTranslation from 'next-translate/useTranslation'
@@ -19,9 +19,13 @@ const TopBeers = ({ beers }: ITopBeersProps) => {
         <p className={styles.info}>{t('common:top4info')}</p>
         <RoundLink href="/beers/all" text={t('common:seeAll')} />
       </div>
-      {beers.map((beer: Beer) => (
-        <BeerTail {...beer} />
-      ))}
+      <Slide triggerOnce cascade direction="right">
+        {beers.map((beer: Beer, index: number) => (
+          <span>
+            <BeerTail {...beer} />
+          </span>
+        ))}
+      </Slide>
     </section>
   )
 }
