@@ -22,11 +22,20 @@ export interface Post {
 
 export type Beer = {
   name: string
+  backgroundColor: {
+    hex: string
+  }
   description: string
   slug: string
   style: string
   alc: number
   blg: number
+  backgroundImage: {
+    responsiveImage: ResponsiveImageType
+  }
+  photoWithBackground: {
+    responsiveImage: ResponsiveImageType
+  }
   photo: {
     responsiveImage: ResponsiveImageType
   }

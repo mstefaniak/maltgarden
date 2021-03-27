@@ -1,9 +1,8 @@
 @import '@/styles/_variables.scss';
 
 .main {
-  max-width: 100rem;
   padding: 0 1rem;
-  margin: 9rem auto 6rem;
+  margin: 8rem auto 3rem;
 }
 
 .header {
@@ -32,6 +31,7 @@
   height: 100%;
   background: $color-bg-primary;
   opacity: 0.95;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   content: '';
 }
 
@@ -66,6 +66,7 @@
 
 .footerNotes {
   p {
+    font-size: 1rem;
     margin: 0.5rem 0;
 
     &:first-child {

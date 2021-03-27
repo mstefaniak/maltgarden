@@ -261,7 +261,7 @@ const getTopBeers = async (locale?: string) => {
   const data = await fetchAPI(
     `
     query GetTopBeers($locale: SiteLocale, $filter: BeerModelFilter) {
-      allBeers(locale: $locale, orderBy: _createdAt_DESC, filter: $filter) {
+      allBeers(locale: $locale, orderBy: _createdAt_DESC, filter: $filter, first: 4) {
         slug
         name
         style
@@ -269,7 +269,7 @@ const getTopBeers = async (locale?: string) => {
           slug
         }
         photo {
-          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 200, h: 200 }) {
+          responsiveImage(imgixParams: {fm: png, w: 230 }) {
             ...responsiveImageFragment
           }
         }
@@ -286,6 +286,44 @@ const getTopBeers = async (locale?: string) => {
   )
 
   return data.allBeers as Beer[]
+}
+
+const getLastBeer = async (locale?: string) => {
+  const data = await fetchAPI(
+    `
+    query GetLastBeer($locale: SiteLocale) {
+      beer(locale: $locale, orderBy: _createdAt_DESC) {
+        slug
+        name
+        description
+        category {
+          slug
+        }
+        backgroundColor {
+          hex
+        }
+        backgroundImage {
+          responsiveImage(imgixParams: {fm: png }) {
+            ...responsiveImageFragment
+          }
+        }
+        photoWithBackground {
+          responsiveImage(imgixParams: {fm: png, w: 800 }) {
+            ...responsiveImageFragment
+          }
+        }
+      }
+    }
+    ${responsiveImageFragment}
+    `,
+    {
+      variables: {
+        locale,
+      },
+    }
+  )
+
+  return data.beer as Beer
 }
 
 const getBeerBySlug = async (
@@ -359,4 +397,5 @@ export {
   getTopBeers,
   getAllBeersWithSlug,
   getBeerBySlug,
+  getLastBeer,
 }
