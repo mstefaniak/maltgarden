@@ -1,3 +1,7 @@
 {
-  "freshestBrew": "Our freshest brew"
+  "ageInfo1": "This website is intended only for adults.",
+  "ageInfo2": "Are you at least 18 years old?",
+  "freshestBrew": "Our freshest brew",
+  "no": "No",
+  "yes": "Yes"
 }

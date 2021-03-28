@@ -1,5 +1,7 @@
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import useTranslation from 'next-translate/useTranslation'
+import { RoundLink } from '@/components/ui/round-link'
 import cn from 'classnames'
 import styles from './age.module.css'
 
@@ -28,11 +30,31 @@ const Age = ({ onVerify, isOpen = true }: AgeProps) => {
       })}
     >
       {isOpen && (
-        <div className={styles.content}>
-          <button className={styles.button} onClick={onVerify}>
-            {t('common:ageConfirm')}
-          </button>
-        </div>
+        <>
+          <div className={styles.bgImage}>
+            <Image
+              src="/images/age_check_bg.png"
+              alt="Colorful waves in the background"
+              layout="fill"
+            />
+          </div>
+          <div className={styles.content}>
+            <p>{t('home:ageInfo1')}</p>
+            <h1 className={styles.heading}>{t('home:ageInfo2')}</h1>
+            <div className={styles.actions}>
+              <RoundLink href="/" text={t('home:yes')} />
+              <RoundLink href="http://google.com" text={t('home:no')} />
+            </div>
+            <div className={styles.logoImage}>
+              <Image
+                src="/images/logo.svg"
+                alt="Maltgarden Brewery Logo"
+                width={285}
+                height={205}
+              />
+            </div>
+          </div>
+        </>
       )}
     </div>
   )
