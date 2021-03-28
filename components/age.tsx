@@ -42,8 +42,12 @@ const Age = ({ onVerify, isOpen = true }: AgeProps) => {
             <p>{t('home:ageInfo1')}</p>
             <h1 className={styles.heading}>{t('home:ageInfo2')}</h1>
             <div className={styles.actions}>
-              <RoundLink href="/" text={t('home:yes')} />
-              <RoundLink href="http://google.com" text={t('home:no')} />
+              <RoundLink onClick={onVerify} href="" text={t('home:yes')} />
+              <RoundLink
+                href="http://google.com"
+                rel="noindex nofollow"
+                text={t('home:no')}
+              />
             </div>
             <div className={styles.logoImage}>
               <Image
