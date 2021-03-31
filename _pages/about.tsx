@@ -1,39 +1,81 @@
 import { GetStaticProps } from 'next'
-import Head from 'next/head'
+import { Image, ResponsiveImageType } from 'react-datocms'
+import { Meta } from '@/components/meta'
 import { Layout } from '@/components/layout'
 import { PostBody } from '@/components/post-body'
 import { getAbout } from '@/lib/api'
 import { markdownToHtml } from '@/lib/markdownToHtml'
+import styles from './about.module.scss'
 
 type AboutProps = {
-  title: string
-  content: string
-  photo: any
-  paragraph2: string
+  title1: string
+  content1: string
+  photo1: {
+    responsiveImage: ResponsiveImageType
+  }
+  title2: string
+  content2: string
+  title3: string
+  content3: string
+  photo3: {
+    responsiveImage: ResponsiveImageType
+  }
+  seo: {
+    description: string
+    title: string
+  }
 }
 
-const About = ({ title, content, photo, paragraph2 }: AboutProps) => {
+const About = ({
+  title1,
+  content1,
+  photo1,
+  title2,
+  content2,
+  title3,
+  content3,
+  photo3,
+  seo,
+}: AboutProps) => {
   return (
     <Layout>
-      <Head>
-        <meta name="og:title" content="About" />
-      </Head>
-      <h2>{title}</h2>
-      <PostBody content={content} />
-      <img src={photo?.responsiveImage?.src} />
-      <p>{paragraph2}</p>
+      <Meta title={seo.title} description={seo.description} />
+      <section className={styles.darkSection}>
+        <div className={styles.content}>
+          <h1>{title1}</h1>
+          <PostBody content={content1} />
+        </div>
+        <Image className={styles.photo} data={photo1.responsiveImage} />
+      </section>
+      <section className={styles.paleSection}>
+        <div className={styles.content}>
+          <h1>{title2}</h1>
+          <PostBody content={content2} />
+        </div>
+      </section>
+      <section className={styles.darkSection}>
+        <Image className={styles.photo} data={photo3.responsiveImage} />
+        <div className={styles.content}>
+          <h1>{title3}</h1>
+          <PostBody content={content3} />
+        </div>
+      </section>
     </Layout>
   )
 }
 
 const getStaticProps: GetStaticProps = async (context) => {
   const data = await getAbout(context.locale as string)
-  const content = await markdownToHtml(data?.paragraph1)
+  const content1 = await markdownToHtml(data?.paragraph1)
+  const content2 = await markdownToHtml(data?.paragraph2)
+  const content3 = await markdownToHtml(data?.paragraph3)
 
   return {
     props: {
       ...data,
-      content,
+      content1,
+      content2,
+      content3,
     },
   }
 }

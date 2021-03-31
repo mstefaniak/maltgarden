@@ -51,26 +51,29 @@ const getAbout = async (locale: string, preview?: boolean) => {
     `
     query About {
       about(locale: ${locale}) {
-        title
+        title1
         paragraph1
-        photo {
-          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 600, h: 600}, sizes: "(max-width: 600px) 100vw, 600px") {
-            srcSet
-            webpSrcSet
-            sizes
-            src
-            width
-            height
-            aspectRatio
-            alt
-            title
-            bgColor
-            base64
+        photo1 {
+          responsiveImage(imgixParams: {fm: png, fit: crop, ar: "1:1"}, sizes: "(max-width: 600px) 100vw, 600px") {
+            ...responsiveImageFragment
           }
         }
+        title2
         paragraph2
+        title3
+        paragraph3
+        photo3 {
+          responsiveImage(imgixParams: {fm: png, fit: crop, ar: "1:1"}, sizes: "(max-width: 600px) 100vw, 600px") {
+            ...responsiveImageFragment
+          }
+        }
+        seo {
+          title
+          description
+        }
       }
     }
+    ${responsiveImageFragment}
     `,
     { preview }
   )

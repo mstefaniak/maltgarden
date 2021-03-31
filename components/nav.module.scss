@@ -30,6 +30,10 @@
   }
 }
 
+.nav .active a {
+  color: $color-link-active;
+}
+
 .nav.isOpen {
   left: 0;
 }

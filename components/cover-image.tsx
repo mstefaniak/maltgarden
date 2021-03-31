@@ -11,8 +11,8 @@ const CoverImage = ({ title, responsiveImage, slug }: CoverImageProps) => {
   const image = (
     <Image
       data={{
-        ...responsiveImage,
         alt: `Cover Image for ${title}`,
+        ...responsiveImage,
       }}
     />
   )
