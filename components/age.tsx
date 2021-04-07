@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Slide } from 'react-awesome-reveal'
 import { useState, useEffect } from 'react'
 import useTranslation from 'next-translate/useTranslation'
 import { RoundLink } from '@/components/ui/round-link'
@@ -42,21 +43,27 @@ const Age = ({ onVerify, isOpen = true }: AgeProps) => {
             <p>{t('home:ageInfo1')}</p>
             <h1 className={styles.heading}>{t('home:ageInfo2')}</h1>
             <div className={styles.actions}>
-              <RoundLink onClick={onVerify} href="" text={t('home:yes')} />
-              <RoundLink
-                href="http://google.com"
-                rel="noindex nofollow"
-                text={t('home:no')}
-              />
+              <Slide delay={1000} direction="left">
+                <RoundLink onClick={onVerify} href="" text={t('home:yes')} />
+              </Slide>
+              <Slide delay={1000} direction="right">
+                <RoundLink
+                  href="http://google.com"
+                  rel="noindex nofollow"
+                  text={t('home:no')}
+                />
+              </Slide>
             </div>
-            <div className={styles.logoImage}>
-              <Image
-                src="/images/logo.svg"
-                alt="Maltgarden Brewery Logo"
-                width={285}
-                height={205}
-              />
-            </div>
+            <Slide delay={1250} direction="up">
+              <div className={styles.logoImage}>
+                <Image
+                  src="/images/logo.svg"
+                  alt="Maltgarden Brewery Logo"
+                  width={285}
+                  height={205}
+                />
+              </div>
+            </Slide>
           </div>
         </>
       )}

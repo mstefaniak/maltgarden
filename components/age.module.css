@@ -58,8 +58,16 @@
   opacity: 1;
 }
 
+.actions {
+  display: flex;
+}
+
 .actions a:first-child {
-  margin-right: 3.5rem;
+  margin-right: 1.75rem;
+}
+
+.actions a:last-child {
+  margin-left: 1.75rem;
 }
 
 .logoImage {
