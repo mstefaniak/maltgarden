@@ -4,22 +4,21 @@ import styles from './slider.module.scss'
 interface ISliderProps {
   min?: number
   max?: number
-  defaultValue?: number
+  margin?: number
+  value?: number
   onChange: (event: number) => void
 }
 
 const Slider = ({
   min = 0,
   max = 100,
-  defaultValue = 50,
+  margin = 0,
+  value = 50,
   onChange,
 }: ISliderProps) => {
-  const [value, setValue] = useState<number>(defaultValue)
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(event.target.value)
-    if (newValue >= min && newValue <= max) {
-      setValue(newValue)
+    if (newValue >= min + margin && newValue <= max - margin) {
       onChange(newValue)
     }
   }
@@ -28,6 +27,8 @@ const Slider = ({
     <input
       className={styles.slider}
       value={value}
+      min={min}
+      max={max}
       onChange={handleChange}
       type="range"
     />
