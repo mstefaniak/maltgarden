@@ -32,7 +32,7 @@ const BeerAndFood = ({ categories, menu }: IBeerAndFoodProps) => {
           <div className={styles.menu}>
             <h2>{categoryName}</h2>
             {menu[categoryName].map((menuItem) => (
-              <dl class={styles.menuRow}>
+              <dl className={styles.menuRow}>
                 <dt className={styles.nameRow}>
                   <span>{menuItem.name}</span>
                   <span>
