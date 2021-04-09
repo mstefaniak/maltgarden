@@ -272,7 +272,7 @@ const getTopBeers = async (locale?: string) => {
           slug
         }
         photo {
-          responsiveImage(imgixParams: {fm: png, w: 230 }) {
+          responsiveImage(imgixParams: {auto: format}) {
             ...responsiveImageFragment
           }
         }

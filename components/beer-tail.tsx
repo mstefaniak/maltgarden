@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import Image from 'next/image'
+import { Image } from 'react-datocms'
 import styles from './beer.module.css'
 import useTranslation from 'next-translate/useTranslation'
 import { Beer } from '@/lib/types'
@@ -8,8 +8,6 @@ import { Slider } from '@/components/ui/slider'
 import { useRefState } from '@/hooks/ref-state'
 
 const BASE_SLIDER_VAL = 5
-const BASE_WIDTH = 115
-const BASE_HEIGHT = 295
 
 const BeerTail = ({ category, photo, name, style, slug }: Beer) => {
   const { t } = useTranslation()
@@ -17,14 +15,14 @@ const BeerTail = ({ category, photo, name, style, slug }: Beer) => {
     BASE_SLIDER_VAL
   )
   const img = photo.responsiveImage
+  const BASE_WIDTH = img.width
+  const BASE_HEIGHT = img.height ?? 295
   const beerURL = `/beers/${category.slug}/${slug}`
   const imgContainerRef = useRef<HTMLDivElement>(null)
   const intervalHandler = useRef<NodeJS.Timeout>()
 
   const resizeImage = (width: number, height: number) => {
     if (imgContainerRef.current) {
-      const diff = height - BASE_HEIGHT
-      imgContainerRef.current.style.marginTop = `-${diff}px`
       imgContainerRef.current.style.width = `${width}px`
       imgContainerRef.current.style.height = `${height}px`
     }
@@ -62,6 +60,7 @@ const BeerTail = ({ category, photo, name, style, slug }: Beer) => {
           resizeImage(newWidth, newHeight)
         } else if (intervalHandler.current) {
           clearInterval(intervalHandler.current)
+          resizeImage(BASE_WIDTH, BASE_HEIGHT)
           setSliderValue(BASE_SLIDER_VAL)
         }
       })
@@ -71,13 +70,10 @@ const BeerTail = ({ category, photo, name, style, slug }: Beer) => {
   return (
     <section onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
       <div className={styles.wrapper}>
-        <div className={styles.photo} ref={imgContainerRef}>
-          <Image
-            src={img.src as string}
-            alt={img.alt}
-            title={img.title}
-            layout="fill"
-          />
+        <div className={styles.photoWrapper}>
+          <div className={styles.photo} ref={imgContainerRef}>
+            <Image data={photo.responsiveImage} lazyLoad={false} />
+          </div>
         </div>
         <div className={styles.details}>
           <div className={styles.category}>{category.categoryName}</div>
