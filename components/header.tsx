@@ -13,12 +13,11 @@ const Header = () => {
         <NavButton />
         <Nav />
         <Link href="/">
-          <a>
+          <a className={styles.headerImage}>
             <Image
               src="/images/logo.svg"
               alt="Maltgarden Brewery Logo"
-              width={126}
-              height={90}
+              layout="fill"
             />
           </a>
         </Link>

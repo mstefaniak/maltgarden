@@ -25,7 +25,7 @@ const Home = ({ newPosts, topBeers, lastBeer }: HomeProps) => {
       <LastBeer beer={lastBeer} />
       <ContentBox>
         <section className={styles.news} key="news">
-          <Fade cascade>
+          <Fade cascade={true} triggerOnce={true}>
             {newPosts.map((post) => (
               <PostPreview post={post} />
             ))}
