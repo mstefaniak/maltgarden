@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Fade } from 'react-awesome-reveal'
 import Image from 'next/image'
 import useTranslation from 'next-translate/useTranslation'
 import styles from './heading.module.scss'
@@ -17,15 +18,15 @@ const Heading = () => {
         src="/images/heading.png"
         alt={`${t('common:home_slogan1')} ${t('common:home_slogan2')}`}
         layout="fill"
-        objectFit="cover"
-        objectPosition="center"
         onLoad={() => setIsReady(true)}
       />
       <div className={styles.content}>
-        <h1>
-          <span>{t('common:home_slogan1')}</span>
-          <span>{t('common:home_slogan2')}</span>
-        </h1>
+        <Fade delay={1000} duration={2000} triggerOnce={true}>
+          <h1>
+            <span>{t('common:home_slogan1')}</span>
+            <span>{t('common:home_slogan2')}</span>
+          </h1>
+        </Fade>
       </div>
     </section>
   )

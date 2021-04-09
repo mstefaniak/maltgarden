@@ -14,14 +14,14 @@ const TopBeers = ({ beers }: ITopBeersProps) => {
 
   return (
     <section className={styles.container}>
-      <Fade delay={500}>
+      <Fade delay={500} triggerOnce={true}>
         <div>
           <h2 className={styles.heading}>{t('common:top4title')}</h2>
           <p className={styles.info}>{t('common:top4info')}</p>
           <RoundLink href="/beers/all" text={t('common:seeAll')} />
         </div>
       </Fade>
-      <Slide cascade direction="right">
+      <Slide cascade={true} direction="right" triggerOnce={true}>
         {beers.map((beer: Beer, index: number) => (
           <span>
             <BeerTail {...beer} />

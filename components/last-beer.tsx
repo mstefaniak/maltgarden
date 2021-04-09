@@ -23,7 +23,7 @@ const LastBeer = ({ beer }: ILastBeerProps) => {
           layout="fill"
         />
       </div>
-      <Slide direction="left" className={styles.image}>
+      <Slide triggerOnce={true} direction="left" className={styles.image}>
         <Image
           src={img.src as string}
           alt={img.alt}
@@ -33,7 +33,8 @@ const LastBeer = ({ beer }: ILastBeerProps) => {
         />
       </Slide>
       <Slide
-        direction="right"
+        triggerOnce={true}
+        direction="up"
         delay={500}
         className={styles.descriptionBox}
         style={{ backgroundColor: beer.backgroundColor.hex }}
