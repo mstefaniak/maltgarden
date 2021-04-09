@@ -4,6 +4,7 @@
   "pages": {
     "*": ["common"],
     "/": ["home"],
+    "/beer-and-food": ["beernfood"],
     "rgx:^/beers": ["beer"]
   }
 }

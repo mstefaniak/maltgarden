@@ -1,0 +1,21 @@
+@import '@/styles/_variables.scss';
+
+.menu {
+  width: 30rem;
+  margin: 4rem auto;
+}
+
+.menuRow {
+  margin: 1rem 0;
+  border-bottom: 2px dotted $color-text-primary;
+}
+
+.nameRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.descRow {
+  font-size: 0.75rem;
+  margin: 0.5rem 0 1rem;
+}

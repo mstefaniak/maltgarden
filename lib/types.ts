@@ -72,3 +72,13 @@ export interface IPath {
   }
   locale: string
 }
+
+export interface MenuItem {
+  name: string
+  price: number
+  priceSecondary?: number
+  description: string
+  categoryName: {
+    categoryName: string
+  }
+}

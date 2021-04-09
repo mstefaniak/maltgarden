@@ -1,5 +1,5 @@
 import { CMS_API_URL, CMS_API_TOKEN } from '@/lib/constants'
-import { ISlug, Beer, Post } from '@/lib/types'
+import { ISlug, Beer, Post, MenuItem } from '@/lib/types'
 
 interface FetchParams {
   variables?: Record<string, any>
@@ -388,6 +388,30 @@ const getAllBeersWithSlug = async () => {
   return data?.allBeers as Beer[]
 }
 
+const getMenu = async (locale: string) => {
+  const data = await fetchAPI(
+    `
+    query Menu($locale: SiteLocale) {
+      allMenuItems(locale: $locale, filter: {available: {eq: true}}) {
+        name
+        price
+        priceSecondary
+        description
+        categoryName {
+          categoryName
+        }
+      }
+    }
+  `,
+    {
+      variables: {
+        locale,
+      },
+    }
+  )
+  return data?.allMenuItems as MenuItem[]
+}
+
 export {
   getAbout,
   getPreviewPostBySlug,
@@ -401,4 +425,5 @@ export {
   getAllBeersWithSlug,
   getBeerBySlug,
   getLastBeer,
+  getMenu,
 }

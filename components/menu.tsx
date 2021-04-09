@@ -21,7 +21,7 @@ const Menu = () => {
         <Link href="/news">{t('common:nav_news')}</Link>
       </li>
       <li className={router.pathname === '/beer-and-food' ? styles.active : ''}>
-        <Link href="">{t('common:nav_food')}</Link>
+        <Link href="/beer-and-food">{t('common:nav_food')}</Link>
       </li>
     </ul>
   )
