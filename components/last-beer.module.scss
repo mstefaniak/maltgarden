@@ -4,7 +4,7 @@
   position: relative;
   display: flex;
   justify-content: center;
-  height: 753px;
+  height: 40rem;
   align-items: flex-end;
 }
 
@@ -17,10 +17,12 @@
   z-index: 1;
 
   img {
-    width: 100%;
+    width: 1920px;
     height: 100%;
     object-fit: cover;
     object-position: center;
+    max-height: 40rem;
+    overflow: hidden;
 
     @include xxl {
       object-fit: fill;
@@ -33,14 +35,23 @@
   justify-content: center;
   flex-direction: column;
   text-align: left;
-  width: 800px;
-  height: 515px;
+  width: 44.5rem;
+  height: 28.6rem;
   color: $color-text-secondary;
   z-index: 2;
-  padding: 2rem 2rem 2rem 8rem;
+  padding: 2rem 2rem 2rem 4rem;
+
+  @include xl {
+    padding-right: 6rem;
+  }
+
+  @include xxl {
+    padding-right: 8rem;
+  }
 }
 
 .image {
   z-index: 2;
-  height: 576px;
+  flex: 0 0 44.45rem;
+  height: 32rem;
 }

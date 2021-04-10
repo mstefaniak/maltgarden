@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { Image } from 'react-datocms'
-import styles from './beer.module.css'
+import styles from './beer.module.scss'
 import useTranslation from 'next-translate/useTranslation'
 import { Beer } from '@/lib/types'
 import { RoundLink } from '@/components/ui/round-link'

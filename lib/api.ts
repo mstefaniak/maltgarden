@@ -311,7 +311,7 @@ const getLastBeer = async (locale?: string) => {
           }
         }
         photoWithBackground {
-          responsiveImage(imgixParams: {fm: png, w: 800 }) {
+          responsiveImage(imgixParams: {auto: format, fit: crop }) {
             ...responsiveImageFragment
           }
         }
@@ -392,7 +392,7 @@ const getMenu = async (locale: string) => {
   const data = await fetchAPI(
     `
     query Menu($locale: SiteLocale) {
-      allMenuItems(locale: $locale, filter: {available: {eq: true}}) {
+      allMenuItems(locale: $locale) {
         name
         price
         priceSecondary
