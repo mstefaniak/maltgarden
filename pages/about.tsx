@@ -2,7 +2,6 @@ import { GetStaticProps } from 'next'
 import { Image, ResponsiveImageType } from 'react-datocms'
 import { Meta } from '@/components/meta'
 import { Layout } from '@/components/layout'
-import { PostBody } from '@/components/post-body'
 import { getAbout } from '@/lib/api'
 import { markdownToHtml } from '@/lib/markdownToHtml'
 import styles from './about.module.scss'
@@ -43,21 +42,21 @@ const About = ({
       <section className={styles.darkSection}>
         <div className={styles.content}>
           <h1>{title1}</h1>
-          <PostBody content={content1} />
+          <div dangerouslySetInnerHTML={{ __html: content1 }} />
         </div>
         <Image className={styles.photo} data={photo1.responsiveImage} />
       </section>
       <section className={styles.paleSection}>
         <div className={styles.content}>
           <h1>{title2}</h1>
-          <PostBody content={content2} />
+          <div dangerouslySetInnerHTML={{ __html: content2 }} />
         </div>
       </section>
       <section className={styles.darkSection}>
         <Image className={styles.photo} data={photo3.responsiveImage} />
         <div className={styles.content}>
           <h1>{title3}</h1>
-          <PostBody content={content3} />
+          <div dangerouslySetInnerHTML={{ __html: content3 }} />
         </div>
       </section>
     </Layout>
