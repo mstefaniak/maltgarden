@@ -10,14 +10,11 @@ interface ISeoDescription {
 
 export interface Post {
   body: string
-  date: string
   excerpt: string
   heading: string
   headingImage: {
     responsiveImage: ResponsiveImageType
   }
-  slug: string
-  seoDescription?: ISeoDescription
 }
 
 export type Beer = {

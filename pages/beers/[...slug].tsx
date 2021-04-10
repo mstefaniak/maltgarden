@@ -13,7 +13,7 @@ import { Beer, IBeerCategory } from '@/lib/types'
 import { BeerCategory } from '@/components/beer-category'
 import useTranslation from 'next-translate/useTranslation'
 import getT from 'next-translate/getT'
-import styles from '@/components//beer.module.css'
+import styles from '@/components/beer.module.scss'
 
 const SingleBeer = ({
   alc,

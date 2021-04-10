@@ -7,6 +7,7 @@ interface IRoundLinkProps {
   rel?: string
   text: string
   type?: 'filled' | 'outlined'
+  hideIcon?: boolean
 }
 
 const RoundLink = ({
@@ -15,6 +16,7 @@ const RoundLink = ({
   rel,
   onClick = () => {},
   type = 'outlined',
+  hideIcon = false,
 }: IRoundLinkProps) => {
   return (
     <Link href={href}>
@@ -26,7 +28,7 @@ const RoundLink = ({
         ${type === 'filled' ? styles.filled : ''}
       `}
       >
-        {text} {'->'}
+        {text} {hideIcon ? '' : '->'}
       </a>
     </Link>
   )

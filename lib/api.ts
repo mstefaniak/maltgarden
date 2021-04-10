@@ -1,5 +1,5 @@
 import { CMS_API_URL, CMS_API_TOKEN } from '@/lib/constants'
-import { ISlug, Beer, Post, MenuItem } from '@/lib/types'
+import { Beer, Post, MenuItem } from '@/lib/types'
 
 interface FetchParams {
   variables?: Record<string, any>
@@ -119,38 +119,48 @@ const getPreviewBeerBySlug = async (slug: string) => {
   return data?.beer as Partial<Beer>
 }
 
-const getAllPostsWithSlug = async () => {
-  const data = await fetchAPI(`
-    {
-      allPosts {
-        _allSlugLocales {
-          locale
-          value
-        }
-      }
-    }
-  `)
-  return data?.allPosts as ISlug[]
-}
-
-const getAllPostsForHome = async (locale: string) => {
+const getAllPosts = async (locale: string) => {
   const data = await fetchAPI(
     `
-    {
-      newPosts: allPosts(locale: ${locale}, orderBy: date_DESC, first: 2) {
+    query AllPosts($locale: SiteLocale) {
+      allPosts(locale: $locale) {
         heading
-        slug
         excerpt
-        date
+        body
         headingImage {
-          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
+          responsiveImage(imgixParams: {auto: format, fit: crop}) {
             ...responsiveImageFragment
           }
         }
       }
     }
     ${responsiveImageFragment}
-  `
+  `,
+    {
+      variables: {
+        locale,
+      },
+    }
+  )
+  return data?.allPosts as Post[]
+}
+
+const getAllPostsForHome = async (locale: string) => {
+  const data = await fetchAPI(
+    `
+    query AllPostsForHome($locale: SiteLocale) {
+      newPosts: allPosts(locale: $locale, orderBy: _createdAt_DESC, first: 2) {
+        heading
+        excerpt
+        body
+      }
+    }
+  `,
+    {
+      variables: {
+        locale,
+      },
+    }
   )
   return data.newPosts
 }
@@ -165,7 +175,6 @@ const getPostAndMorePosts = async (
   query PostBySlug($slug: String, $locale: SiteLocale) {
     post(locale: $locale, filter: {slug: {eq: $slug}}) {
       heading
-      slug
       body
       date
       headingImage {
@@ -178,9 +187,8 @@ const getPostAndMorePosts = async (
         title
       }
     }
-    morePosts: allPosts(locale: $locale, orderBy: date_DESC, first: 2, filter: {slug: {neq: $slug}}) {
+    morePosts: allPosts(locale: $locale, orderBy: _createdAt_DESC, first: 2, filter: {slug: {neq: $slug}}) {
       heading
-      slug
       excerpt
       date
       headingImage {
@@ -416,7 +424,7 @@ export {
   getAbout,
   getPreviewPostBySlug,
   getPreviewBeerBySlug,
-  getAllPostsWithSlug,
+  getAllPosts,
   getAllPostsForHome,
   getPostAndMorePosts,
   getBeerCategories,
