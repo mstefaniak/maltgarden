@@ -5,6 +5,7 @@
     "*": ["common"],
     "/": ["home"],
     "/beer-and-food": ["beernfood"],
-    "rgx:^/beers": ["beer"]
+    "rgx:^/beers": ["beer"],
+    "rgx:^/news": ["news"]
   }
 }

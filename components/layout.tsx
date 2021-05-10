@@ -5,29 +5,30 @@ import { MetaStatic } from './meta-static'
 import { Alert } from './alert'
 import { Header } from './header'
 import { Age } from '@/components/age'
-import { Heading } from '@/components/ui/heading'
 import { useAgeVerify } from '@/hooks/age-verify'
 
 type LayoutProps = {
   children: JSX.Element | Array<JSX.Element>
   preview?: boolean
-  isHomePage?: boolean
+  backgroundColor?: 'beige' | 'blue'
+  heading?: JSX.Element
 }
 
 const Layout = ({
   children,
   preview = false,
-  isHomePage = false,
+  backgroundColor = 'beige',
+  heading,
 }: LayoutProps) => {
   const { verified, setVerified } = useAgeVerify()
 
   return (
-    <div className={styles.container}>
+    <div className={`${backgroundColor === 'blue' ? styles.bgBlue : ''}`}>
       <MetaStatic />
       <Age onVerify={setVerified} isOpen={!verified} />
       <Alert preview={preview} />
       <Header />
-      {isHomePage && <Heading />}
+      {heading}
       <main className={styles.main}>{children}</main>
       <Footer />
       <Copyright />

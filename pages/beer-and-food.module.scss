@@ -1,21 +1,88 @@
 @import '@/styles/_variables.scss';
 
-.menu {
-  width: 30rem;
-  margin: 4rem auto;
+.header {
+  height: 36.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.menuRow {
-  margin: 1rem 0;
-  border-bottom: 2px dotted $color-text-primary;
+.headerContent {
+  z-index: 2;
+  color: $color-text-secondary;
+  margin: 8rem 0 0 20rem;
+}
+
+.info {
+  margin: 2rem 0 3.5rem;
+}
+
+.mapPin {
+  margin-right: 0.3rem;
+  vertical-align: -5px;
+}
+
+.icon {
+  margin-left: 1.5rem;
+  color: $color-text-secondary;
+  svg {
+    width: 1.6rem;
+  }
+}
+
+.headerMask {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to right, rgba(5, 5, 5, 0.52), transparent);
+}
+
+.headerImg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.menu {
+  width: 50rem;
+  margin: 4rem auto;
+  position: relative;
+}
+
+.menuSection {
+  margin: 2.4rem 0 0 8.4rem;
 }
 
 .nameRow {
   display: flex;
-  justify-content: space-between;
+  font-size: 2.22rem;
+  font-family: Danmark;
+  font-weight: bold;
+  padding-left: 0.3rem;
+}
+
+.itemName {
+  margin-right: 0.5rem;
 }
 
 .descRow {
-  font-size: 0.75rem;
-  margin: 0.5rem 0 1rem;
+  font-size: 1.2rem;
+  margin: 0 0 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 0.3rem;
+  border-bottom: 0.2rem dotted $color-text-primary;
+}
+
+.pubLogo {
+  width: 14.44rem;
+  height: 14.44rem;
+  position: absolute;
+  top: 14.7rem;
+  left: -16.6rem;
 }

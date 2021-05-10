@@ -5,6 +5,7 @@ import { Layout } from '@/components/layout'
 import { TopBeers } from '@/components/top-beers'
 import { LastBeer } from '@/components/last-beer'
 import { PostPreview } from '@/components/post-preview'
+import { Heading } from '@/components/ui/heading'
 import styles from './index.module.scss'
 import { getAllPostsForHome, getTopBeers, getLastBeer } from '@/lib/api'
 import { Post, Beer } from '@/lib/types'
@@ -18,7 +19,7 @@ interface HomeProps {
 
 const Home = ({ newPosts, topBeers, lastBeer }: HomeProps) => {
   return (
-    <Layout isHomePage={true}>
+    <Layout heading={<Heading />}>
       <ContentBox>
         <TopBeers beers={topBeers} />
       </ContentBox>

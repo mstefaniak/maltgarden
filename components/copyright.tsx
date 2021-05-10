@@ -9,7 +9,7 @@ const Copyright = () => {
       <span>{t('common:footerBuildBy')}</span>{' '}
       <a
         href="https://github.com/mstefaniak"
-        rel="noopener noreferrer"
+        rel="noindex nofollow noopener noreferrer"
         target="_blank"
       >
         mstefaniak
