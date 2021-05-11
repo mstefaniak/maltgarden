@@ -14,7 +14,7 @@ enum LOCALES {
   EN = 'en',
   PL = 'pl',
 }
-const POSTS_PER_PAGE = 1
+const POSTS_PER_PAGE = 5
 
 export {
   EMAIL,

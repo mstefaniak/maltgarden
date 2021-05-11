@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react'
 import { RoundLink } from '@/components/ui/round-link'
 import useTranslation from 'next-translate/useTranslation'
 import { markdownToHtml } from '@/lib/markdownToHtml'
+import { ContentBox } from './ui/content-box'
+import styles from './ui/single-post.module.scss'
 
 interface IPostBodyProps {
   body: string
@@ -36,18 +38,20 @@ const PostBody = ({ body, excerpt }: IPostBodyProps) => {
   }
 
   return (
-    <>
-      {!isFullView && (
-        <div dangerouslySetInnerHTML={{ __html: parsedExcerpt }} />
-      )}
-      {isFullView && <div dangerouslySetInnerHTML={{ __html: parsedBody }} />}
+    <ContentBox>
+      <div className={styles.content}>
+        {!isFullView && (
+          <div dangerouslySetInnerHTML={{ __html: parsedExcerpt }} />
+        )}
+        {isFullView && <div dangerouslySetInnerHTML={{ __html: parsedBody }} />}
+      </div>
       <RoundLink
         text={isFullView ? t('common:readLess') : t('common:readMore')}
         href=""
         onClick={toggleMore}
         hideIcon={isFullView}
       />
-    </>
+    </ContentBox>
   )
 }
 

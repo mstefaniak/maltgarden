@@ -1,4 +1,4 @@
-import { CMS_API_URL, CMS_API_TOKEN } from '@/lib/constants'
+import { CMS_API_URL, CMS_API_TOKEN, POSTS_PER_PAGE } from '@/lib/constants'
 import { Beer, Post, MenuItem } from '@/lib/types'
 
 interface FetchParams {
@@ -119,11 +119,11 @@ const getPreviewBeerBySlug = async (slug: string) => {
   return data?.beer as Partial<Beer>
 }
 
-const getAllPosts = async (locale: string) => {
+const getAllPosts = async (locale: string, offset: number = 0) => {
   const data = await fetchAPI(
     `
-    query AllPosts($locale: SiteLocale) {
-      allPosts(locale: $locale) {
+    query AllPosts($locale: SiteLocale, $offset: IntType, $perPage: IntType) {
+      allPosts(locale: $locale, orderBy: _publishedAt_DESC, first: $perPage, skip: $offset) {
         heading
         excerpt
         body
@@ -139,17 +139,32 @@ const getAllPosts = async (locale: string) => {
     {
       variables: {
         locale,
+        offset,
+        perPage: POSTS_PER_PAGE,
       },
     }
   )
   return data?.allPosts as Post[]
 }
 
+const getAllPostsCount = async () => {
+  const data = await fetchAPI(
+    `
+    query AllPostsCount {
+      _allPostsMeta {
+        count
+      }
+    }
+  `
+  )
+  return data?._allPostsMeta.count as number
+}
+
 const getAllPostsForHome = async (locale: string) => {
   const data = await fetchAPI(
     `
     query AllPostsForHome($locale: SiteLocale) {
-      newPosts: allPosts(locale: $locale, orderBy: _createdAt_DESC, first: 2) {
+      newPosts: allPosts(locale: $locale, orderBy: _publishedAt_DESC, first: 2) {
         heading
         excerpt
         body
@@ -163,52 +178,6 @@ const getAllPostsForHome = async (locale: string) => {
     }
   )
   return data.newPosts
-}
-
-const getPostAndMorePosts = async (
-  slug: string | number,
-  locale?: string,
-  preview?: boolean
-) => {
-  const data = await fetchAPI(
-    `
-  query PostBySlug($slug: String, $locale: SiteLocale) {
-    post(locale: $locale, filter: {slug: {eq: $slug}}) {
-      heading
-      body
-      date
-      headingImage {
-        responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 600, h: 300 }) {
-          ...responsiveImageFragment
-        }
-      }
-      seoDescription {
-        description
-        title
-      }
-    }
-    morePosts: allPosts(locale: $locale, orderBy: _createdAt_DESC, first: 2, filter: {slug: {neq: $slug}}) {
-      heading
-      excerpt
-      date
-      headingImage {
-        responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 600, h: 300 }) {
-          ...responsiveImageFragment
-        }
-      }
-    }
-  }
-  ${responsiveImageFragment}
-  `,
-    {
-      preview,
-      variables: {
-        slug,
-        locale,
-      },
-    }
-  )
-  return data
 }
 
 const getBeerCategories = async (locale?: string) => {
@@ -425,8 +394,8 @@ export {
   getPreviewPostBySlug,
   getPreviewBeerBySlug,
   getAllPosts,
+  getAllPostsCount,
   getAllPostsForHome,
-  getPostAndMorePosts,
   getBeerCategories,
   getBeers,
   getTopBeers,

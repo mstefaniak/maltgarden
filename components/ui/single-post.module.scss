@@ -9,15 +9,16 @@
 .heading {
   position: relative;
   height: 30rem;
+}
 
-  h1 {
-    color: $color-text-secondary;
-    text-shadow: 2px 2px $color-text-primary;
-    position: absolute;
-    bottom: 1rem;
-    left: 2rem;
-    z-index: 1;
-  }
+.title {
+  color: $color-text-secondary;
+  text-shadow: 2px 2px $color-text-primary;
+  position: absolute;
+  bottom: 2.75rem;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 
 .headingImgBox {
@@ -28,4 +29,8 @@
 .headingImg {
   object-fit: cover;
   object-position: center;
+}
+
+.content {
+  margin: 3rem 0 5rem;
 }
