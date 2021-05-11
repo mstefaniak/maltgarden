@@ -39,7 +39,7 @@ const About = ({
   return (
     <Layout>
       <Meta title={seo.title} description={seo.description} />
-      <section className={styles.darkSection}>
+      <section className={styles.colorSection}>
         <div className={styles.content}>
           <h1>{title1}</h1>
           <div dangerouslySetInnerHTML={{ __html: content1 }} />
@@ -52,7 +52,7 @@ const About = ({
           <div dangerouslySetInnerHTML={{ __html: content2 }} />
         </div>
       </section>
-      <section className={styles.darkSection}>
+      <section className={styles.brownSection}>
         <Image className={styles.photo} data={photo3.responsiveImage} />
         <div className={styles.content}>
           <h1>{title3}</h1>
