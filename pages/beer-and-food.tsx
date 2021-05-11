@@ -12,7 +12,7 @@ import {
   faInstagram,
   faFacebookSquare,
 } from '@fortawesome/free-brands-svg-icons'
-import { faMap } from '@fortawesome/free-regular-svg-icons'
+import { FB_PUB_URL, INSTAGRAM_PUB_URL } from '@/lib/constants'
 
 const Heading = () => {
   const { t } = useTranslation()
@@ -44,7 +44,7 @@ const Heading = () => {
         <p>
           {t('common:followUs')}
           <a
-            href="https://www.facebook.com/MaltgardenBeerFood"
+            href={FB_PUB_URL}
             rel="nofollow noindex"
             target="_blank"
             className={styles.icon}
@@ -52,7 +52,7 @@ const Heading = () => {
             <FontAwesomeIcon icon={faFacebookSquare} />
           </a>
           <a
-            href="https://instagram.com/maltgardenbeerfood"
+            href={INSTAGRAM_PUB_URL}
             rel="nofollow noindex"
             target="_blank"
             className={styles.icon}

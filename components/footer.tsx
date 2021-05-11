@@ -2,11 +2,17 @@ import { Menu } from './menu'
 import {
   EMAIL,
   FB_URL,
-  UNTAPPD_URL,
+  YOUTUBE_URL,
   INSTAGRAM_URL,
   PHONE,
 } from '@/lib/constants'
 import useTranslation from 'next-translate/useTranslation'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faInstagram,
+  faYoutube,
+  faFacebookSquare,
+} from '@fortawesome/free-brands-svg-icons'
 import styles from './layout.module.scss'
 
 const Footer = () => {
@@ -24,14 +30,29 @@ const Footer = () => {
         </p>
         <p>
           <span>{t('common:followUs')}</span>
-          <a href={FB_URL} rel="external noindex nofollow">
-            FB
+          <a
+            href={FB_URL}
+            rel="nofollow noindex"
+            target="_blank"
+            className={styles.footerIcon}
+          >
+            <FontAwesomeIcon icon={faFacebookSquare} />
           </a>
-          <a href={UNTAPPD_URL} rel="external noindex nofollow">
-            UT
+          <a
+            href={YOUTUBE_URL}
+            rel="nofollow noindex"
+            target="_blank"
+            className={styles.footerIcon}
+          >
+            <FontAwesomeIcon icon={faYoutube} />
           </a>
-          <a href={INSTAGRAM_URL} rel="external noindex nofollow">
-            IG
+          <a
+            href={INSTAGRAM_URL}
+            rel="nofollow noindex"
+            target="_blank"
+            className={styles.footerIcon}
+          >
+            <FontAwesomeIcon icon={faInstagram} />
           </a>
         </p>
       </section>
