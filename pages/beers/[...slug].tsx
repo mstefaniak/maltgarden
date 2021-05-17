@@ -19,7 +19,7 @@ import { ContentBox } from '@/components/ui/content-box'
 import { route } from 'next/dist/next-server/server/router'
 
 interface HeadingProps {
-  title: string
+  title?: string
 }
 
 const Heading = ({ title }: HeadingProps) => {
