@@ -3,6 +3,7 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
 import { Meta } from '@/components/meta'
 import { Layout } from '@/components/layout'
+import Image from 'next/image'
 import {
   getAllBeersWithSlug,
   getBeerBySlug,
@@ -14,6 +15,37 @@ import { BeerCategory } from '@/components/beer-category'
 import useTranslation from 'next-translate/useTranslation'
 import getT from 'next-translate/getT'
 import styles from '@/components/beer.module.scss'
+import { ContentBox } from '@/components/ui/content-box'
+import { route } from 'next/dist/next-server/server/router'
+
+interface HeadingProps {
+  title: string
+}
+
+const Heading = ({ title }: HeadingProps) => {
+  const titleChunks = title?.split(' ') ?? []
+
+  return (
+    <header className={styles.header}>
+      <div className={styles.headerImg}>
+        <Image
+          src="/images/beers-bg.png"
+          alt="Maltgarden Beers"
+          layout="fill"
+        />
+      </div>
+      <div className={styles.headerContent}>
+        <ContentBox>
+          <h1 className={styles.title}>
+            {titleChunks.map((chunk) => (
+              <span>{chunk}</span>
+            ))}
+          </h1>
+        </ContentBox>
+      </div>
+    </header>
+  )
+}
 
 const SingleBeer = ({
   alc,
@@ -27,9 +59,14 @@ const SingleBeer = ({
 }: Beer) => {
   const { t } = useTranslation()
   const img = photo.responsiveImage
+  const router = useRouter()
+  const handleClose = () => {
+    router.back()
+  }
 
   return (
     <section>
+      <button onClick={handleClose}>X</button>
       <img
         src={img.src}
         srcSet={img.srcSet}
@@ -76,47 +113,45 @@ const View = ({
 }: ComponentProps) => {
   const title = isSingleBeerView && beer?.name ? beer.name : categoryName
   const pageTitle = beer?.seoDescription?.title ?? `${title} - Maltgarden`
-  const { t } = useTranslation()
   const router = useRouter()
 
-  return (
-    <Layout preview={preview}>
-      <Meta
-        title={pageTitle}
-        description={
-          isSingleBeerView ? beer?.seoDescription?.description : undefined
-        }
-        imageUrl={beer?.seoDescription?.image?.url}
-      />
-      <h1>
-        {t('beer:title')} - {title}
-      </h1>
-      <ul>
-        <li
-          key="0"
-          className={router.asPath === '/beers/all' ? styles.active : ''}
-        >
-          <Link href="/beers/all">
-            <a>{t('beer:all')}</a>
-          </Link>
-        </li>
-        {beerCategories.map(({ slug, categoryName }) => (
-          <li
-            key={slug}
-            className={router.asPath === `/beers/${slug}` ? styles.active : ''}
-          >
-            <Link href={`/beers/${slug}`}>
-              <a>{categoryName}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
+  if (isSingleBeerView) {
+    return (
+      <Layout preview={preview}>
+        <Meta
+          title={pageTitle}
+          description={beer?.seoDescription?.description}
+          imageUrl={beer?.seoDescription?.image?.url}
+        />
 
-      {isSingleBeerView && beer ? (
-        <SingleBeer {...beer} />
-      ) : (
-        <BeerCategory beers={beers} />
-      )}
+        <ContentBox>{beer && <SingleBeer {...beer} />}</ContentBox>
+      </Layout>
+    )
+  }
+
+  return (
+    <Layout preview={preview} heading={<Heading title={title} />}>
+      <Meta title={pageTitle} />
+
+      <ContentBox>
+        <div className={styles.beerContent}>
+          <ul className={styles.beerMenu}>
+            {beerCategories.map(({ slug, categoryName }) => (
+              <li
+                key={slug}
+                className={
+                  router.asPath === `/beers/${slug}` ? styles.active : ''
+                }
+              >
+                <Link href={`/beers/${slug}`}>
+                  <a>{categoryName}</a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <BeerCategory beers={beers} />
+        </div>
+      </ContentBox>
     </Layout>
   )
 }
@@ -151,9 +186,6 @@ const getStaticProps: GetStaticProps = async ({
   if (isSingleBeerView) {
     const data = await getBeerBySlug(beerSlug, locale, preview)
     props.beer = data
-  } else if (categorySlug === 'all') {
-    props.categoryName = t('beer:all')
-    props.beers = await getBeers(locale, undefined, preview)
   } else {
     const selectedCategory = beerCategories.find(
       (category) => categorySlug === category.slug
@@ -174,7 +206,6 @@ const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: [
-      '/beers/all',
       ...allBeers?.map((beer) => `/beers/${beer.category.slug}/${beer.slug}`),
       ...categories?.map((category) => `/beers/${category.slug}`),
     ],

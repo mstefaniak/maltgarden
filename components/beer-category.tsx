@@ -1,11 +1,12 @@
 import { Beer } from '@/lib/types'
-import { BeerTail } from '@/components/beer-tail'
+import { BeerTailSimple } from '@/components/beer-tail-simple'
+import styles from './beer.module.scss'
 
 const BeerCategory = ({ beers }: { beers: Beer[] }) => {
   return (
-    <section>
+    <section className={styles.listWrapper}>
       {Array.isArray(beers) &&
-        beers.map((beer) => <BeerTail {...beer} key={beer.slug} />)}
+        beers.map((beer) => <BeerTailSimple {...beer} key={beer.slug} />)}
     </section>
   )
 }

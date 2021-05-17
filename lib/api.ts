@@ -217,7 +217,7 @@ const getBeers = async (
           slug
         }
         photo {
-          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 200, h: 200 }) {
+          responsiveImage(imgixParams: { auto: format }) {
             ...responsiveImageFragment
           }
         }

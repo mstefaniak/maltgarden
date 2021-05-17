@@ -13,7 +13,7 @@ const Menu = () => {
       <li
         className={!!router.pathname.match(/\/beers\//i) ? styles.active : ''}
       >
-        <Link href="/beers/all">{t('common:nav_beers')}</Link>
+        <Link href="/beers/newest-beers">{t('common:nav_beers')}</Link>
       </li>
       <li className={router.pathname === '/about' ? styles.active : ''}>
         <Link href="/about">{t('common:nav_about')}</Link>
