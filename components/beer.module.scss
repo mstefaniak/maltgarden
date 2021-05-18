@@ -51,6 +51,22 @@
   transform: translateY(50px);
 }
 
+.slider {
+  opacity: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  input {
+    transform: rotate(-90deg);
+    position: absolute;
+    left: 5rem;
+    top: 250px;
+    width: 285px;
+  }
+}
+
 .simpleDetails {
   position: absolute;
   bottom: 2rem;
@@ -62,6 +78,10 @@
   transform: translateY(30px);
 }
 
+.wrapper:hover .slider {
+  opacity: 1;
+}
+
 .wrapper:hover .simpleLink,
 .wrapper:hover .details,
 .wrapper:hover .simpleDetails {
@@ -69,6 +89,7 @@
   transform: translateY(0);
 }
 
+.slider,
 .photoWrapper,
 .details,
 .simpleDetails,

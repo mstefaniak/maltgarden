@@ -80,6 +80,8 @@ const BeerTail = ({ category, photo, name, style, slug }: Beer) => {
           <div className={styles.name}>{name}</div>
           <div className={styles.style}>{style}</div>
           <RoundLink href={beerURL} text={t('common:more')} />
+        </div>
+        <div className={styles.slider}>
           <Slider
             min={0}
             max={40}
