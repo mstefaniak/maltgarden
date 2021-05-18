@@ -1,0 +1,82 @@
+@import '@/styles/_variables.scss';
+
+.beerWrapper {
+  max-width: 107rem;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  z-index: 0;
+  top: -200px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.smallGap {
+  margin: 0.25rem 0;
+}
+
+.description {
+  z-index: 1;
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: $color-text-secondary;
+  padding: 8rem 4rem 2rem 7rem;
+
+  p {
+    font-size: 1.11rem;
+    line-height: 1.3;
+  }
+
+  @include xl {
+    padding: 2rem 4rem 2rem 7rem;
+    height: 45rem;
+  }
+
+  @include xxl {
+    padding: 2rem 4rem 2rem 11rem;
+    height: 51rem;
+  }
+}
+
+p.styleName {
+  font-size: 1.28rem;
+}
+
+.photo {
+  width: 100%;
+  align-self: flex-end;
+}
+
+.closeButton {
+  position: absolute;
+  top: 4rem;
+  left: 2rem;
+  outline: none;
+  border: none;
+  background: none;
+  font-family: Danmark;
+  font-size: 2.1rem;
+  cursor: pointer;
+  color: $color-text-secondary;
+
+  &:hover {
+    color: $color-link-hover;
+  }
+}
+
+.untappd {
+  color: $color-text-secondary;
+  svg {
+    width: 2rem;
+  }
+}

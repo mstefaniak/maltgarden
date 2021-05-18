@@ -347,17 +347,24 @@ const getBeerBySlug = async (
       beer(locale: $locale, filter: {slug: {eq: $slug}}) {
         alc
         blg
+        name
         description
         ingredients
-        name
         untappdUrl
         style
         category {
-          categoryName
           slug
         }
-        photo {
-          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 400, h: 400 }) {
+        backgroundColor {
+          hex
+        }
+        backgroundImage {
+          responsiveImage(imgixParams: {fm: png }) {
+            ...responsiveImageFragment
+          }
+        }
+        photoWithBackground {
+          responsiveImage(imgixParams: {auto: format, fit: crop }) {
             ...responsiveImageFragment
           }
         }

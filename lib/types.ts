@@ -23,6 +23,7 @@ export type Beer = {
     hex: string
   }
   description: string
+  ingredients: string
   slug: string
   style: string
   alc: number

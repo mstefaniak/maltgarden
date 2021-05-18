@@ -17,7 +17,7 @@ import useTranslation from 'next-translate/useTranslation'
 import getT from 'next-translate/getT'
 import styles from '@/components/beer.module.scss'
 import { ContentBox } from '@/components/ui/content-box'
-import { route } from 'next/dist/next-server/server/router'
+import { SingleBeer } from '@/components/ui/single-beer'
 
 interface HeadingProps {
   title?: string
@@ -45,53 +45,6 @@ const Heading = ({ title }: HeadingProps) => {
         </ContentBox>
       </div>
     </header>
-  )
-}
-
-const SingleBeer = ({
-  alc,
-  blg,
-  description,
-  name,
-  photo,
-  category,
-  style,
-  untappdUrl,
-}: Beer) => {
-  const { t } = useTranslation()
-  const img = photo.responsiveImage
-  const router = useRouter()
-  const handleClose = () => {
-    router.back()
-  }
-
-  return (
-    <section>
-      <button onClick={handleClose}>X</button>
-      <img
-        src={img.src}
-        srcSet={img.srcSet}
-        alt={img.alt}
-        width={img.width}
-        height={img.height}
-        title={img.title}
-      />
-      <div>{category.categoryName}</div>
-      <div>{name}</div>
-      <div>{style}</div>
-      <div>
-        {t('beer:alc')}: {alc}%
-      </div>
-      <div>
-        {t('beer:blg')}: {blg}
-      </div>
-      <div>{description}</div>
-      {untappdUrl && (
-        <div>
-          <a href={untappdUrl}>UNTAPPD</a>
-        </div>
-      )}
-    </section>
   )
 }
 
@@ -126,7 +79,7 @@ const View = ({
           imageUrl={beer?.seoDescription?.image?.url}
         />
 
-        <ContentBox>{beer && <SingleBeer {...beer} />}</ContentBox>
+        {beer && <SingleBeer {...beer} />}
       </Layout>
     )
   }
