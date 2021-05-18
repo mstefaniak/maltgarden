@@ -152,7 +152,6 @@ const getStaticProps: GetStaticProps = async ({
   if (isSingleBeerView) {
     props.beer = await getBeerBySlug(beerSlug, locale, preview)
     const beers = await getBeers(locale, selectedCategory?.id)
-    console.log(beers)
     props.beers = beers
       .filter((beer: Beer) => beerSlug !== beer.slug)
       .splice(0, 4)

@@ -85,7 +85,7 @@ p.styleName {
 }
 
 .otherBeersBox {
-  padding: 3rem 2rem;
+  padding: 2.5rem 1.5rem;
 }
 
 .otherBeersList {
@@ -100,4 +100,12 @@ p.styleName {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+
+  a {
+    text-align: center;
+  }
+}
+
+.beerName {
+  margin-top: 1.25rem;
 }

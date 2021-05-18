@@ -1,4 +1,5 @@
 import { Image } from 'react-datocms'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import { Beer } from '@/lib/types'
@@ -76,18 +77,27 @@ const SingleBeer = ({ beer, otherBeers }: ISingleBeerProps) => {
       <section className={styles.otherBeersBox}>
         <h3>{t('beer:otherInCategory')}</h3>
         <div className={styles.otherBeersList}>
-          {otherBeers.map((otherBeer) => (
-            <div className={styles.otherBeer}>
-              {otherBeer.photoWithBackground && (
-                <Image
-                  data={otherBeer.photoWithBackground.responsiveImage}
-                  lazyLoad={false}
-                />
-              )}
-              <p className={styles.smallGap}>{otherBeer.name}</p>
-              <p className={styles.smallGap}>{otherBeer.style}</p>
-            </div>
-          ))}
+          {otherBeers.map((otherBeer) => {
+            const beerURL = `/beers/${otherBeer.category.slug}/${otherBeer.slug}`
+            return (
+              <div className={styles.otherBeer}>
+                <Link href={beerURL}>
+                  <a>
+                    {otherBeer.photoWithBackground && (
+                      <Image
+                        data={otherBeer.photoWithBackground.responsiveImage}
+                        lazyLoad={false}
+                      />
+                    )}
+                    <p className={`${styles.smallGap} ${styles.beerName}`}>
+                      {otherBeer.name}
+                    </p>
+                    <p className={styles.smallGap}>{otherBeer.style}</p>
+                  </a>
+                </Link>
+              </div>
+            )
+          })}
         </div>
       </section>
     </div>
