@@ -78,8 +78,7 @@ const View = ({
           description={beer?.seoDescription?.description}
           imageUrl={beer?.seoDescription?.image?.url}
         />
-
-        {beer && <SingleBeer {...beer} />}
+        <div>{beer && <SingleBeer {...beer} />}</div>
       </Layout>
     )
   }
