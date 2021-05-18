@@ -9,6 +9,7 @@ import {
   getBeerBySlug,
   getBeerCategories,
   getBeers,
+  getNewestBeers,
 } from '@/lib/api'
 import { Beer, IBeerCategory } from '@/lib/types'
 import { BeerCategory } from '@/components/beer-category'
@@ -114,6 +115,7 @@ const View = ({
   const title = isSingleBeerView && beer?.name ? beer.name : categoryName
   const pageTitle = beer?.seoDescription?.title ?? `${title} - Maltgarden`
   const router = useRouter()
+  const { t } = useTranslation()
 
   if (isSingleBeerView) {
     return (
@@ -148,6 +150,14 @@ const View = ({
                 </Link>
               </li>
             ))}
+            <li
+              key="-1"
+              className={router.asPath === `/beers/newest` ? styles.active : ''}
+            >
+              <Link href={`/beers/newest`}>
+                <a>{t('beer:newest')}</a>
+              </Link>
+            </li>
           </ul>
           <BeerCategory beers={beers} />
         </div>
@@ -186,13 +196,16 @@ const getStaticProps: GetStaticProps = async ({
   if (isSingleBeerView) {
     const data = await getBeerBySlug(beerSlug, locale, preview)
     props.beer = data
+  } else if (categorySlug === 'newest') {
+    props.categoryName = t('beer:newest')
+    props.beers = await getBeers(locale, undefined, preview)
   } else {
     const selectedCategory = beerCategories.find(
       (category) => categorySlug === category.slug
     )
     if (selectedCategory) {
       props.categoryName = selectedCategory.categoryName
-      props.beers = await getBeers(locale, selectedCategory.id, preview)
+      props.beers = await getNewestBeers(locale)
     }
   }
 
@@ -206,6 +219,7 @@ const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: [
+      '/beers/newest',
       ...allBeers?.map((beer) => `/beers/${beer.category.slug}/${beer.slug}`),
       ...categories?.map((category) => `/beers/${category.slug}`),
     ],
