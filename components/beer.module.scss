@@ -4,7 +4,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  cursor: pointer;
   width: 15.83rem;
   margin: 0 1rem;
   height: 510px;
@@ -134,12 +133,19 @@
 
 .beerMenu {
   list-style-type: none;
-  height: 30rem;
+  height: 490px;
   margin: 0;
   padding: 4.5rem 0;
   font-size: 1.28rem;
-
   border-right: 1px solid $color-link-active;
+
+  @include xl {
+    height: 510px;
+  }
+
+  @include xxl {
+    height: 540px;
+  }
 
   li {
     width: 24rem;
@@ -155,8 +161,8 @@
 
 .listWrapper {
   display: grid;
-  margin: 0 1rem;
+  margin-right: 1rem;
   grid-template-columns: 25rem 25rem 25rem;
-  row-gap: 2rem;
+  row-gap: 2.5rem;
   justify-content: stretch;
 }

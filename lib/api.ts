@@ -200,11 +200,7 @@ const getBeerCategories = async (locale?: string) => {
   return data
 }
 
-const getBeers = async (
-  locale?: string,
-  categoryId?: number,
-  preview?: boolean
-) => {
+const getBeers = async (locale?: string, categoryId?: number) => {
   const data = await fetchAPI(
     `
     query GetBeers($locale: SiteLocale, $filter: BeerModelFilter) {
@@ -221,12 +217,16 @@ const getBeers = async (
             ...responsiveImageFragment
           }
         }
+        photoWithBackground {
+          responsiveImage(imgixParams: { auto: format }) {
+            ...responsiveImageFragment
+          }
+        }
       }
     }
     ${responsiveImageFragment}
     `,
     {
-      preview,
       variables: {
         locale,
         filter: categoryId ? { category: { eq: categoryId } } : {},

@@ -78,7 +78,7 @@ const View = ({
           description={beer?.seoDescription?.description}
           imageUrl={beer?.seoDescription?.image?.url}
         />
-        <div>{beer && <SingleBeer {...beer} />}</div>
+        <div>{beer && <SingleBeer beer={beer} otherBeers={beers} />}</div>
       </Layout>
     )
   }
@@ -145,20 +145,23 @@ const getStaticProps: GetStaticProps = async ({
     isSingleBeerView,
   }
 
+  const selectedCategory = beerCategories.find(
+    (category) => categorySlug === category.slug
+  )
+
   if (isSingleBeerView) {
-    const data = await getBeerBySlug(beerSlug, locale, preview)
-    props.beer = data
+    props.beer = await getBeerBySlug(beerSlug, locale, preview)
+    const beers = await getBeers(locale, selectedCategory?.id)
+    console.log(beers)
+    props.beers = beers
+      .filter((beer: Beer) => beerSlug !== beer.slug)
+      .splice(0, 4)
   } else if (categorySlug === 'newest') {
     props.categoryName = t('beer:newest')
-    props.beers = await getBeers(locale, undefined, preview)
+    props.beers = await getNewestBeers(locale)
   } else {
-    const selectedCategory = beerCategories.find(
-      (category) => categorySlug === category.slug
-    )
-    if (selectedCategory) {
-      props.categoryName = selectedCategory.categoryName
-      props.beers = await getNewestBeers(locale)
-    }
+    props.categoryName = selectedCategory?.categoryName ?? null
+    props.beers = await getBeers(locale, selectedCategory?.id)
   }
 
   return { props }
