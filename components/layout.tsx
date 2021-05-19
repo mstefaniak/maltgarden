@@ -22,10 +22,13 @@ const Layout = ({
 }: LayoutProps) => {
   const { verified, setVerified } = useAgeVerify()
 
+  if (!verified) {
+    return <Age onVerify={setVerified} />
+  }
+
   return (
     <div className={`${backgroundColor === 'blue' ? styles.bgBlue : ''}`}>
       <MetaStatic />
-      <Age onVerify={setVerified} isOpen={!verified} />
       <Alert preview={preview} />
       <Header />
       {heading}

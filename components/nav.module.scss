@@ -3,13 +3,12 @@
 .nav {
   position: fixed;
   width: 30rem;
-  color: $color-text-secondary;
-  background-color: $color-bg-secondary;
+  background-color: $color-bg-primary;
   top: 0;
   bottom: 0;
   left: -30rem;
   transition: all 0.25s ease-out;
-  z-index: 2;
+  z-index: 3;
 
   @include md {
     position: relative;
@@ -20,18 +19,6 @@
     left: auto;
     flex: 1 0 32vw;
   }
-}
-
-.nav a {
-  color: $color-link-secondary;
-
-  @include md {
-    color: $color-link;
-  }
-}
-
-.nav .active a {
-  color: $color-link-active;
 }
 
 .nav.isOpen {
@@ -51,33 +38,62 @@
 }
 
 .nav li {
-  margin-right: 0.5rem;
+  font-size: 1.5rem;
+  margin: 0 0.5rem 2rem 0;
+
+  @include md {
+    font-size: 1rem;
+    margin: 0 0.5rem 0 0;
+  }
 }
 
 .navButton {
   position: relative;
-  width: 25px;
+  width: 24px;
   height: 30px;
   cursor: pointer;
+  outline: none;
   z-index: 3;
+  margin-top: 1rem;
 
   @include md {
     display: none;
   }
 }
 
+.close {
+  font-family: Danmark;
+  font-size: 1.8rem;
+  line-height: 1;
+  font-weight: bold;
+}
+
 .navLine {
   display: block;
   position: absolute;
   left: 0;
-  width: 25px;
-  height: 1px;
+  width: 24px;
+  height: 5px;
   background-color: $color-text-primary;
   transition: all 0.25s ease-out;
+}
 
-  .isOpen & {
-    background-color: $color-text-secondary;
-  }
+.navLineBorderTop {
+  position: absolute;
+  top: 0;
+  left: 1px;
+  right: 1px;
+  height: 1px;
+  background-color: $color-bg-primary;
+}
+
+.navLineBorderBottom {
+  position: absolute;
+  bottom: 0;
+  left: 1px;
+  right: 1px;
+  height: 1px;
+  background-color: $color-bg-primary;
 }
 
 .firstLine {
@@ -95,17 +111,9 @@
 }
 
 .isOpen .navLine {
-  width: 20px;
+  display: none;
 }
 
-.isOpen .firstLine {
-  transform: rotate(45deg);
-}
-
-.isOpen .secondLine {
-  opacity: 0;
-}
-
-.isOpen .thirdLine {
-  transform: rotate(-45deg);
+li.spaceTop {
+  margin-top: 5rem;
 }

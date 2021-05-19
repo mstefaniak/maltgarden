@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { isMobile } from 'react-device-detect'
 import { LangSwitch } from './lang-switch'
 import { NavButton } from './nav-button'
 import { Nav } from './nav'
@@ -10,7 +11,6 @@ const Header = () => {
   return (
     <NavProvider>
       <header className={styles.header}>
-        <NavButton />
         <Nav />
         <Link href="/">
           <a className={styles.headerImage}>
@@ -21,7 +21,12 @@ const Header = () => {
             />
           </a>
         </Link>
-        <LangSwitch />
+        {isMobile && <NavButton />}
+        {!isMobile && (
+          <div className={styles.langSwitchBox}>
+            <LangSwitch />
+          </div>
+        )}
       </header>
     </NavProvider>
   )

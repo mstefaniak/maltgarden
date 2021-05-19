@@ -15,9 +15,23 @@ const NavButton = () => {
       className={cn(styles.navButton, { [styles.isOpen]: isOpen })}
       onClick={toggleOpen}
     >
-      <div className={cn(styles.navLine, styles.firstLine)} />
-      <div className={cn(styles.navLine, styles.secondLine)} />
-      <div className={cn(styles.navLine, styles.thirdLine)} />
+      {!isOpen && (
+        <>
+          <div className={cn(styles.navLine, styles.firstLine)}>
+            <div className={styles.navLineBorderTop} />
+            <div className={styles.navLineBorderBottom} />
+          </div>
+          <div className={cn(styles.navLine, styles.secondLine)}>
+            <div className={styles.navLineBorderTop} />
+            <div className={styles.navLineBorderBottom} />
+          </div>
+          <div className={cn(styles.navLine, styles.thirdLine)}>
+            <div className={styles.navLineBorderTop} />
+            <div className={styles.navLineBorderBottom} />
+          </div>
+        </>
+      )}
+      {isOpen && <div className={styles.close}>X</div>}
     </div>
   )
 }

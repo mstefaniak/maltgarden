@@ -52,7 +52,7 @@
 }
 
 .slider {
-  opacity: 1;
+  opacity: 0;
   position: absolute;
   right: 0;
   top: 0;
@@ -127,8 +127,12 @@
 
 .header {
   position: relative;
-  margin-top: 6.5rem;
+  margin-top: $height-header-mobile;
   height: 30rem;
+
+  @include md {
+    margin-top: $height-header-desktop;
+  }
 }
 
 .headerContent {

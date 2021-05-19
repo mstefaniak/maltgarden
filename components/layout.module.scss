@@ -17,10 +17,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2.4rem 1rem;
-  height: 6.5rem;
+  padding: 0 2.4rem;
+  height: $height-header-mobile;
   font-family: Danmark;
   font-weight: bold;
+
+  @include md {
+    height: $height-header-desktop;
+    padding-botom: 1rem;
+  }
 }
 
 .header * {
@@ -41,14 +46,28 @@
 
 .headerImage {
   position: relative;
-  width: 6.75rem;
-  height: 7rem;
-  margin-top: 0.6rem;
+  width: 5.5rem;
+  height: 3.92rem;
+
+  @include md {
+    width: 6.5rem;
+    height: 7rem;
+    margin-top: 0.6rem;
+  }
 }
 
 .headerHomeImage {
   width: 8rem;
   height: 8rem;
+}
+
+.langSwitchBox {
+  width: 4.5rem;
+  flex: 1 0 32vw;
+
+  & > div {
+    justify-content: flex-end;
+  }
 }
 
 .backToHome {

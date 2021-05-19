@@ -47,7 +47,7 @@ const MetaStatic = () => {
         sizes="16x16"
         href="/favicon-16x16.png"
       />
-      <meta name="viewport" content="width=device-width" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="manifest" href="/manifest.json" />
       <meta
         name="google-site-verification"
