@@ -4,11 +4,15 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 15.83rem;
+  width: 30%;
   margin: 0 1rem;
-  height: 510px;
   text-align: center;
   position: relative;
+
+  @include md {
+    width: 15.83rem;
+    height: 510px;
+  }
 
   @include xl {
     height: 530px;

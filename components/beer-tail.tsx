@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { isDesktop } from 'react-device-detect'
 import { Image } from 'react-datocms'
 import styles from './beer.module.scss'
 import useTranslation from 'next-translate/useTranslation'
@@ -11,9 +12,8 @@ const BASE_SLIDER_VAL = 5
 
 const BeerTail = ({ category, photo, name, style, slug }: Beer) => {
   const { t } = useTranslation()
-  const [sliderValue, sliderValueRef, setSliderValue] = useRefState<number>(
-    BASE_SLIDER_VAL
-  )
+  const [sliderValue, sliderValueRef, setSliderValue] =
+    useRefState<number>(BASE_SLIDER_VAL)
   const img = photo.responsiveImage
   const BASE_WIDTH = img.width
   const BASE_HEIGHT = img.height ?? 295
@@ -81,15 +81,17 @@ const BeerTail = ({ category, photo, name, style, slug }: Beer) => {
           <div className={styles.style}>{style}</div>
           <RoundLink href={beerURL} text={t('common:more')} />
         </div>
-        <div className={styles.slider}>
-          <Slider
-            min={0}
-            max={40}
-            margin={BASE_SLIDER_VAL}
-            value={sliderValue}
-            onChange={handleSliderChange}
-          />
-        </div>
+        {isDesktop && (
+          <div className={styles.slider}>
+            <Slider
+              min={0}
+              max={40}
+              margin={BASE_SLIDER_VAL}
+              value={sliderValue}
+              onChange={handleSliderChange}
+            />
+          </div>
+        )}
       </div>
     </section>
   )

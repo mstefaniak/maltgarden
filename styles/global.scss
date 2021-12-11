@@ -18,7 +18,7 @@ body {
   font-family: Peggs, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.6;
-  font-size: 12px;
+  font-size: 13px;
   color: $color-text-primary;
   background-color: $color-bg-primary;
 
@@ -70,6 +70,10 @@ h3 {
   font-size: 2.78rem;
   margin: 0;
   padding: 0;
+
+  @include md {
+    font-size: 2.15rem;
+  }
 }
 
 h2 {
@@ -82,7 +86,9 @@ h2 {
 }
 
 p {
-  font-size: 1.26rem;
+  @include md {
+    font-size: 1.26rem;
+  }
 }
 
 dt,

@@ -2,19 +2,40 @@
 
 .news {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin-top: 3rem;
+  padding: 0 2.5rem;
+
+  @include md {
+    padding: 0;
+    flex-direction: row;
+  }
 
   & > div {
-    width: 50vw;
-
     &:first-child {
-      padding-right: 2rem;
-      border-right: 2px solid $color-text-primary;
+      padding-bottom: 4rem;
+      border-bottom: 2px solid $color-text-primary;
     }
 
     &:last-child {
-      padding-left: 2rem;
+      padding-top: 4rem;
+    }
+
+    @include md {
+      width: 50vw;
+
+      &:first-child {
+        padding-bottom: 0;
+        padding-right: 2rem;
+        border-right: 2px solid $color-text-primary;
+        border-bottom: none;
+      }
+
+      &:last-child {
+        padding-top: 0;
+        padding-left: 2rem;
+      }
     }
   }
 }

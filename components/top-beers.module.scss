@@ -1,19 +1,42 @@
+@import '@/styles/_variables.scss';
+
 .container {
   display: flex;
+  flex-direction: column;
+
+  @include md {
+    margin: 5rem 0 2rem;
+    flex-direction: row;
+  }
+}
+
+.intro {
+  flex: 0 0 27rem;
+}
+
+.beers {
+  display: flex;
   justify-content: space-between;
-  margin: 5rem 0 2rem;
+  overflow: scroll;
 }
 
 .heading {
-  font-size: 2.8rem;
+  font-size: 2.15rem;
   font-weight: bold;
-  margin: 4.3rem 0 0;
+  margin: 3rem 0 0;
   padding: 0;
+
+  @include md {
+    font-size: 2.8rem;
+    margin: 4.3rem 0 0;
+  }
 }
 
 .info {
-  font-size: 1.35rem;
   font-weight: 200;
+  @include md {
+    font-size: 1.35rem;
+  }
 }
 
 .beerBox {

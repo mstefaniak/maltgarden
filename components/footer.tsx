@@ -1,3 +1,4 @@
+import { isDesktop } from 'react-device-detect'
 import { Menu } from './menu'
 import {
   EMAIL,
@@ -56,9 +57,11 @@ const Footer = () => {
           </a>
         </p>
       </section>
-      <section className={styles.footerMenu}>
-        <Menu />
-      </section>
+      {isDesktop && (
+        <section className={styles.footerMenu}>
+          <Menu />
+        </section>
+      )}
     </footer>
   )
 }

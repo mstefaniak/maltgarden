@@ -5,7 +5,9 @@
 }
 
 .main {
-  margin: 6.5rem auto 3rem;
+  @include md {
+    margin: 6.5rem auto 3rem;
+  }
 }
 
 .header {
@@ -96,10 +98,13 @@
 
     &:first-child {
       margin-bottom: 2rem;
+      font-weight: bold;
+      font-family: Danmark;
     }
 
     span {
       color: gray;
+      font-family: Danmark;
       font-weight: bold;
       margin-right: 0.25rem;
     }

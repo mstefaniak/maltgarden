@@ -3,9 +3,17 @@
 .lastBeer {
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  height: 40rem;
-  align-items: flex-end;
+  padding-top: 5rem;
+  align-items: flex-start;
+
+  @include md {
+    padding: 0;
+    height: 40rem;
+    align-items: flex-end;
+    flex-direction: row;
+  }
 }
 
 .background {
@@ -35,11 +43,15 @@
   justify-content: center;
   flex-direction: column;
   text-align: left;
-  width: 44.5rem;
-  height: 28.6rem;
   color: $color-text-secondary;
   z-index: 2;
-  padding: 2rem 2rem 2rem 4rem;
+  padding: 2.5rem;
+
+  @include md {
+    width: 44.5rem;
+    height: 28.6rem;
+    padding: 2rem 2rem 2rem 4rem;
+  }
 
   @include xl {
     padding-right: 6rem;
@@ -52,6 +64,10 @@
 
 .image {
   z-index: 2;
-  flex: 0 0 44.45rem;
-  height: 32rem;
+  flex: 0 0 20rem;
+
+  @include md {
+    flex: 0 0 44.45rem;
+    height: 32rem;
+  }
 }

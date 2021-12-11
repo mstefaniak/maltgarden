@@ -1,21 +1,13 @@
 import { ReactNode } from 'react'
 
+import styles from './content-box.module.scss'
+
 interface IContentBoxProps {
   children: ReactNode
 }
 
 const ContentBox = ({ children }: IContentBoxProps) => {
-  return (
-    <div
-      style={{
-        maxWidth: '88rem',
-        margin: '0 auto',
-        padding: '0 1rem',
-      }}
-    >
-      {children}
-    </div>
-  )
+  return <div className={styles.ContentBox}>{children}</div>
 }
 
 export { ContentBox }

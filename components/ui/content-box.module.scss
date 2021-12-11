@@ -1,0 +1,10 @@
+@import '@/styles/_variables.scss';
+
+.ContentBox {
+  max-width: 88rem;
+  margin: 0 auto;
+
+  @include md {
+    padding: 0 1rem;
+  }
+}
