@@ -1,12 +1,16 @@
+import { GraphQLClient } from 'graphql-request'
+
 import { CMS_API_URL, CMS_API_TOKEN, POSTS_PER_PAGE } from '@/lib/constants'
-import { Beer, Post, MenuItem } from '@/lib/types'
+import { Beer, Post, MenuItem, CmsVariables } from '@/lib/types'
+
+const AUTH_TOKEN = `Bearer ${CMS_API_TOKEN}`
 
 interface FetchParams {
   variables?: Record<string, any>
   preview?: boolean
 }
 
-export const responsiveImageFragment: string = `
+const responsiveImageFragment: string = `
   fragment responsiveImageFragment on ResponsiveImage {
     srcSet
     webpSrcSet
@@ -21,6 +25,21 @@ export const responsiveImageFragment: string = `
     base64
   }
 `
+interface RequestArgs {
+  query: string
+  variables?: CmsVariables
+  preview: boolean
+}
+
+export function request({ query, variables, preview }: RequestArgs) {
+  const endpoint = CMS_API_URL + (preview ? '/preview' : '')
+  const client = new GraphQLClient(endpoint, {
+    headers: {
+      authorization: AUTH_TOKEN,
+    },
+  })
+  return client.request(query, variables)
+}
 
 const fetchAPI = async (
   query: string,
@@ -30,7 +49,7 @@ const fetchAPI = async (
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${CMS_API_TOKEN}`,
+      Authorization: AUTH_TOKEN,
     },
     body: JSON.stringify({
       query,
@@ -46,37 +65,36 @@ const fetchAPI = async (
   return json.data
 }
 
-const getAbout = async (locale: string, preview?: boolean) => {
-  const data = await fetchAPI(
-    `
-    query About {
-      about(locale: ${locale}) {
-        title1
-        paragraph1
-        photo1 {
-          responsiveImage(imgixParams: {fm: png, fit: crop, ar: "1:1"}, sizes: "(max-width: 600px) 100vw, 600px") {
-            ...responsiveImageFragment
-          }
-        }
-        title2
-        paragraph2
-        title3
-        paragraph3
-        photo3 {
-          responsiveImage(imgixParams: {fm: png, fit: crop, ar: "1:1"}, sizes: "(max-width: 600px) 100vw, 600px") {
-            ...responsiveImageFragment
-          }
-        }
-        seo {
-          title
-          description
-        }
+export const ABOUT_QUERY = `
+query About($locale: SiteLocale) {
+  about(locale: $locale) {
+    title1
+    paragraph1
+    photo1 {
+      responsiveImage(imgixParams: {fm: png, fit: clamp, ar: "1:1"}, sizes: "(max-width: 600px) 100vw, 600px") {
+        ...responsiveImageFragment
       }
     }
-    ${responsiveImageFragment}
-    `,
-    { preview }
-  )
+    title2
+    paragraph2
+    title3
+    paragraph3
+    photo3 {
+      responsiveImage(imgixParams: {fm: png, fit: crop, ar: "1:1"}, sizes: "(max-width: 600px) 100vw, 600px") {
+        ...responsiveImageFragment
+      }
+    }
+    seo {
+      title
+      description
+    }
+  }
+}
+${responsiveImageFragment}
+`
+
+const getAbout = async (locale: string, preview?: boolean) => {
+  const data = await fetchAPI(ABOUT_QUERY, { preview })
   return data?.about
 }
 

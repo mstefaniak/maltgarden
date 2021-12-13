@@ -5,55 +5,25 @@ import { Image, useQuerySubscription } from 'react-datocms'
 import { Meta } from '@/components/meta'
 import { Layout } from '@/components/layout'
 
-import { responsiveImageFragment } from '@/lib/api'
+import { IAbout, Subscription } from '@/lib/types'
+import { request, ABOUT_QUERY } from '@/lib/api'
 import { markdownToHtml } from '@/lib/markdownToHtml'
 import { CMS_API_TOKEN } from '@/lib/constants'
 
 import styles from './about.module.scss'
 
 interface Props {
-  locale?: string
-  token: string
+  subscription: Subscription<IAbout>
 }
 
-const About = ({ locale, token }: Props): JSX.Element | null => {
+const About = ({ subscription }: Props): JSX.Element | null => {
   const [content, setContent] = useState<Record<string, string>>({
     paragraph1: '',
     paragraph2: '',
     paragraph3: '',
   })
 
-  const { status, error, data } = useQuerySubscription({
-    enabled: true,
-    query: `
-      query About {
-        about(locale: ${locale}) {
-          title1
-          paragraph1
-          photo1 {
-            responsiveImage(imgixParams: {fm: png, fit: clamp, ar: "1:1"}, sizes: "(max-width: 600px) 100vw, 600px") {
-              ...responsiveImageFragment
-            }
-          }
-          title2
-          paragraph2
-          title3
-          paragraph3
-          photo3 {
-            responsiveImage(imgixParams: {fm: png, fit: crop, ar: "1:1"}, sizes: "(max-width: 600px) 100vw, 600px") {
-              ...responsiveImageFragment
-            }
-          }
-          seo {
-            title
-            description
-          }
-        }
-      }
-      ${responsiveImageFragment}
-    `,
-    token,
-  })
+  const { data } = useQuerySubscription(subscription)
 
   useEffect(() => {
     load()
@@ -108,12 +78,27 @@ const About = ({ locale, token }: Props): JSX.Element | null => {
 }
 
 const getStaticProps: GetStaticProps = async (context) => {
-  const locale = context.locale
+  const graphqlRequest = {
+    query: ABOUT_QUERY,
+    variables: { locale: context.locale },
+    preview: context.preview ?? false,
+  }
+
+  const subscription: Subscription<IAbout> = context.preview
+    ? {
+        ...graphqlRequest,
+        enabled: false,
+        initialData: await request(graphqlRequest),
+        token: CMS_API_TOKEN,
+      }
+    : {
+        enabled: false,
+        initialData: await request(graphqlRequest),
+      }
 
   return {
     props: {
-      locale,
-      token: CMS_API_TOKEN,
+      subscription,
     },
   }
 }

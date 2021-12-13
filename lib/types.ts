@@ -80,3 +80,37 @@ export interface MenuItem {
     categoryName: string
   }
 }
+
+export interface CmsVariables {
+  locale?: string
+}
+
+export interface Subscription<T> {
+  enabled: false
+  query?: string
+  preview?: boolean
+  variables?: CmsVariables
+  initialData: T
+  token?: string
+}
+
+export interface IAbout {
+  about: {
+    paragraph1: string
+    paragraph2: string
+    paragraph3: string
+    title1: string
+    title2: string
+    title3: string
+    photo1: {
+      responsiveImage: ResponsiveImageType
+    }
+    photo3: {
+      responsiveImage: ResponsiveImageType
+    }
+    seo: {
+      description: string
+      title: string
+    }
+  }
+}
