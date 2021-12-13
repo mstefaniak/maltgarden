@@ -13,9 +13,10 @@ import styles from './about.module.scss'
 
 interface Props {
   locale?: string
+  token: string
 }
 
-const About = ({ locale }: Props): JSX.Element | null => {
+const About = ({ locale, token }: Props): JSX.Element | null => {
   const [content, setContent] = useState<Record<string, string>>({
     paragraph1: '',
     paragraph2: '',
@@ -51,8 +52,7 @@ const About = ({ locale }: Props): JSX.Element | null => {
       }
       ${responsiveImageFragment}
     `,
-    variables: {},
-    token: CMS_API_TOKEN,
+    token,
   })
 
   useEffect(() => {
@@ -113,6 +113,7 @@ const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       locale,
+      token: CMS_API_TOKEN,
     },
   }
 }
