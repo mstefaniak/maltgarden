@@ -9,7 +9,7 @@ const YOUTUBE_URL = 'https://youtube.com/Maltgarden'
 const INSTAGRAM_URL = 'https://www.instagram.com/browarmaltgarden/'
 const INSTAGRAM_PUB_URL = 'https://instagram.com/maltgardenbeerfood'
 const CMS_API_URL = 'https://graphql.datocms.com'
-const CMS_API_TOKEN = process.env.DATOCMS_API_TOKEN
+const CMS_API_TOKEN = process.env.DATOCMS_API_TOKEN ?? ''
 enum LOCALES {
   EN = 'en',
   PL = 'pl',

@@ -6,7 +6,7 @@ interface FetchParams {
   preview?: boolean
 }
 
-const responsiveImageFragment: string = `
+export const responsiveImageFragment: string = `
   fragment responsiveImageFragment on ResponsiveImage {
     srcSet
     webpSrcSet
