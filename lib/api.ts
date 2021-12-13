@@ -93,11 +93,6 @@ query About($locale: SiteLocale) {
 ${responsiveImageFragment}
 `
 
-const getAbout = async (locale: string, preview?: boolean) => {
-  const data = await fetchAPI(ABOUT_QUERY, { preview })
-  return data?.about
-}
-
 const getPreviewPostBySlug = async (slug: string) => {
   const data = await fetchAPI(
     `
@@ -178,25 +173,50 @@ const getAllPostsCount = async () => {
   return data?._allPostsMeta.count as number
 }
 
-const getAllPostsForHome = async (locale: string) => {
-  const data = await fetchAPI(
-    `
-    query AllPostsForHome($locale: SiteLocale) {
-      newPosts: allPosts(locale: $locale, orderBy: _publishedAt_DESC, first: 2) {
-        heading
-        excerpt
-        body
+export const HOME_QUERY = `
+  query Home($locale: SiteLocale, $filter: BeerModelFilter) {
+    newPosts: allPosts(locale: $locale, orderBy: _publishedAt_DESC, first: 2) {
+      heading
+      excerpt
+      body
+    }
+    topBeers: allBeers(locale: $locale, orderBy: _createdAt_DESC, filter: $filter, first: 4) {
+      slug
+      name
+      style
+      category {
+        slug
+      }
+      photo {
+        responsiveImage(imgixParams: {auto: format}) {
+          ...responsiveImageFragment
+        }
       }
     }
-  `,
-    {
-      variables: {
-        locale,
-      },
+    lastBeer: beer(locale: $locale, orderBy: _createdAt_DESC) {
+      slug
+      name
+      description
+      category {
+        slug
+      }
+      backgroundColor {
+        hex
+      }
+      backgroundImage {
+        responsiveImage(imgixParams: {fm: png }) {
+          ...responsiveImageFragment
+        }
+      }
+      photoWithBackground {
+        responsiveImage(imgixParams: {auto: format, fit: crop }) {
+          ...responsiveImageFragment
+        }
+      }
     }
-  )
-  return data.newPosts
-}
+  }
+  ${responsiveImageFragment}
+`
 
 const getBeerCategories = async (locale?: string) => {
   const data = await fetchAPI(
@@ -278,37 +298,6 @@ const getNewestBeers = async (locale?: string) => {
     {
       variables: {
         locale,
-      },
-    }
-  )
-
-  return data.allBeers as Beer[]
-}
-
-const getTopBeers = async (locale?: string) => {
-  const data = await fetchAPI(
-    `
-    query GetTopBeers($locale: SiteLocale, $filter: BeerModelFilter) {
-      allBeers(locale: $locale, orderBy: _createdAt_DESC, filter: $filter, first: 4) {
-        slug
-        name
-        style
-        category {
-          slug
-        }
-        photo {
-          responsiveImage(imgixParams: {auto: format}) {
-            ...responsiveImageFragment
-          }
-        }
-      }
-    }
-    ${responsiveImageFragment}
-    `,
-    {
-      variables: {
-        locale,
-        filter: { top4: { eq: true } },
       },
     }
   )
@@ -445,16 +434,13 @@ const getMenu = async (locale: string) => {
 }
 
 export {
-  getAbout,
   getPreviewPostBySlug,
   getPreviewBeerBySlug,
   getAllPosts,
   getAllPostsCount,
-  getAllPostsForHome,
   getBeerCategories,
   getBeers,
   getNewestBeers,
-  getTopBeers,
   getAllBeersWithSlug,
   getBeerBySlug,
   getLastBeer,

@@ -114,3 +114,9 @@ export interface IAbout {
     }
   }
 }
+
+export interface IHome {
+  newPosts: Post[]
+  topBeers: Beer[]
+  lastBeer: Beer
+}

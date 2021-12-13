@@ -65,6 +65,7 @@
 .image {
   z-index: 2;
   flex: 0 0 20rem;
+  overflow: hidden;
 
   @include md {
     flex: 0 0 44.45rem;
