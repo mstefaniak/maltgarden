@@ -53,9 +53,7 @@ const SingleBeer = ({ beer, otherBeers }: ISingleBeerProps) => {
           <p className={styles.smallGap}>
             {t('beer:alc')}: {alc}% / {t('beer:blg')}: {blg}
           </p>
-          <p className={styles.smallGap}>
-            {t('beer:ingredients')}: {ingredients}
-          </p>
+          <p className={styles.smallGap}>{ingredients}</p>
           <p>{description}</p>
           {untappdUrl && (
             <div>
