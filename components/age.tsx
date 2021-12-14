@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Slide } from 'react-awesome-reveal'
 import { useState, useEffect } from 'react'
 import useTranslation from 'next-translate/useTranslation'
+import { RoundButton } from '@/components/ui/round-button'
 import { RoundLink } from '@/components/ui/round-link'
 import cn from 'classnames'
 import styles from './age.module.scss'
@@ -53,7 +54,7 @@ const Age = ({ onVerify }: AgeProps) => {
         <h1 className={styles.heading}>{t('home:ageInfo2')}</h1>
         <div className={styles.actions}>
           <Slide delay={1000} direction="left">
-            <RoundLink onClick={onVerify} href="" text={t('home:yes')} />
+            <RoundButton onClick={onVerify} text={t('home:yes')} />
           </Slide>
           <Slide delay={1000} direction="right">
             <RoundLink

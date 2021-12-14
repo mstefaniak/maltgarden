@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 import { Post } from '@/lib/types'
 import { PostBody } from '@/components/post-body'
 import styles from './post-preview.module.scss'
@@ -6,7 +8,7 @@ interface IPostPreviewProps {
   post: Post
 }
 
-const PostPreview = ({ post }: IPostPreviewProps) => {
+const PostPreview = memo(({ post }: IPostPreviewProps) => {
   const { heading, body, excerpt } = post
 
   return (
@@ -15,6 +17,6 @@ const PostPreview = ({ post }: IPostPreviewProps) => {
       <PostBody body={body} excerpt={excerpt} />
     </div>
   )
-}
+})
 
 export { PostPreview }

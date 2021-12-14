@@ -1,0 +1,31 @@
+@import '@/styles/_variables.scss';
+
+.Button {
+  height: 1.5rem;
+  border: 2px solid $color-text-primary;
+  border-radius: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 1.6rem 0;
+  font-family: Danmark;
+  font-size: 1.11rem;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  background-color: transparent;
+
+  &:hover {
+    background-color: $color-bg-secondary;
+    color: $color-text-secondary;
+  }
+}
+
+.isFilled {
+  background-color: $color-bg-secondary;
+  color: $color-text-secondary;
+
+  &:hover {
+    color: $color-text-secondary;
+    background-color: $color-link-hover;
+  }
+}

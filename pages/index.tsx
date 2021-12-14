@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { GetStaticProps } from 'next'
 import { useQuerySubscription } from 'react-datocms'
 import { Fade } from 'react-awesome-reveal'
@@ -27,6 +28,11 @@ const Home = ({ subscription }: Props): JSX.Element | null => {
 
   const { newPosts, topBeers, lastBeer } = data
 
+  const newestPosts = useMemo(
+    () => newPosts.map((post) => <PostPreview post={post} />),
+    [newPosts]
+  )
+
   return (
     <Layout heading={<Heading />}>
       <ContentBox>
@@ -34,11 +40,9 @@ const Home = ({ subscription }: Props): JSX.Element | null => {
       </ContentBox>
       <LastBeer beer={lastBeer} />
       <ContentBox>
-        <section className={styles.news} key="news">
+        <section className={styles.news}>
           <Fade cascade={true} triggerOnce={true}>
-            {newPosts.map((post) => (
-              <PostPreview post={post} />
-            ))}
+            {newestPosts}
           </Fade>
         </section>
       </ContentBox>

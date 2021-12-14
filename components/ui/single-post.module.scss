@@ -33,4 +33,12 @@
 
 .content {
   margin: 3rem 0 5rem;
+  max-height: 300px;
+  transition: max-height 1.5s ease-out;
+  overflow-y: hidden;
+
+  &.isExpanded {
+    max-height: 3500px;
+    transition: max-height 1.5s ease-in;
+  }
 }
