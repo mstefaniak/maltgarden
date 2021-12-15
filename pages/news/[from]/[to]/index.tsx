@@ -10,20 +10,21 @@ import { useRouter } from 'next/router'
 import { POSTS_PER_PAGE } from '@/lib/constants'
 import useTranslation from 'next-translate/useTranslation'
 
-interface INewsProps {
+interface Props {
   posts: Post[]
   from: number
   count: number
+  preview: boolean
 }
 
-const News = ({ posts, from, count }: INewsProps) => {
+const News = ({ posts, from, count, preview }: Props) => {
   const { t } = useTranslation()
   const router = useRouter()
   const nextFrom = +from + POSTS_PER_PAGE
   const nextTo = nextFrom + POSTS_PER_PAGE
 
   return (
-    <Layout>
+    <Layout preview={preview}>
       <Head>
         <meta name="og:title" content="Beers" />
       </Head>
@@ -62,7 +63,8 @@ const getStaticPaths: GetStaticPaths = async () => {
 }
 
 const getStaticProps: GetStaticProps = async (context) => {
-  const { from } = (context.params as Record<string, unknown>) as Record<
+  const preview = context.preview ?? false
+  const { from } = context.params as Record<string, unknown> as Record<
     string,
     number | undefined
   >
@@ -74,6 +76,7 @@ const getStaticProps: GetStaticProps = async (context) => {
       posts,
       from: from ?? 0,
       count,
+      preview,
     },
   }
 }

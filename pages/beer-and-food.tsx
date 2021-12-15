@@ -70,9 +70,10 @@ type Menu = Record<string, MenuItem[]>
 interface IBeerAndFoodProps {
   categories: string[]
   menu: Menu
+  preview: boolean
 }
 
-const BeerAndFood = ({ categories, menu }: IBeerAndFoodProps) => {
+const BeerAndFood = ({ categories, menu, preview }: IBeerAndFoodProps) => {
   //TODO
   const seo = {
     title: '',
@@ -80,7 +81,7 @@ const BeerAndFood = ({ categories, menu }: IBeerAndFoodProps) => {
   }
 
   return (
-    <Layout backgroundColor="blue" heading={<Heading />}>
+    <Layout backgroundColor="blue" heading={<Heading />} preview={preview}>
       <Meta title={seo.title} description={seo.description} />
       <ContentBox>
         {categories.map((categoryName, index) => (
@@ -121,6 +122,7 @@ const BeerAndFood = ({ categories, menu }: IBeerAndFoodProps) => {
 }
 
 const getStaticProps: GetStaticProps = async (context) => {
+  const preview = context.preview ?? false
   const data = await getMenu(context.locale as string)
   const categories = data.reduce(
     (a, v) => a.add(v.categoryName.categoryName),
@@ -140,6 +142,7 @@ const getStaticProps: GetStaticProps = async (context) => {
     props: {
       categories: Array.from(categories),
       menu,
+      preview,
     },
   }
 }

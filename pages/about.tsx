@@ -18,9 +18,10 @@ import styles from './about.module.scss'
 
 interface Props {
   subscription: QueryListenerOptions<IAbout, unknown>
+  preview: boolean
 }
 
-const About = ({ subscription }: Props): JSX.Element | null => {
+const About = ({ subscription, preview }: Props): JSX.Element | null => {
   const [content, setContent] = useState<Record<string, string>>({
     paragraph1: '',
     paragraph2: '',
@@ -55,7 +56,7 @@ const About = ({ subscription }: Props): JSX.Element | null => {
   const { about } = data
 
   return (
-    <Layout>
+    <Layout preview={preview}>
       <Meta title={about.seo.title} description={about.seo.description} />
       <section className={styles.colorSection}>
         <div className={styles.content}>
@@ -82,10 +83,11 @@ const About = ({ subscription }: Props): JSX.Element | null => {
 }
 
 const getStaticProps: GetStaticProps = async (context) => {
+  const preview = context.preview ?? false
   const graphqlRequest = {
     query: ABOUT_QUERY,
     variables: { locale: context.locale },
-    preview: context.preview ?? false,
+    preview,
   }
 
   const subscription = context.preview
@@ -103,6 +105,7 @@ const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       subscription,
+      preview,
     },
   }
 }

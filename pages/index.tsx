@@ -17,9 +17,10 @@ import styles from './index.module.scss'
 
 interface Props {
   subscription: QueryListenerOptions<IHome, unknown>
+  preview: boolean
 }
 
-const Home = ({ subscription }: Props): JSX.Element | null => {
+const Home = ({ subscription, preview }: Props): JSX.Element | null => {
   const { data } = useQuerySubscription(subscription)
 
   if (!data) {
@@ -34,7 +35,7 @@ const Home = ({ subscription }: Props): JSX.Element | null => {
   )
 
   return (
-    <Layout heading={<Heading />}>
+    <Layout heading={<Heading />} preview={preview}>
       <ContentBox>
         <TopBeers beers={topBeers} />
       </ContentBox>
@@ -51,13 +52,14 @@ const Home = ({ subscription }: Props): JSX.Element | null => {
 }
 
 const getStaticProps: GetStaticProps = async (context) => {
+  const preview = context.preview ?? false
   const graphqlRequest = {
     query: HOME_QUERY,
     variables: {
       locale: context.locale,
       filter: { top4: { eq: true } },
     },
-    preview: context.preview ?? false,
+    preview,
   }
 
   const subscription = context.preview
@@ -75,6 +77,7 @@ const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       subscription,
+      preview,
     },
   }
 }
