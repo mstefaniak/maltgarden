@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { GetStaticProps } from 'next'
-import { useQuerySubscription } from 'react-datocms'
+import { useQuerySubscription, QueryListenerOptions } from 'react-datocms'
 import { Fade } from 'react-awesome-reveal'
 
 import { ContentBox } from '@/components/ui/content-box'
@@ -10,13 +10,13 @@ import { LastBeer } from '@/components/last-beer'
 import { PostPreview } from '@/components/post-preview'
 import { Heading } from '@/components/ui/heading'
 import { request, HOME_QUERY } from '@/lib/api'
-import { IHome, Subscription } from '@/lib/types'
+import { IHome } from '@/lib/types'
 import { CMS_API_TOKEN } from '@/lib/constants'
 
 import styles from './index.module.scss'
 
 interface Props {
-  subscription: Subscription<IHome>
+  subscription: QueryListenerOptions<IHome, unknown>
 }
 
 const Home = ({ subscription }: Props): JSX.Element | null => {
@@ -60,10 +60,10 @@ const getStaticProps: GetStaticProps = async (context) => {
     preview: context.preview ?? false,
   }
 
-  const subscription: Subscription<IHome> = context.preview
+  const subscription = context.preview
     ? {
         ...graphqlRequest,
-        enabled: false,
+        enabled: true,
         initialData: await request(graphqlRequest),
         token: CMS_API_TOKEN,
       }

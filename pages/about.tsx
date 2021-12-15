@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react'
 import { GetStaticProps } from 'next'
-import { Image, useQuerySubscription } from 'react-datocms'
+import {
+  Image,
+  useQuerySubscription,
+  QueryListenerOptions,
+} from 'react-datocms'
 
 import { Meta } from '@/components/meta'
 import { Layout } from '@/components/layout'
 
-import { IAbout, Subscription } from '@/lib/types'
+import { IAbout } from '@/lib/types'
 import { request, ABOUT_QUERY } from '@/lib/api'
 import { markdownToHtml } from '@/lib/markdownToHtml'
 import { CMS_API_TOKEN } from '@/lib/constants'
@@ -13,7 +17,7 @@ import { CMS_API_TOKEN } from '@/lib/constants'
 import styles from './about.module.scss'
 
 interface Props {
-  subscription: Subscription<IAbout>
+  subscription: QueryListenerOptions<IAbout, unknown>
 }
 
 const About = ({ subscription }: Props): JSX.Element | null => {
@@ -54,7 +58,7 @@ const About = ({ subscription }: Props): JSX.Element | null => {
     <Layout>
       <Meta title={about.seo.title} description={about.seo.description} />
       <section className={styles.colorSection}>
-        <div className={styles.content}>
+        <div className={`${styles.content} ${styles.content1}`}>
           <h1>{about.title1}</h1>
           <div dangerouslySetInnerHTML={{ __html: content.paragraph1 }} />
         </div>
@@ -84,10 +88,10 @@ const getStaticProps: GetStaticProps = async (context) => {
     preview: context.preview ?? false,
   }
 
-  const subscription: Subscription<IAbout> = context.preview
+  const subscription = context.preview
     ? {
         ...graphqlRequest,
-        enabled: false,
+        enabled: true,
         initialData: await request(graphqlRequest),
         token: CMS_API_TOKEN,
       }

@@ -85,15 +85,6 @@ export interface CmsVariables {
   locale?: string
 }
 
-export interface Subscription<T> {
-  enabled: false
-  query?: string
-  preview?: boolean
-  variables?: CmsVariables
-  initialData: T
-  token?: string
-}
-
 export interface IAbout {
   about: {
     paragraph1: string
