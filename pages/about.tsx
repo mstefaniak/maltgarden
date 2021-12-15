@@ -58,7 +58,7 @@ const About = ({ subscription }: Props): JSX.Element | null => {
     <Layout>
       <Meta title={about.seo.title} description={about.seo.description} />
       <section className={styles.colorSection}>
-        <div className={`${styles.content} ${styles.content1}`}>
+        <div className={styles.content}>
           <h1>{about.title1}</h1>
           <div dangerouslySetInnerHTML={{ __html: content.paragraph1 }} />
         </div>

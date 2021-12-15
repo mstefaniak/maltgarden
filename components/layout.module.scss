@@ -5,8 +5,10 @@
 }
 
 .main {
+  margin: $height-header-mobile auto 0;
+
   @include md {
-    margin: 6.5rem auto 3rem;
+    margin: $height-header-desktop auto 3rem;
   }
 }
 
