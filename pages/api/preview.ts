@@ -27,19 +27,17 @@ export default async function preview(
     if (page) {
       location = `/posts/${page.slug}`
     }
-  } else if (category === 'about') {
+  } else if (slug === 'about') {
     location = '/about'
   }
 
   // If the slug doesn't exist prevent preview mode from being enabled
   if (!location) {
-    return res
-      .status(401)
-      .json({
-        message: 'Location not recognized by api/preview script',
-        category,
-        slug,
-      })
+    return res.status(401).json({
+      message: 'Location not recognized by api/preview script',
+      category,
+      slug,
+    })
   }
 
   // Enable Preview Mode by setting the cookies

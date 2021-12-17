@@ -267,7 +267,14 @@ const getBeers = async (locale?: string, categoryId?: number) => {
     {
       variables: {
         locale,
-        filter: categoryId ? { category: { eq: categoryId } } : {},
+        filter: categoryId
+          ? {
+              OR: [
+                { category: { eq: categoryId } },
+                { categorySecondary: { eq: categoryId } },
+              ],
+            }
+          : {},
       },
     }
   )

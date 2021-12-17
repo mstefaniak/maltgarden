@@ -39,7 +39,7 @@ const Heading = ({ title }: HeadingProps) => {
         <ContentBox>
           <h1 className={styles.title}>
             {titleChunks.map((chunk) => (
-              <span>{chunk}</span>
+              <span key={chunk}>{chunk}</span>
             ))}
           </h1>
         </ContentBox>
