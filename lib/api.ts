@@ -65,6 +65,19 @@ const fetchAPI = async (
   return json.data
 }
 
+export const SHAREHOLDERS_QUERY = `
+query Shareholders($locale: SiteLocale) {
+  shareholderInfo(locale: $locale) {
+    title
+    content
+    seo {
+      title
+      description
+    }
+  }
+}
+`
+
 export const ABOUT_QUERY = `
 query About($locale: SiteLocale) {
   about(locale: $locale) {

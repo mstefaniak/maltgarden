@@ -42,6 +42,15 @@ const Menu = () => {
             <a onClick={() => setIsOpen(false)}>{t('common:nav_food')}</a>
           </Link>
         </li>
+        <li
+          className={router.pathname === '/shareholders' ? styles.active : ''}
+        >
+          <Link href="/shareholders">
+            <a onClick={() => setIsOpen(false)}>
+              {t('common:nav_shareholders')}
+            </a>
+          </Link>
+        </li>
         <MobileView>
           <li className={styles.spaceTop}>
             <Link href="/newsletter">

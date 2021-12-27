@@ -6,6 +6,7 @@ import {
   QueryListenerOptions,
 } from 'react-datocms'
 
+import { Article } from '@/components/ui/article'
 import { Meta } from '@/components/meta'
 import { Layout } from '@/components/layout'
 
@@ -59,24 +60,21 @@ const About = ({ subscription, preview }: Props): JSX.Element | null => {
     <Layout preview={preview}>
       <Meta title={about.seo.title} description={about.seo.description} />
       <section className={styles.colorSection}>
-        <div className={styles.content}>
-          <h1>{about.title1}</h1>
+        <Article title={about.title1}>
           <div dangerouslySetInnerHTML={{ __html: content.paragraph1 }} />
-        </div>
+        </Article>
         <Image className={styles.photo} data={about.photo1.responsiveImage} />
       </section>
       <section className={styles.paleSection}>
-        <div className={styles.content}>
-          <h1>{about.title2}</h1>
+        <Article title={about.title2}>
           <div dangerouslySetInnerHTML={{ __html: content.paragraph2 }} />
-        </div>
+        </Article>
       </section>
       <section className={styles.brownSection}>
         <Image className={styles.photo} data={about.photo3.responsiveImage} />
-        <div className={styles.content}>
-          <h1>{about.title3}</h1>
+        <Article title={about.title3}>
           <div dangerouslySetInnerHTML={{ __html: content.paragraph3 }} />
-        </div>
+        </Article>
       </section>
     </Layout>
   )

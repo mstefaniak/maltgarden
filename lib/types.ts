@@ -99,10 +99,7 @@ export interface IAbout {
     photo3: {
       responsiveImage: ResponsiveImageType
     }
-    seo: {
-      description: string
-      title: string
-    }
+    seo: ISeoDescription
   }
 }
 
@@ -110,4 +107,12 @@ export interface IHome {
   newPosts: Post[]
   topBeers: Beer[]
   lastBeer: Beer
+}
+
+export interface IShareholders {
+  shareholderInfo: {
+    title: string
+    content: string
+    seo: ISeoDescription
+  }
 }

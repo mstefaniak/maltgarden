@@ -7,12 +7,12 @@ import { ContentBox } from './ui/content-box'
 
 import styles from './ui/single-post.module.scss'
 
-interface IPostBodyProps {
+interface Props {
   body: string
   excerpt: string
 }
 
-const PostBody = memo(({ body, excerpt }: IPostBodyProps) => {
+const PostBody = memo(({ body, excerpt }: Props) => {
   const { t } = useTranslation()
   const [isFullView, setIsFullView] = useState(false)
   const [parsedBody, setParsedBody] = useState<string>()
