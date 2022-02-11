@@ -5,14 +5,14 @@ import {
   FB_URL,
   YOUTUBE_URL,
   INSTAGRAM_URL,
-  PHONE,
+  UNTAPPD_URL,
 } from '@/lib/constants'
 import useTranslation from 'next-translate/useTranslation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faInstagram,
-  faYoutube,
   faFacebookSquare,
+  faUntappd,
 } from '@fortawesome/free-brands-svg-icons'
 import styles from './layout.module.scss'
 
@@ -22,12 +22,9 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <section className={styles.footerNotes}>
-        <p>2021 &copy; Maltgarden</p>
+        <p>2022 &copy; Maltgarden</p>
         <p>
           <span>Email</span> <a href={`mailto: ${EMAIL}`}>{EMAIL}</a>
-        </p>
-        <p>
-          <span>{t('common:phone')}</span> {PHONE}
         </p>
         <p>
           <span>{t('common:followUs')}</span>
@@ -40,12 +37,12 @@ const Footer = () => {
             <FontAwesomeIcon icon={faFacebookSquare} />
           </a>
           <a
-            href={YOUTUBE_URL}
+            href={UNTAPPD_URL}
+            className={styles.footerIcon}
             rel="nofollow noindex"
             target="_blank"
-            className={styles.footerIcon}
           >
-            <FontAwesomeIcon icon={faYoutube} />
+            <FontAwesomeIcon icon={faUntappd} />
           </a>
           <a
             href={INSTAGRAM_URL}

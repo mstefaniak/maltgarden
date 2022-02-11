@@ -1,7 +1,6 @@
 const PAGE_TITLE = 'Maltgarden'
 const PAGE_URL = 'http://maltgarden.pl'
-const EMAIL = 'biuro@maltgarden.pl'
-const PHONE = '+48 555 666 777'
+const EMAIL = 'info@maltgarden.pl'
 const FB_URL = 'https://www.facebook.com/BrowarMaltgarden'
 const FB_PUB_URL = 'https://www.facebook.com/MaltgardenBeerFood'
 const UNTAPPD_URL = 'https://untappd.com/Maltgarden'
@@ -23,7 +22,6 @@ export {
   CMS_API_URL,
   CMS_API_TOKEN,
   LOCALES,
-  PHONE,
   FB_URL,
   FB_PUB_URL,
   UNTAPPD_URL,
