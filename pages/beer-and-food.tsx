@@ -1,18 +1,24 @@
 import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import {
+  Image as DatoImage,
+  QueryListenerOptions,
+  useQuerySubscription,
+} from 'react-datocms'
 import { Layout } from '@/components/layout'
 import { Meta } from '@/components/meta'
-import { getMenu } from '@/lib/api'
-import { MenuItem } from '@/lib/types'
-import styles from './beer-and-food.module.scss'
+import { request, BEER_AND_FOOD_QUERY } from '@/lib/api'
+import { MenuItem, IBeerAndFood } from '@/lib/types'
 import { ContentBox } from '@/components/ui/content-box'
 import useTranslation from 'next-translate/useTranslation'
-import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faInstagram,
   faFacebookSquare,
 } from '@fortawesome/free-brands-svg-icons'
-import { FB_PUB_URL, INSTAGRAM_PUB_URL } from '@/lib/constants'
+import { FB_PUB_URL, INSTAGRAM_PUB_URL, CMS_API_TOKEN } from '@/lib/constants'
+
+import styles from './beer-and-food.module.scss'
 
 const Heading = () => {
   const { t } = useTranslation()
@@ -67,55 +73,28 @@ const Heading = () => {
 
 type Menu = Record<string, MenuItem[]>
 
-interface IBeerAndFoodProps {
-  categories: string[]
-  menu: Menu
+interface Props {
+  subscription: QueryListenerOptions<IBeerAndFood, unknown>
   preview: boolean
 }
 
-const BeerAndFood = ({ categories, menu, preview }: IBeerAndFoodProps) => {
-  //TODO
-  const seo = {
-    title: '',
-    description: '',
+const BeerAndFood = ({ subscription, preview }: Props) => {
+  const { data } = useQuerySubscription(subscription)
+
+  if (!data) {
+    return null
   }
+
+  const { menuImage, seo } = data.beerAndFood
+  const { responsiveImage } = menuImage
 
   return (
     <Layout backgroundColor="blue" heading={<Heading />} preview={preview}>
-      <Meta title={seo.title} description={seo.description} />
+      {seo && <Meta title={seo.title} description={seo.description} />}
       <ContentBox>
-        {categories.map((categoryName, index) => (
-          <div className={styles.menu}>
-            {index === 0 && (
-              <div className={styles.pubLogo}>
-                <Image
-                  src="/images/beer-food.png"
-                  alt="Maltgarden Beer & Food"
-                  layout="fill"
-                />
-              </div>
-            )}
-            <h2>{categoryName}</h2>
-            <dl className={styles.menuSection}>
-              {menu[categoryName].map((menuItem) => (
-                <>
-                  <dt className={styles.nameRow}>
-                    <span className={styles.itemName}>{menuItem.name}</span>
-                    <span>
-                      {menuItem.priceSecondary && (
-                        <>
-                          {menuItem.priceSecondary} zł {' / '}
-                        </>
-                      )}
-                      {menuItem.price} zł
-                    </span>
-                  </dt>
-                  <dd className={styles.descRow}>{menuItem.description}</dd>
-                </>
-              ))}
-            </dl>
-          </div>
-        ))}
+        {responsiveImage && (
+          <DatoImage className={styles.photo} data={responsiveImage} />
+        )}
       </ContentBox>
     </Layout>
   )
@@ -123,25 +102,27 @@ const BeerAndFood = ({ categories, menu, preview }: IBeerAndFoodProps) => {
 
 const getStaticProps: GetStaticProps = async (context) => {
   const preview = context.preview ?? false
-  const data = await getMenu(context.locale as string)
-  const categories = data.reduce(
-    (a, v) => a.add(v.categoryName.categoryName),
-    new Set()
-  ) as Set<string>
-  const menu = data.reduce((a: Menu, v: MenuItem) => {
-    if (!a[v.categoryName.categoryName]) {
-      a[v.categoryName.categoryName] = []
-    }
+  const graphqlRequest = {
+    query: BEER_AND_FOOD_QUERY,
+    variables: { locale: context.locale },
+    preview,
+  }
 
-    a[v.categoryName.categoryName].push(v)
-
-    return a
-  }, {})
+  const subscription = context.preview
+    ? {
+        ...graphqlRequest,
+        enabled: true,
+        initialData: await request(graphqlRequest),
+        token: CMS_API_TOKEN,
+      }
+    : {
+        enabled: false,
+        initialData: await request(graphqlRequest),
+      }
 
   return {
     props: {
-      categories: Array.from(categories),
-      menu,
+      subscription,
       preview,
     },
   }

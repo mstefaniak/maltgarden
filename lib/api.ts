@@ -429,29 +429,22 @@ const getAllBeersWithSlug = async () => {
   return data?.allBeers as Beer[]
 }
 
-const getMenu = async (locale: string) => {
-  const data = await fetchAPI(
-    `
-    query Menu($locale: SiteLocale) {
-      allMenuItems(locale: $locale) {
-        name
-        price
-        priceSecondary
-        description
-        categoryName {
-          categoryName
+export const BEER_AND_FOOD_QUERY = `
+  query BeerAndFood($locale: SiteLocale) {
+    beerAndFood(locale: $locale) {
+      menuImage {
+        responsiveImage(imgixParams: {auto: format}) {
+          ...responsiveImageFragment
         }
       }
+      seo {
+        title
+        description
+      }
     }
-  `,
-    {
-      variables: {
-        locale,
-      },
-    }
-  )
-  return data?.allMenuItems as MenuItem[]
-}
+  }
+  ${responsiveImageFragment}
+`
 
 export {
   getPreviewPostBySlug,
@@ -464,5 +457,4 @@ export {
   getAllBeersWithSlug,
   getBeerBySlug,
   getLastBeer,
-  getMenu,
 }

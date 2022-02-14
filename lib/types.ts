@@ -116,3 +116,12 @@ export interface IShareholders {
     seo: ISeoDescription
   }
 }
+
+export interface IBeerAndFood {
+  beerAndFood: {
+    menuImage: {
+      responsiveImage: ResponsiveImageType
+    }
+    seo: ISeoDescription
+  }
+}
