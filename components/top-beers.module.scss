@@ -11,12 +11,31 @@
 }
 
 .intro {
-  flex: 0 0 27rem;
+  padding: 0 2rem;
+
+  @include md {
+    padding: 0;
+    flex: 0 0 27rem;
+  }
+}
+
+.beersWrapper {
+  overflow-x: scroll;
+  padding: 2rem 0 1rem;
 }
 
 .beers {
   display: flex;
   justify-content: space-between;
+  width: 140%;
+
+  @include md {
+    width: 100%;
+  }
+}
+
+.beersMobile {
+  overflow-x: scroll;
 }
 
 .heading {
@@ -51,4 +70,18 @@
 
 .details {
   display: none;
+}
+
+.mobileAll {
+  display: flex;
+  justify-content: center;
+  margin: 3rem auto 4rem;
+}
+
+.seeAll {
+  display: none;
+
+  @include md {
+    display: inline-block;
+  }
 }

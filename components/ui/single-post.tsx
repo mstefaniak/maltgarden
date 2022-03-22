@@ -23,7 +23,9 @@ const SinglePost = ({ data }: IPostProps) => {
           </ContentBox>
         </div>
       </div>
-      <PostBody body={data.body} excerpt={data.excerpt} />
+      <div className={styles.body}>
+        <PostBody body={data.body} excerpt={data.excerpt} />
+      </div>
     </div>
   )
 }

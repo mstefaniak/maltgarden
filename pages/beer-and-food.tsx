@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import { isMobile } from 'react-device-detect'
 import Image from 'next/image'
 import {
   Image as DatoImage,
@@ -24,14 +25,24 @@ const Heading = () => {
   const { t } = useTranslation()
 
   return (
-    <header className={styles.header}>
+    <section className={styles.header}>
       <div className={styles.headerMask} />
       <div className={styles.headerImg}>
-        <Image
-          src="/images/beer-food-header.png"
-          alt="Maltgarden snack - Header"
-          layout="fill"
-        />
+        {isMobile ? (
+          <Image
+            src="/images/beer-food-header.png"
+            alt="Maltgarden snack - Header"
+            layout="responsive"
+            width="900"
+            height="337"
+          />
+        ) : (
+          <Image
+            src="/images/beer-food-header.png"
+            alt="Maltgarden snack - Header"
+            layout="fill"
+          />
+        )}
       </div>
       <div className={styles.headerContent}>
         <h1>Maltgarden Beer & Food</h1>
@@ -67,7 +78,7 @@ const Heading = () => {
           </a>
         </p>
       </div>
-    </header>
+    </section>
   )
 }
 
@@ -87,13 +98,16 @@ const BeerAndFood = ({ subscription, preview }: Props) => {
 
   const { menuImage, seo } = data.beerAndFood
   const { responsiveImage } = menuImage
+  const showMenuImage = responsiveImage && !isMobile
 
   return (
     <Layout backgroundColor="blue" heading={<Heading />} preview={preview}>
       {seo && <Meta title={seo.title} description={seo.description} />}
       <ContentBox>
-        {responsiveImage && (
+        {showMenuImage ? (
           <DatoImage className={styles.photo} data={responsiveImage} />
+        ) : (
+          <div>menu here</div>
         )}
       </ContentBox>
     </Layout>

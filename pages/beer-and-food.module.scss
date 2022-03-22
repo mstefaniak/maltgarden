@@ -1,17 +1,25 @@
 @import '@/styles/_variables.scss';
 
 .header {
-  height: 36.5rem;
+  margin-top: $height-header-mobile;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  @include md {
+    height: 36.5rem;
+  }
 }
 
 .headerContent {
   z-index: 2;
   color: $color-text-secondary;
-  margin: 8rem 0 0 20rem;
+  margin: 2rem;
+
+  @include md {
+    margin: 8rem 0 0 20rem;
+  }
 }
 
 .info {
@@ -47,7 +55,7 @@
   height: 100%;
   position: absolute;
   top: 0;
-  left: 0;
+  left: -58%;
 }
 
 .menu {

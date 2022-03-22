@@ -39,12 +39,20 @@ const BeerTail = ({ category, photo, name, style, slug }: Beer) => {
   }
 
   const handleMouseOver = () => {
+    if (!isDesktop) {
+      return
+    }
+
     if (intervalHandler.current) {
       clearInterval(intervalHandler.current)
     }
   }
 
   const handleMouseLeave = () => {
+    if (!isDesktop) {
+      return
+    }
+
     intervalHandler.current = setInterval(() => {
       requestAnimationFrame(() => {
         const newSliderValue = sliderValueRef.current - 1
@@ -75,22 +83,24 @@ const BeerTail = ({ category, photo, name, style, slug }: Beer) => {
             <Image data={photo.responsiveImage} lazyLoad={false} />
           </div>
         </div>
-        <div className={styles.details}>
-          <div className={styles.category}>{category.categoryName}</div>
-          <div className={styles.name}>{name}</div>
-          <div className={styles.style}>{style}</div>
-          <RoundLink href={beerURL} text={t('common:more')} />
-        </div>
         {isDesktop && (
-          <div className={styles.slider}>
-            <Slider
-              min={0}
-              max={40}
-              margin={BASE_SLIDER_VAL}
-              value={sliderValue}
-              onChange={handleSliderChange}
-            />
-          </div>
+          <>
+            <div className={styles.details}>
+              <div className={styles.category}>{category.categoryName}</div>
+              <div className={styles.name}>{name}</div>
+              <div className={styles.style}>{style}</div>
+              <RoundLink href={beerURL} text={t('common:more')} />
+            </div>
+            <div className={styles.slider}>
+              <Slider
+                min={0}
+                max={40}
+                margin={BASE_SLIDER_VAL}
+                value={sliderValue}
+                onChange={handleSliderChange}
+              />
+            </div>
+          </>
         )}
       </div>
     </section>

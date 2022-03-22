@@ -4,8 +4,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 30%;
-  margin: 0 1rem;
+  width: 60%;
+  margin: 0 auto;
   text-align: center;
   position: relative;
 
@@ -54,6 +54,7 @@
   position: absolute;
   bottom: 0;
   transform: translateY(50px);
+  max-width: 18rem;
 }
 
 .slider {
@@ -76,6 +77,7 @@
   position: absolute;
   bottom: 2rem;
   transform: translateY(20px);
+  max-width: 20rem;
 }
 
 .simpleLink {
@@ -103,25 +105,37 @@
 }
 
 .wrapper:hover .photoWrapper {
-  transform: translateY(-20px);
+  @include md {
+    transform: translateY(-20px);
+  }
 }
 
 .name {
   font-family: Danmark;
   font-weight: bold;
   font-size: 1.27rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .photoWrapper {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 417px;
+  height: 16rem;
+
+  @include md {
+    height: 417px;
+  }
 }
 
 .style {
   margin-bottom: 1rem;
   font-size: 1.27rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .active {
