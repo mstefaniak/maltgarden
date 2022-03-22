@@ -24,21 +24,12 @@ const Heading = () => {
     <section className={styles.header}>
       <div className={styles.headerMask} />
       <div className={styles.headerImg}>
-        {isMobile ? (
-          <Image
-            src="/images/beer-food-header.png"
-            alt="Maltgarden snack - Header"
-            layout="responsive"
-            width="900"
-            height="337"
-          />
-        ) : (
-          <Image
-            src="/images/beer-food-header.png"
-            alt="Maltgarden snack - Header"
-            layout="fill"
-          />
-        )}
+        <Image
+          src="/images/beer-food-header.png"
+          alt="Maltgarden snack - Header"
+          layout="fill"
+          objectFit="cover"
+        />
       </div>
       <div className={styles.headerContent}>
         <h1>Maltgarden Beer & Food</h1>
@@ -100,10 +91,8 @@ const BeerAndFood = ({ subscription, preview }: Props) => {
     <Layout backgroundColor="blue" heading={<Heading />} preview={preview}>
       {seo && <Meta title={seo.title} description={seo.description} />}
       <ContentBox>
-        {showMenuImage ? (
+        {showMenuImage && (
           <DatoImage className={styles.photo} data={responsiveImage} />
-        ) : (
-          <div>menu here</div>
         )}
       </ContentBox>
     </Layout>
