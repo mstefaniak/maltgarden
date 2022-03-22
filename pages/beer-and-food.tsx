@@ -12,6 +12,7 @@ import { request, BEER_AND_FOOD_QUERY } from '@/lib/api'
 import { MenuItem, IBeerAndFood } from '@/lib/types'
 import { ContentBox } from '@/components/ui/content-box'
 import useTranslation from 'next-translate/useTranslation'
+import type { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FB_PUB_URL, INSTAGRAM_PUB_URL, CMS_API_TOKEN } from '@/lib/constants'
 
@@ -53,7 +54,9 @@ const Heading = () => {
             target="_blank"
             className={styles.icon}
           >
-            <FontAwesomeIcon icon="fa-brands fa-facebook-square" />
+            <FontAwesomeIcon
+              icon={'fa-brands fa-facebook-square' as IconProp}
+            />
           </a>
           <a
             href={INSTAGRAM_PUB_URL}
@@ -61,7 +64,7 @@ const Heading = () => {
             target="_blank"
             className={styles.icon}
           >
-            <FontAwesomeIcon icon="fa-brands fa-instagram" />
+            <FontAwesomeIcon icon={'fa-brands fa-instagram' as IconProp} />
           </a>
         </p>
       </div>

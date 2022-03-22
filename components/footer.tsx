@@ -8,6 +8,7 @@ import {
   UNTAPPD_URL,
 } from '@/lib/constants'
 import useTranslation from 'next-translate/useTranslation'
+import type { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './layout.module.scss'
@@ -30,7 +31,9 @@ const Footer = () => {
             target="_blank"
             className={styles.footerIcon}
           >
-            <FontAwesomeIcon icon="fa-brands fa-facebook-square" />
+            <FontAwesomeIcon
+              icon={'fa-brands fa-facebook-square' as IconProp}
+            />
           </a>
           <a
             href={UNTAPPD_URL}
@@ -38,7 +41,7 @@ const Footer = () => {
             rel="nofollow noindex"
             target="_blank"
           >
-            <FontAwesomeIcon icon="fa-brands fa-untappd" />
+            <FontAwesomeIcon icon={'fa-brands fa-untappd' as IconProp} />
           </a>
           <a
             href={INSTAGRAM_URL}
@@ -46,7 +49,7 @@ const Footer = () => {
             target="_blank"
             className={styles.footerIcon}
           >
-            <FontAwesomeIcon icon="fa-brands fa-instagram" />
+            <FontAwesomeIcon icon={'fa-brands fa-instagram' as IconProp} />
           </a>
         </p>
       </section>
