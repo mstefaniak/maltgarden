@@ -13,10 +13,6 @@ import { MenuItem, IBeerAndFood } from '@/lib/types'
 import { ContentBox } from '@/components/ui/content-box'
 import useTranslation from 'next-translate/useTranslation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faInstagram,
-  faFacebookSquare,
-} from '@fortawesome/free-brands-svg-icons'
 import { FB_PUB_URL, INSTAGRAM_PUB_URL, CMS_API_TOKEN } from '@/lib/constants'
 
 import styles from './beer-and-food.module.scss'
@@ -66,7 +62,7 @@ const Heading = () => {
             target="_blank"
             className={styles.icon}
           >
-            <FontAwesomeIcon icon={faFacebookSquare} />
+            <FontAwesomeIcon icon="fa-brands fa-facebook-square" />
           </a>
           <a
             href={INSTAGRAM_PUB_URL}
@@ -74,7 +70,7 @@ const Heading = () => {
             target="_blank"
             className={styles.icon}
           >
-            <FontAwesomeIcon icon={faInstagram} />
+            <FontAwesomeIcon icon="fa-brands fa-instagram" />
           </a>
         </p>
       </div>

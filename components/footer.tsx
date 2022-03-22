@@ -9,11 +9,7 @@ import {
 } from '@/lib/constants'
 import useTranslation from 'next-translate/useTranslation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faInstagram,
-  faFacebookSquare,
-  faUntappd,
-} from '@fortawesome/free-brands-svg-icons'
+
 import styles from './layout.module.scss'
 
 const Footer = () => {
@@ -34,7 +30,7 @@ const Footer = () => {
             target="_blank"
             className={styles.footerIcon}
           >
-            <FontAwesomeIcon icon={faFacebookSquare} />
+            <FontAwesomeIcon icon="fa-brands fa-facebook-square" />
           </a>
           <a
             href={UNTAPPD_URL}
@@ -42,7 +38,7 @@ const Footer = () => {
             rel="nofollow noindex"
             target="_blank"
           >
-            <FontAwesomeIcon icon={faUntappd} />
+            <FontAwesomeIcon icon="fa-brands fa-untappd" />
           </a>
           <a
             href={INSTAGRAM_URL}
@@ -50,7 +46,7 @@ const Footer = () => {
             target="_blank"
             className={styles.footerIcon}
           >
-            <FontAwesomeIcon icon={faInstagram} />
+            <FontAwesomeIcon icon="fa-brands fa-instagram" />
           </a>
         </p>
       </section>
